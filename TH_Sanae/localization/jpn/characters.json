@@ -1,0 +1,17 @@
+{
+  "TH_YOUMU-YOUMU_CHARACTER.aromaPrinciple": "[sine][blue]……断つ……[/blue][/sine]",
+  "TH_YOUMU-YOUMU_CHARACTER.banter.alive.endTurnPing": "……",
+  "TH_YOUMU-YOUMU_CHARACTER.banter.dead.endTurnPing": "……",
+  "TH_YOUMU-YOUMU_CHARACTER.cardsModifierDescription": "魂魄妖夢のカードが報酬やショップに出現するようになる。",
+  "TH_YOUMU-YOUMU_CHARACTER.cardsModifierTitle": "魂魄妖夢カード",
+  "TH_YOUMU-YOUMU_CHARACTER.description": "半人半霊の庭師。剣術を得意とする。\n敵、霊体、弾幕、果ては人の煩悩までも断つことができる。",
+  "TH_YOUMU-YOUMU_CHARACTER.eventDeathPrevention": "くそっ……どうしてこうなる……",
+  "TH_YOUMU-YOUMU_CHARACTER.goldMonologue": "[sine]このお金……役に立つかも……[/sine]",
+  "TH_YOUMU-YOUMU_CHARACTER.possessiveAdjective": "彼女の",
+  "TH_YOUMU-YOUMU_CHARACTER.pronounObject": "彼女",
+  "TH_YOUMU-YOUMU_CHARACTER.pronounPossessive": "彼女の",
+  "TH_YOUMU-YOUMU_CHARACTER.pronounSubject": "彼女",
+  "TH_YOUMU-YOUMU_CHARACTER.title": "魂魄妖夢",
+  "TH_YOUMU-YOUMU_CHARACTER.titleObject": "妖夢",
+  "TH_YOUMU-YOUMU_CHARACTER.unlockText": "[pink]{Prerequisite}[/pink]で1ゲームプレイしてこのキャラクターをアンロック。"
+}

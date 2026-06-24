@@ -1,0 +1,5 @@
+{
+  "LOCK.description": "本回合内直到[gold]硬直[/gold]被移除之前，不能被打出。",
+  "LOCK.title": "锁定"
+
+}

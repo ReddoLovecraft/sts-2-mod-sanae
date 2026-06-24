@@ -1,0 +1,19 @@
+{
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-0.ancient": "Oh? You are neither truly alive nor a dead spirit. What an interesting way to exist... Would you mind if I studied you?",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-0.next": "Continue",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-1.char": "As if I'd allow that. Anyway, take this!",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-1.next": "Take this!",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-2.ancient": "...Sigh, then... see you next time!",
+
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-0r.char": "Who are you?",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-0r.next": "Continue",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-1r.ancient": "We just met a moment ago. Did you forget so soon?",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-1r.next": "Take this!",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-2r.char": "If you won't talk, I'll just cut you down first!",
+
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-0.ancient": "You seem no ordinary person. How about...",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-0.next": "Interrupt",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-1.char": "I'll just cut you down first!",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-1.next": "Take this!",
+  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-2.ancient": "Sigh... This is impossible to communicate with..."
+}

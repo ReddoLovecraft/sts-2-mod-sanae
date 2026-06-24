@@ -1,0 +1,20 @@
+{
+  "id": "TH_Sanae",
+  "name": "东风谷早苗",
+  "author": "Reddo",
+  "description": "加入了来自东方Project的角色，奇迹的现人神，东风谷早苗。",
+  "version": "0.4.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [
+	{
+	  "id": "BaseLib",
+	  "min_version": "3.2.0"
+	},
+	{
+	  "id": "Patchoulib",
+	  "min_version": "1.8.0"
+	}
+  ],
+  "affects_gameplay": true
+}

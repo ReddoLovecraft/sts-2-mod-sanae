@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cj17no26m0q0c"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bup6r1pwduv4h" path="res://TH_Sanae/ArtWorks/Character/normal/sanae_skeleton.atlas" id="1_ksdp4"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://conw4h8sv5kbr" path="res://TH_Sanae/ArtWorks/Character/normal/sanae_skeleton.skel" id="2_a8b6y"]
+
+[resource]
+atlas_res = ExtResource("1_ksdp4")
+skeleton_file_res = ExtResource("2_a8b6y")

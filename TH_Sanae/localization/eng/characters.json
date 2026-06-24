@@ -1,0 +1,17 @@
+{
+  "TH_YOUMU-YOUMU_CHARACTER.aromaPrinciple": "[sine][blue]...Sever...[/blue][/sine]",
+  "TH_YOUMU-YOUMU_CHARACTER.banter.alive.endTurnPing": "...",
+  "TH_YOUMU-YOUMU_CHARACTER.banter.dead.endTurnPing": "...",
+  "TH_YOUMU-YOUMU_CHARACTER.cardsModifierDescription": "Youmu Konpaku's cards now appear in rewards and shops.",
+  "TH_YOUMU-YOUMU_CHARACTER.cardsModifierTitle": "Youmu Cards",
+  "TH_YOUMU-YOUMU_CHARACTER.description": "A half-human, half-phantom gardener, skilled in swordsmanship.\nCapable of cutting through enemies, spirits, danmaku, and even human worries.",
+  "TH_YOUMU-YOUMU_CHARACTER.eventDeathPrevention": "Damn... how could this be...",
+  "TH_YOUMU-YOUMU_CHARACTER.goldMonologue": "[sine]These gold coins... might come in handy...[/sine]",
+  "TH_YOUMU-YOUMU_CHARACTER.possessiveAdjective": "Her",
+  "TH_YOUMU-YOUMU_CHARACTER.pronounObject": "her",
+  "TH_YOUMU-YOUMU_CHARACTER.pronounPossessive": "her",
+  "TH_YOUMU-YOUMU_CHARACTER.pronounSubject": "She",
+  "TH_YOUMU-YOUMU_CHARACTER.title": "Youmu Konpaku",
+  "TH_YOUMU-YOUMU_CHARACTER.titleObject": "Youmu",
+  "TH_YOUMU-YOUMU_CHARACTER.unlockText": "Play a game with [pink]{Prerequisite}[/pink] to unlock this character."
+}

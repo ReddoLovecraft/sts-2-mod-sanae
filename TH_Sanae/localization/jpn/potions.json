@@ -1,0 +1,10 @@
+{ 
+  "TH_YOUMU-HEALTH_POWDER.title": "生命の粉",
+  "TH_YOUMU-HEALTH_POWDER.description": "全てのプレイヤーは最大ライフの[blue]35%[/blue]を回復する。",
+  "TH_YOUMU-ANCIENT_MEDIC.title": "いにしえの秘薬",
+  "TH_YOUMU-ANCIENT_MEDIC.description": "あなたのライフと{Energy:energyIcons()}を上限まで回復する。", 
+  "TH_YOUMU-SWORD_POTION.title": "剣意の薬水",
+  "TH_YOUMU-SWORD_POTION.description": "[blue]9[/blue]層の[gold]気刃[/gold]を得る。",
+  "TH_YOUMU-FISH_FIN.title": "研ぎ魚の鱗",
+  "TH_YOUMU-FISH_FIN.description": "[gold]開刃[/gold]する。"
+}

@@ -1,0 +1,22 @@
+{
+	"SPELLCARD.title": "符卡",
+	"SPELLCARD.description": "能被多次[gold]升级[/gold]的卡牌，直接打出时无效果，需要[gold]吟唱[/gold]才能正常生效。",
+	"CHANT.title": "吟唱X",
+	"CHANT.description": "打出后，将在[blue]X[/blue]回合后自动打出具有正常效果的复制。\n也可[gold]右键卡牌[/gold]，失去[blue]5X[/blue]点生命使本次打出具有正常效果，并将其在本场战斗中[gold]升级[/gold]。",
+	"STOP_WIND.title": "止风",
+	"STOP_WIND.description": "移除自身所有[gold]风势[/gold]，若处于[gold]风起[/gold]，则同时退出[gold]风起[/gold]。",
+	"WIND_STATE.title": "风起",
+	"WIND_STATE.description": "受到的伤害减少[blue]75%[/blue]。\n在你的回合结束时，若[gold]风势[/gold]层数低于[blue]18[/blue]，则退出[gold]风起[/gold]。",
+	"WIND_SUMMON.title": "唤风",
+	"WIND_SUMMON.description": "若自身已经处于[gold]风起[/gold]，则翻倍[gold]风势[/gold]，否则进入[gold]风起[/gold]。",
+	"WIND_CONTROL.title": "御风X",
+	"WIND_CONTROL.description": "自身具有X层[gold]风势[/gold]时，触发指定效果。",
+	"PERSUASION.title": "劝诱",
+	"PERSUASION.description": "[purple]饶恕[/purple]当前生命不高于[gold]信仰[/gold]层数两倍的敌人，被[purple]饶恕[/purple]的敌人会留下随机的奖励。",
+	"DEVOTEE.title": "敬拜者",
+	"DEVOTEE.description": "[gold]信仰[/gold]层数大于[blue]10[/blue]的角色。",
+	"PIETY.title": "虔信X",
+	"PIETY.description": "自身具有X层[gold]信仰[/gold]时，触发指定效果。",
+	"REMOVE.title": "即逝",
+	"REMOVE.description": "打出后将自身从你的[gold]牌组[/gold]中移除。"
+}

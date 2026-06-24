@@ -1,0 +1,17 @@
+{
+  "TH_SANAE-SANAE_CHARACTER.aromaPrinciple": "[sine][blue]……祈祷……[/blue][/sine]",
+  "TH_SANAE-SANAE_CHARACTER.banter.alive.endTurnPing": "……",
+  "TH_SANAE-SANAE_CHARACTER.banter.dead.endTurnPing": "……",
+  "TH_SANAE-SANAE_CHARACTER.cardsModifierDescription": "东风谷早苗的卡牌现在会出现在奖励和商店中。",
+  "TH_SANAE-SANAE_CHARACTER.cardsModifierTitle": "东风谷早苗卡牌",
+  "TH_SANAE-SANAE_CHARACTER.description": "守矢神社的风祝，拥有引发奇迹程度的能力。\n通过传播信仰和操纵风势来进行战斗。",
+  "TH_SANAE-SANAE_CHARACTER.eventDeathPrevention": "呜……怎么会这样……",
+  "TH_SANAE-SANAE_CHARACTER.goldMonologue": "[sine]这些金币……也许能派上用场……[/sine]",
+  "TH_SANAE-SANAE_CHARACTER.possessiveAdjective": "她的",
+  "TH_SANAE-SANAE_CHARACTER.pronounObject": "她",
+  "TH_SANAE-SANAE_CHARACTER.pronounPossessive": "她的",
+  "TH_SANAE-SANAE_CHARACTER.pronounSubject": "她",
+  "TH_SANAE-SANAE_CHARACTER.title": "东风谷早苗",
+  "TH_SANAE-SANAE_CHARACTER.titleObject": "早苗",
+  "TH_SANAE-SANAE_CHARACTER.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。"
+}

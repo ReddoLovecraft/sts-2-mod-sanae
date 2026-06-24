@@ -1,0 +1,10 @@
+{ 
+  "TH_YOUMU-HEALTH_POWDER.title": "Lifepowder",
+  "TH_YOUMU-HEALTH_POWDER.description": "All players heal [blue]35%[/blue] of their Max HP.",
+  "TH_YOUMU-ANCIENT_MEDIC.title": "Ancient Potion",
+  "TH_YOUMU-ANCIENT_MEDIC.description": "Restore your HP and {Energy:energyIcons()} to maximum.",
+  "TH_YOUMU-SWORD_POTION.title": "Sword Will Potion",
+  "TH_YOUMU-SWORD_POTION.description": "Gain [blue]9[/blue] [gold]Sword Gas[/gold].",
+  "TH_YOUMU-FISH_FIN.title": "Whetfish Fin",
+  "TH_YOUMU-FISH_FIN.description": "[gold]Sharpen Blade[/gold]."
+}

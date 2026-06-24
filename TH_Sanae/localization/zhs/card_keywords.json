@@ -1,0 +1,12 @@
+{
+    "TH_SANAE-DRAW.description": "具有该关键词的卡牌在被抽到时，基础数值将根据取得的签发生变换。\n[gold]大吉[/gold]：数值翻倍\n[green]吉[/green]：数值不变\n[red]凶[/red]：数值减半\n[purple]大凶[/purple]：数值归零",
+    "TH_SANAE-DRAW.title": "抽签",
+    "TH_SANAE-DRAW_GREAT_LUCK.title": "抽签·大吉",
+    "TH_SANAE-DRAW_LUCK.title": "抽签·吉",
+    "TH_SANAE-DRAW_BAD_LUCK.title": "抽签·凶",
+    "TH_SANAE-DRAW_GREAT_CURSE.title": "抽签·大凶",
+    "TH_SANAE-WIND_STEP.description": "具有该关键词的卡牌只有在自身处于[gold]风起[/gold]时方可打出。",
+    "TH_SANAE-WIND_STEP.title": "风行",
+    "TH_SANAE-MIRACLE.description": "具有该关键词的卡牌在被抽到时，有几率获得等同于其基础耗能的能量。",
+    "TH_SANAE-MIRACLE.title": "奇跡"
+}

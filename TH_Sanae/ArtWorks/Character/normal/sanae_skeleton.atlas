@@ -1,0 +1,657 @@
+
+sanae_skeleton.png
+size: 1845,1797
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+AttackH/Hit_0000_spellFa008.png
+  rotate: false
+  xy: 1608, 1273
+  size: 218, 255
+  orig: 450, 450
+  offset: 147, 3
+  index: -1
+AttackH/Hit_0001_spellFa007.png
+  rotate: false
+  xy: 1173, 1025
+  size: 196, 236
+  orig: 450, 450
+  offset: 169, 14
+  index: -1
+AttackH/Hit_0002_spellFa006.png
+  rotate: false
+  xy: 1428, 791
+  size: 159, 245
+  orig: 450, 450
+  offset: 134, 8
+  index: -1
+AttackH/Hit_0003_spellFa005.png
+  rotate: false
+  xy: 1371, 1038
+  size: 157, 223
+  orig: 450, 450
+  offset: 158, 5
+  index: -1
+AttackH/Hit_0004_spellFa004
+  rotate: false
+  xy: 2, 1130
+  size: 245, 407
+  orig: 450, 450
+  offset: 157, 3
+  index: -1
+AttackH/Hit_0005_spellFa003.png
+  rotate: true
+  xy: 918, 1079
+  size: 181, 253
+  orig: 450, 450
+  offset: 131, 5
+  index: -1
+AttackH/Hit_0006_spellFa002.png
+  rotate: true
+  xy: 407, 1077
+  size: 187, 248
+  orig: 450, 450
+  offset: 123, 5
+  index: -1
+AttackH/Hit_0007_spellFa001.png
+  rotate: false
+  xy: 660, 1253
+  size: 171, 272
+  orig: 450, 450
+  offset: 125, 3
+  index: -1
+AttackH/Hit_0008_spellFa000.png
+  rotate: false
+  xy: 160, 156
+  size: 146, 300
+  orig: 450, 450
+  offset: 136, 0
+  index: -1
+AttackS/AttackH_0000_spellAa009.png
+  rotate: false
+  xy: 558, 544
+  size: 206, 261
+  orig: 450, 450
+  offset: 118, 0
+  index: -1
+AttackS/AttackH_0001_spellAa008.png
+  rotate: false
+  xy: 324, 816
+  size: 240, 259
+  orig: 450, 450
+  offset: 120, 2
+  index: -1
+AttackS/AttackH_0002_spellAa007.png
+  rotate: false
+  xy: 1056, 1524
+  size: 286, 271
+  orig: 450, 450
+  offset: 98, 2
+  index: -1
+AttackS/AttackH_0003_spellAa006.png
+  rotate: false
+  xy: 750, 1530
+  size: 304, 265
+  orig: 450, 450
+  offset: 92, 5
+  index: -1
+AttackS/AttackH_0004_spellAa005.png
+  rotate: false
+  xy: 422, 1527
+  size: 326, 268
+  orig: 450, 450
+  offset: 95, 2
+  index: -1
+AttackS/AttackH_0005_spellAa004.png
+  rotate: false
+  xy: 2, 1539
+  size: 418, 256
+  orig: 450, 450
+  offset: 32, 2
+  index: -1
+AttackS/AttackH_0006_spellAa003.png
+  rotate: false
+  xy: 566, 807
+  size: 157, 268
+  orig: 450, 450
+  offset: 92, 2
+  index: -1
+AttackS/AttackH_0007_spellAa002.png
+  rotate: false
+  xy: 1392, 265
+  size: 147, 257
+  orig: 450, 450
+  offset: 92, 13
+  index: -1
+AttackS/AttackH_0008_spellAa001.png
+  rotate: false
+  xy: 1246, 296
+  size: 144, 257
+  orig: 450, 450
+  offset: 92, 13
+  index: -1
+AttackS/AttackH_0009_spellAa000.png
+  rotate: false
+  xy: 888, 13
+  size: 138, 263
+  orig: 450, 450
+  offset: 92, 7
+  index: -1
+Idle/Idle_0000_wstand000.png
+  rotate: false
+  xy: 1394, 524
+  size: 193, 265
+  orig: 450, 450
+  offset: 155, 1
+  index: -1
+Idle/Idle_0001_stand007.png
+  rotate: false
+  xy: 538, 280
+  size: 198, 262
+  orig: 450, 450
+  offset: 155, 4
+  index: -1
+Idle/Idle_0002_stand006.png
+  rotate: false
+  xy: 738, 278
+  size: 198, 262
+  orig: 450, 450
+  offset: 155, 4
+  index: -1
+Idle/Idle_0003_stand005.png
+  rotate: false
+  xy: 1174, 555
+  size: 218, 262
+  orig: 450, 450
+  offset: 155, 4
+  index: -1
+Idle/Idle_0004_stand004.png
+  rotate: false
+  xy: 1608, 1530
+  size: 235, 265
+  orig: 450, 450
+  offset: 155, 1
+  index: -1
+Idle/Idle_0005_stand003.png
+  rotate: false
+  xy: 330, 548
+  size: 226, 266
+  orig: 450, 450
+  offset: 155, 0
+  index: -1
+Idle/Idle_0006_stand002.png
+  rotate: false
+  xy: 725, 810
+  size: 212, 266
+  orig: 450, 450
+  offset: 155, 0
+  index: -1
+Idle/Idle_0007_stand001.png
+  rotate: false
+  xy: 766, 542
+  size: 198, 266
+  orig: 450, 450
+  offset: 155, 0
+  index: -1
+OnHit/OnHit_0000_hitUnder002.png
+  rotate: false
+  xy: 833, 1262
+  size: 218, 266
+  orig: 450, 450
+  offset: 146, 0
+  index: -1
+OnHit/OnHit_0001_hitUnder001.png
+  rotate: false
+  xy: 966, 550
+  size: 206, 266
+  orig: 450, 450
+  offset: 146, 0
+  index: -1
+OnHit/OnHit_0002_hitUnder000.png
+  rotate: true
+  xy: 1589, 517
+  size: 197, 247
+  orig: 450, 450
+  offset: 146, 19
+  index: -1
+Spell/YC_0000_spellDa022.png
+  rotate: false
+  xy: 2, 125
+  size: 156, 331
+  orig: 450, 450
+  offset: 162, 3
+  index: -1
+Spell/YC_0000_spellDa024.png
+  rotate: false
+  xy: 330, 286
+  size: 206, 260
+  orig: 450, 450
+  offset: 176, 2
+  index: -1
+Spell/YC_0001_spellDa021.png
+  rotate: false
+  xy: 2, 794
+  size: 173, 334
+  orig: 450, 450
+  offset: 154, 0
+  index: -1
+Spell/YC_0001_spellDa023.png
+  rotate: false
+  xy: 177, 496
+  size: 151, 304
+  orig: 450, 450
+  offset: 170, 0
+  index: -1
+Spell/YC_0002_spellDa020.png
+  rotate: false
+  xy: 1303, 1263
+  size: 145, 259
+  orig: 450, 450
+  offset: 171, 3
+  index: -1
+Spell/YC_0003_spellDa019.png
+  rotate: false
+  xy: 1450, 1275
+  size: 156, 259
+  orig: 450, 450
+  offset: 162, 3
+  index: -1
+Spell/YC_0004_spellDa018.png
+  rotate: true
+  xy: 657, 1078
+  size: 173, 259
+  orig: 450, 450
+  offset: 154, 6
+  index: -1
+Spell/YC_0005_spellDa017.png
+  rotate: false
+  xy: 1053, 1263
+  size: 248, 259
+  orig: 450, 450
+  offset: 171, 6
+  index: -1
+Spell/YC_0006_spellDa016.png
+  rotate: false
+  xy: 407, 1266
+  size: 251, 259
+  orig: 450, 450
+  offset: 162, 6
+  index: -1
+Spell/YC_0007_spellDa015.png
+  rotate: false
+  xy: 1344, 1536
+  size: 262, 259
+  orig: 450, 450
+  offset: 154, 6
+  index: -1
+Spell/YC_0008_spellDa014.png
+  rotate: true
+  xy: 1167, 819
+  size: 204, 259
+  orig: 450, 450
+  offset: 112, 6
+  index: -1
+Spell/YC_0009_spellDa013.png
+  rotate: true
+  xy: 1530, 1057
+  size: 214, 259
+  orig: 450, 450
+  offset: 104, 6
+  index: -1
+Spell/YC_0010_spellDa012.png
+  rotate: false
+  xy: 939, 818
+  size: 226, 259
+  orig: 450, 450
+  offset: 101, 6
+  index: -1
+Spell/YC_0011_spellDa011.png
+  rotate: false
+  xy: 508, 19
+  size: 192, 259
+  orig: 450, 450
+  offset: 171, 6
+  index: -1
+Spell/YC_0012_spellDa010.png
+  rotate: false
+  xy: 702, 17
+  size: 184, 259
+  orig: 450, 450
+  offset: 162, 3
+  index: -1
+Spell/YC_0013_spellDa009.png
+  rotate: false
+  xy: 308, 25
+  size: 198, 259
+  orig: 450, 450
+  offset: 154, 0
+  index: -1
+Spell/YC_0014_spellDa008.png
+  rotate: false
+  xy: 177, 802
+  size: 145, 326
+  orig: 450, 450
+  offset: 171, 3
+  index: -1
+Spell/YC_0015_spellDa007.png
+  rotate: false
+  xy: 249, 1206
+  size: 156, 331
+  orig: 450, 450
+  offset: 162, 6
+  index: -1
+Spell/YC_0016_spellDa006.png
+  rotate: false
+  xy: 2, 458
+  size: 173, 334
+  orig: 450, 450
+  offset: 154, 0
+  index: -1
+Spell/YC_0017_spellDa005.png
+  rotate: false
+  xy: 1096, 281
+  size: 148, 267
+  orig: 450, 450
+  offset: 168, 0
+  index: -1
+Spell/YC_0018_spellDa004.png
+  rotate: false
+  xy: 938, 281
+  size: 156, 259
+  orig: 450, 450
+  offset: 162, 6
+  index: -1
+Spell/YC_0019_spellDa003.png
+  rotate: true
+  xy: 1589, 882
+  size: 173, 254
+  orig: 450, 450
+  offset: 154, 8
+  index: -1
+Spell/YC_0020_spellDa002.png
+  rotate: false
+  xy: 1541, 267
+  size: 145, 248
+  orig: 450, 450
+  offset: 168, 8
+  index: -1
+Spell/YC_0021_spellDa001.png
+  rotate: true
+  xy: 1589, 716
+  size: 164, 254
+  orig: 450, 450
+  offset: 179, 8
+  index: -1
+Spell/YC_0022_spellDa000.png
+  rotate: false
+  xy: 1028, 20
+  size: 179, 259
+  orig: 450, 450
+  offset: 176, 6
+  index: -1
+cast/cast-_0000_shotBa000.png
+  rotate: false
+  xy: 1261, 70
+  size: 60, 95
+  orig: 65, 112
+  offset: 0, 17
+  index: -1
+cast/cast-_0001_shotBa001.png
+  rotate: false
+  xy: 1209, 55
+  size: 50, 110
+  orig: 65, 112
+  offset: 0, 2
+  index: -1
+cast/cast-_0002_shotBa002.png
+  rotate: false
+  xy: 1209, 167
+  size: 58, 112
+  orig: 65, 112
+  offset: 0, 0
+  index: -1
+cast/cast-_0003_shotBa003.png
+  rotate: false
+  xy: 345, 1094
+  size: 60, 110
+  orig: 65, 112
+  offset: 0, 2
+  index: -1
+cast/cast-_0004_shotBa004.png
+  rotate: true
+  xy: 1688, 255
+  size: 65, 95
+  orig: 65, 112
+  offset: 0, 17
+  index: -1
+cast/cast-_0005_shotBa005.png
+  rotate: false
+  xy: 233, 60
+  size: 65, 94
+  orig: 65, 112
+  offset: 0, 18
+  index: -1
+cast/cast-_0006_shotBa006.png
+  rotate: false
+  xy: 166, 59
+  size: 65, 95
+  orig: 65, 112
+  offset: 0, 17
+  index: -1
+cast/cast-_0007_shotBa007.png
+  rotate: false
+  xy: 1488, 168
+  size: 63, 95
+  orig: 65, 112
+  offset: 0, 17
+  index: -1
+cast/cast-_0008_shotBa008.png
+  rotate: false
+  xy: 1553, 170
+  size: 64, 95
+  orig: 65, 112
+  offset: 0, 17
+  index: -1
+cast/cast-_0009_shotBa009.png
+  rotate: false
+  xy: 1619, 170
+  size: 64, 95
+  orig: 65, 112
+  offset: 0, 17
+  index: -1
+die/die-_0000_down000.png
+  rotate: false
+  xy: 1746, 2
+  size: 81, 60
+  orig: 99, 63
+  offset: 0, 3
+  index: -1
+die/die-_0001_down001.png
+  rotate: true
+  xy: 1340, 217
+  size: 77, 48
+  orig: 99, 63
+  offset: 0, 15
+  index: -1
+die/die-_0002_down002.png
+  rotate: false
+  xy: 233, 2
+  size: 72, 56
+  orig: 99, 63
+  offset: 0, 7
+  index: -1
+die/die-_0003_down003.png
+  rotate: false
+  xy: 1478, 41
+  size: 85, 62
+  orig: 99, 63
+  offset: 0, 1
+  index: -1
+die/die-_0004_down004.png
+  rotate: false
+  xy: 1390, 200
+  size: 96, 63
+  orig: 99, 63
+  offset: 0, 0
+  index: -1
+die/die-_0005_down005.png
+  rotate: true
+  xy: 1791, 1172
+  size: 99, 37
+  orig: 99, 63
+  offset: 0, 26
+  index: -1
+rest/sit-_0000_shotCc000.png
+  rotate: true
+  xy: 1773, 457
+  size: 58, 70
+  orig: 66, 89
+  offset: 0, 19
+  index: -1
+rest/sit-_0001_shotCc001.png
+  rotate: true
+  xy: 1565, 52
+  size: 60, 89
+  orig: 66, 89
+  offset: 0, 0
+  index: -1
+rest/sit-_0002_shotCc002.png
+  rotate: true
+  xy: 1261, 2
+  size: 66, 85
+  orig: 66, 89
+  offset: 0, 4
+  index: -1
+rest/sit-_0003_shotCc003.png
+  rotate: true
+  xy: 1656, 64
+  size: 60, 89
+  orig: 66, 89
+  offset: 0, 0
+  index: -1
+rest/sit-_0004_shotCc004.png
+  rotate: true
+  xy: 1656, 2
+  size: 60, 88
+  orig: 66, 89
+  offset: 0, 1
+  index: -1
+shop/shop-_0000_walkFront000.png
+  rotate: true
+  xy: 1747, 70
+  size: 54, 93
+  orig: 62, 95
+  offset: 0, 2
+  index: -1
+shop/shop-_0001_walkFront001.png
+  rotate: true
+  xy: 1553, 114
+  size: 54, 94
+  orig: 62, 95
+  offset: 0, 1
+  index: -1
+shop/shop-_0002_walkFront002.png
+  rotate: false
+  xy: 1323, 72
+  size: 57, 94
+  orig: 62, 95
+  offset: 0, 1
+  index: -1
+shop/shop-_0003_walkFront003.png
+  rotate: true
+  xy: 1685, 126
+  size: 59, 93
+  orig: 62, 95
+  offset: 0, 2
+  index: -1
+shop/shop-_0004_walkFront004.png
+  rotate: false
+  xy: 1382, 105
+  size: 62, 93
+  orig: 62, 95
+  offset: 0, 2
+  index: -1
+shop/shop-_0005_walkFront005.png
+  rotate: true
+  xy: 1446, 105
+  size: 61, 94
+  orig: 62, 95
+  offset: 0, 1
+  index: -1
+shop/shop-_0006_walkFront006.png
+  rotate: false
+  xy: 1785, 226
+  size: 58, 95
+  orig: 62, 95
+  offset: 0, 0
+  index: -1
+shop/shop-_0007_walkFront007.png
+  rotate: true
+  xy: 1382, 46
+  size: 57, 94
+  orig: 62, 95
+  offset: 0, 1
+  index: -1
+throw/throw-2_0000_spellBa000.png
+  rotate: false
+  xy: 1269, 199
+  size: 69, 95
+  orig: 83, 97
+  offset: 0, 2
+  index: -1
+throw/throw-_0001_spellBa001.png
+  rotate: true
+  xy: 249, 1130
+  size: 74, 94
+  orig: 83, 97
+  offset: 0, 3
+  index: -1
+throw/throw-_0002_spellBa002.png
+  rotate: true
+  xy: 1685, 187
+  size: 66, 93
+  orig: 83, 97
+  offset: 0, 4
+  index: -1
+throw/throw-_0003_spellBa003.png
+  rotate: false
+  xy: 1780, 131
+  size: 63, 93
+  orig: 83, 97
+  offset: 0, 4
+  index: -1
+throw/throw-_0004_spellBa004.png
+  rotate: false
+  xy: 1772, 323
+  size: 71, 95
+  orig: 83, 97
+  offset: 0, 2
+  index: -1
+throw/throw-_0005_spellBa005.png
+  rotate: false
+  xy: 2, 26
+  size: 82, 97
+  orig: 83, 97
+  offset: 0, 0
+  index: -1
+throw/throw-_0006_spellBa006.png
+  rotate: false
+  xy: 1688, 322
+  size: 82, 96
+  orig: 83, 97
+  offset: 0, 1
+  index: -1
+throw/throw-_0007_spellBa007.png
+  rotate: false
+  xy: 86, 28
+  size: 78, 95
+  orig: 83, 97
+  offset: 0, 2
+  index: -1
+throw/throw-_0008_spellBa008.png
+  rotate: false
+  xy: 1688, 420
+  size: 83, 95
+  orig: 83, 97
+  offset: 0, 2
+  index: -1

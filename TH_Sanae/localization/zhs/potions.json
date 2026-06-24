@@ -1,0 +1,10 @@
+{ 
+  "TH_YOUMU-HEALTH_POWDER.title": "生命粉尘",
+  "TH_YOUMU-HEALTH_POWDER.description": "所有玩家回复最大生命值的[blue]35%[/blue]。",
+  "TH_YOUMU-ANCIENT_MEDIC.title": "远古秘药",
+  "TH_YOUMU-ANCIENT_MEDIC.description": "将你的生命和{Energy:energyIcons()}恢复到上限。", 
+  "TH_YOUMU-SWORD_POTION.title": "剑意药水",
+  "TH_YOUMU-SWORD_POTION.description": "获得[blue]9[/blue]层[gold]剑气[/gold]。",
+  "TH_YOUMU-FISH_FIN.title": "磨刀鱼鳞 ",
+  "TH_YOUMU-FISH_FIN.description": "[gold]开刃[/gold]。"
+}

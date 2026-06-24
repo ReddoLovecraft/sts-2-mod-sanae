@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://teutis6yif4y"]
+
+[ext_resource type="Script" uid="uid://bmj0sbqwvhlx8" path="res://TH_Sanae/ArtWorks/VFX/Sanaerest.cs" id="1_rfjk2"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cj17no26m0q0c" path="res://TH_Sanae/ArtWorks/Character/sanae.tres" id="2_ahef8"]
+
+[node name="sakuyarest" type="Node2D"]
+script = ExtResource("1_rfjk2")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_ahef8")
+preview_skin = "default"
+preview_animation = "overgrowth_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(-1.0000019, -34)
+scale = Vector2(2.5, 2.5)
+
+[node name="ControlRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SelectionRetic" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -189.0
+offset_top = -698.0
+offset_right = 231.0
+offset_bottom = -28.0
+
+[node name="Hitbox" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -280.0
+offset_top = -600.0
+offset_right = 367.0
+offset_bottom = -41.0
+
+[node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 209.0
+offset_top = -700.0
+offset_right = 209.0
+offset_bottom = -700.0
+
+[node name="ThoughtBubbleLeft" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -231.0
+offset_top = -700.0
+offset_right = -73.0
+offset_bottom = -700.0

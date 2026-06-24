@@ -1,0 +1,11 @@
+{
+	"SWORD.title": "Blade",
+	"SWORD.description": "Three levels: [blue]White[/blue]/[gold]Yellow[/gold]/[red]Red[/red], corresponding to [blue]25%[/blue]/[gold]50%[/gold]/[red]100%[/red] increased damage from [gold]Attack[/gold] cards, lasting [blue]3[/blue] turns.",
+	"OPEN_SWORD.title": "Sharpen Blade",
+	"OPEN_SWORD.description": "If you have [gold]Blade[/gold], raise it by one level; otherwise, gain [gold]White Blade[/gold].",
+	"DERIVE.title": "Derive X",
+	"DERIVE.description": "Choose [blue]X[/blue] cards of a specified type from your [gold]Draw Pile[/gold] and add them to your hand.",
+	"DERIVE.selectionScreenPrompt": "Choose [blue]X[/blue] cards of the specified type from your [gold]Draw Pile[/gold] to add to your hand.",
+	"CANCEL.title": "Cancel",
+	"CANCEL.description": "Success depends on the [gold]Cancel[/gold] level ([purple]Spell[/purple] → [red]Super[/red] → [gold]Normal[/gold]).\nIf successful, this card can be played ignoring [gold]Stiffness[/gold] (removing it), and return the previous card you played this turn to your hand (except [gold]Power[/gold] cards)."
+}

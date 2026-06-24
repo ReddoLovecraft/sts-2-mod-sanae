@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://conw4h8sv5kbr"
+path="res://.godot/imported/sanae_skeleton.skel-a3b2c97c5504eeb8627d0d3bc959d3dc.spskel"
+
+[deps]
+
+source_file="res://TH_Sanae/ArtWorks/Character/normal/sanae_skeleton.skel"
+dest_files=["res://.godot/imported/sanae_skeleton.skel-a3b2c97c5504eeb8627d0d3bc959d3dc.spskel"]
+
+[params]
+

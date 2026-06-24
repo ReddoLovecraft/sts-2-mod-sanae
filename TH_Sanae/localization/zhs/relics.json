@@ -1,0 +1,11 @@
+{
+  "TH_SANAE-FAKE_FAITH.title": "褪色的信仰",
+  "TH_SANAE-FAKE_FAITH.description": "每场战斗开始和结束时，恢复[green]{Heal}[/green]点生命。\n每当你战胜[purple]BOSS[/purple]/[red]精英[/red]时，该计数增加[blue]3[/blue]点。",
+  "TH_SANAE-FAKE_FAITH.flavor": "守矢神社信仰的具现，如今不复原本的色彩，但仍能带给早苗些许庇佑。",
+  "TH_SANAE-TRUE_FAITH.title": "昌盛的信仰",
+  "TH_SANAE-TRUE_FAITH.description": "在你的回合开始和结束时，恢复[green]{Heal}[/green]点生命。\n每当你战胜[purple]BOSS[/purple]/[red]精英[/red]时，该计数增加[blue]3[/blue]点。",
+  "TH_SANAE-TRUE_FAITH.flavor": "守矢神社信仰的具现，在早苗的努力下，终于得以重现昔日的色彩。",
+  "TH_SANAE-MYSTERY_FRUIT_RELIC.title": "神秘果",
+  "TH_SANAE-MYSTERY_FRUIT_RELIC.description": "在你的回合开始时，获得{Energy:energyIcons()}。",
+  "TH_SANAE-MYSTERY_FRUIT_RELIC.flavor": "有着能让世界上酸的东西都变成甜的程度能力的果实。"
+}

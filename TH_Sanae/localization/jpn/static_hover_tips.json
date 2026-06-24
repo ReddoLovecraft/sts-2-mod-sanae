@@ -1,0 +1,11 @@
+{
+	"SWORD.title": "刃",
+	"SWORD.description": "[blue]白[/blue]/[gold]黄[/gold]/[red]紅[/red]の3段階に分かれ、それぞれ[gold]攻撃カード[/gold]のダメージを[blue]25%[/blue]/[gold]50%[/gold]/[red]100%[/red]上昇させる。効果は[blue]3[/blue]ターン持続する。",
+	"OPEN_SWORD.title": "開刃",
+	"OPEN_SWORD.description": "[gold]刃[/gold]を持っている場合、その段階を1上げる。そうでなければ[gold]白刃[/gold]を得る。",
+	"DERIVE.title": "派生X",
+	"DERIVE.description": "[gold]ドロー山札[/gold]から指定タイプのカードを[blue]X[/blue]枚選んで手札に加える。",
+	"DERIVE.selectionScreenPrompt": "[gold]ドロー山札[/gold]から指定タイプのカードを[blue]X[/blue]枚選んで手札に加える。",
+	"CANCEL.title": "取消",
+	"CANCEL.description": "[gold]取消[/gold]レベル([purple]スペルカード[/purple]→[red]必殺技[/red]→[gold]通常[/gold])で成功するか判定する。\n成功した場合、このカードは[gold]硬直[/gold]を無視して使用でき、[gold]硬直[/gold]を除去し、このターン中に直前に使用したカードを手札に戻す（[gold]パワーカード[/gold]を除く）。"
+}
