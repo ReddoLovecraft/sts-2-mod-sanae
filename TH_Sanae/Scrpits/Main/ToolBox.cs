@@ -41,6 +41,22 @@ namespace TH_Sanae.Scripts.Main
         private static HashSet<string>? _windRelatedTipIds;
 
         private static List<Type>? _sanaeSpellCardTypes;
+        private static List<Type>? _kanakoCardTypes;
+        private static readonly HashSet<string> _kanakoCardTypeNames =
+        [
+            nameof(ArmyGodForm),
+            nameof(BoilingBlood),
+            nameof(ExtendOnbashria),
+            nameof(FaithCall),
+            nameof(GodPowerLight),
+            nameof(KanakoOnbashiraSummon),
+            nameof(KanakoSummonOnbashira),
+            nameof(KanakoSummonRush),
+            nameof(KanakoSummonWind),
+            nameof(MartialTraining),
+            nameof(TechInnovation),
+            nameof(WindGodVirtue)
+        ];
         public static void playWindSfx(float specialNum,Color? color = null)
         {
             Color actualColor = color ?? new Color("FFFFFF80");
@@ -213,14 +229,7 @@ namespace TH_Sanae.Scripts.Main
 
         public static CardModel? CreateRandomKanakoCard(Player player, bool upgraded = false)
         {
-            List<Type> kanakoCardTypes = typeof(SanaeCharacter).Assembly
-                .GetTypes()
-                .Where(type => !type.IsAbstract
-                    && typeof(SanaeCardModel).IsAssignableFrom(type)
-                    && type.Namespace == "TH_Sanae.Scrpits.Cards"
-                    && type.Name.Contains("Kanako", StringComparison.Ordinal))
-                .OrderBy(type => type.Name)
-                .ToList();
+            List<Type> kanakoCardTypes = GetKanakoCardTypes();
             if (kanakoCardTypes.Count == 0)
             {
                 return null;
@@ -462,6 +471,20 @@ namespace TH_Sanae.Scripts.Main
                 .ToList();
 
             return _sanaeSpellCardTypes;
+        }
+
+        private static List<Type> GetKanakoCardTypes()
+        {
+            _kanakoCardTypes ??= typeof(SanaeCharacter).Assembly
+                .GetTypes()
+                .Where(type => !type.IsAbstract
+                    && typeof(SanaeCardModel).IsAssignableFrom(type)
+                    && type.Namespace == "TH_Sanae.Scrpits.Cards"
+                    && _kanakoCardTypeNames.Contains(type.Name))
+                .OrderBy(type => type.Name)
+                .ToList();
+
+            return _kanakoCardTypes;
         }
 
         public static int GetDebuffTotalCount(Creature target) 

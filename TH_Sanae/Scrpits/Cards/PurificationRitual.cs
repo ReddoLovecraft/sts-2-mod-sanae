@@ -46,7 +46,7 @@ namespace TH_Sanae.Scrpits.Cards
 			await base.OnPlay(choiceContext, cardPlay);
 			if (!NotYC)
 			{
-				YCPower? yc = await PowerCmd.Apply<YCPower>(choiceContext, Owner.Creature, YC_count, Owner.Creature, this);
+				YCPower? yc = await CreateYCPower(choiceContext, YC_count);
 				if (yc != null)
 				{
 					yc.cardsTip.Clear();

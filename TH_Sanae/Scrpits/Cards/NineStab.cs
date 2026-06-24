@@ -46,8 +46,7 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				for (int i = 1; i <= YC_count; i++)
 				{
-					YCPower? yc = await PowerCmd.Apply<YCPower>(choiceContext, Owner.Creature, i, Owner.Creature, this);
-					yc?.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), $"yc-{CurrentUpgradeLevel}-{i}"), this);
+					await QueueChantWithPreview(choiceContext, i, $"yc-{CurrentUpgradeLevel}-{i}");
 				}
 				return;
 			}

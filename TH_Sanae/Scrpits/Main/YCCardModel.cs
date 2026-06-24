@@ -11,8 +11,10 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.ValueProps;
+using Patchoulib.Scrpits.Main;
 using Patchouib.Scrpits.Main;
 using TH_Sanae.Scripts.Powers;
 
@@ -134,6 +136,40 @@ namespace TH_Sanae.Scripts.Main
 			}
            
         }
+
+		protected async Task<YCPower?> CreateYCPower(PlayerChoiceContext choiceContext, int chantCount, Creature? directPlayTarget = null)
+		{
+			if (Owner.GetRelic<BookOfMoriya>() is BookOfMoriya relic)
+			{
+				relic.Flash();
+				if ((Owner.RunState.Rng.CombatCardGeneration.NextInt(2)) == 0)
+				{
+					await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 2, Owner.Creature, this);
+				}
+				else
+				{
+					await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, 2, Owner.Creature, this);
+				}
+
+				chantCount -= 2;
+			}
+
+			if (chantCount <= 0)
+			{
+				YCCardModel card = (YCCardModel)CreateDupe();
+				card.NotYC = true;
+				await CardCmd.AutoPlay(choiceContext, card, directPlayTarget);
+				return null;
+			}
+
+			return await PowerCmd.Apply<YCPower>(choiceContext, Owner.Creature, chantCount, Owner.Creature, this);
+		}
+
+		protected async Task QueueChantWithPreview(PlayerChoiceContext choiceContext, int chantCount, string previewId, Creature? directPlayTarget = null)
+		{
+			YCPower? yc = await CreateYCPower(choiceContext, chantCount, directPlayTarget);
+			yc?.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), previewId), this);
+		}
 
 		protected void RefreshUpgradeExtraHoverTipsIfNeeded()
 		{

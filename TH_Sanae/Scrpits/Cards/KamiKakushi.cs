@@ -22,7 +22,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		//public override CardPoolModel VisualCardPool => ModelDb.CardPool<ColorlessCardPool>();
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<IntangiblePower>(1)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IntangiblePower>()];
 
@@ -33,15 +33,14 @@ namespace TH_Sanae.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-			await PowerCmd.Apply<IntangiblePower>(choiceContext, Owner.Creature, DynamicVars["IntangiblePower"].BaseValue, Owner.Creature, this);
+			await PowerCmd.Apply<IntangiblePower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			PlayerCmd.EndTurn(Owner, canBackOut: false);
 		}
 
 		protected override void OnUpgrade()
 		{
-			DynamicVars["IntangiblePower"].UpgradeValueBy(1);
+			DynamicVars.Cards.UpgradeValueBy(1);
 		}
 	}
 }
-
 

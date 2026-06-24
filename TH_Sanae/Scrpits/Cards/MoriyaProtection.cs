@@ -12,12 +12,15 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using Patchoulib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
+using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Models;
 
 namespace TH_Sanae.Scrpits.Cards
 {
 	[Pool(typeof(SanaeCardPool))]
-	public sealed class MoriyaProtection : SanaeCardModel
+	public sealed class MoriyaProtection : SanaeCardModel,ITranscendenceCard
 	{
+		public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<MoriyaTwoGodBlessing>();
 		protected override bool ShouldGlowRedInternal => GetPreviousPlayedCardType() == CardType.Attack;
 		protected override bool ShouldGlowGreenInternal => GetPreviousPlayedCardType() != null && GetPreviousPlayedCardType() != CardType.Attack;
 

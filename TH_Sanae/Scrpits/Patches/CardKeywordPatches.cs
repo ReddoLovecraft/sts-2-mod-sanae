@@ -89,11 +89,7 @@ namespace TH_Sanae.Scripts.Patches
 
 		private static async Task ApplyMiracleKeyword(PlayerChoiceContext choiceContext, CardModel card)
 		{
-			if (card.Owner.RunState.Rng.CombatEnergyCosts.NextFloat() < 0.2f||card.Owner.HasPower<AlwaysGoodLuckPower>())
-			{
-				ToolBox.PlayMiracleVfx(card.Owner);
-				await PlayerCmd.GainEnergy(card.EnergyCost.Canonical, card.Owner);
-			}
+			await MiracleHelper.TryTriggerMiracle(choiceContext, card);
 		}
 
 		private static void ApplyVarIfPresent(CardModel card, DynamicVarSet currentVars, DynamicVarSet referenceVars, string key, DrawResultType result)

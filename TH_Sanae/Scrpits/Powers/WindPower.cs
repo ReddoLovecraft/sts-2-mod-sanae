@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -11,6 +12,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Saves;
 using MegaCrit.Sts2.Core.Settings;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Sanae.Scripts.Main;
 
@@ -18,9 +20,36 @@ namespace TH_Sanae.Scripts.Powers
 {
 public sealed class WindPower : SanaePowerModel
 {
+	private bool _applyingAyaFollowBonus;
+
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
+
+	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	{
+		if (power != this || amount <= 0m || _applyingAyaFollowBonus)
+		{
+			return;
+		}
+
+		AyaFollow? relic = Owner.Player?.GetRelic<AyaFollow>();
+		if (relic == null)
+		{
+			return;
+		}
+
+		_applyingAyaFollowBonus = true;
+		try
+		{
+			relic.Flash();
+			await PowerCmd.ModifyAmount(choiceContext, this, amount, null, cardSource);
+		}
+		finally
+		{
+			_applyingAyaFollowBonus = false;
+		}
+	}
 
 	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
 	{
@@ -64,7 +93,7 @@ public sealed class WindPower : SanaePowerModel
 		int nextAmount = currentAmount - decayAmount;
 		if (nextAmount <= 0)
 		{
-			await PowerCmd.Remove(this);
+			await PowerCmd.ModifyAmount(choiceContext, this, -currentAmount, null, null);
 			return;
 		}
 

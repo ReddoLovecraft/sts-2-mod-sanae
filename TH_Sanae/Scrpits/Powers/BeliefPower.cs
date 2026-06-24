@@ -59,16 +59,19 @@ public sealed class BeliefPower : SanaePowerModel
 	public override Task AfterApplied(Creature? applier, CardModel? cardSource)
 	{
 		RefreshDisplayVars();
-		return Task.CompletedTask;
+		return TriggerBandAidHeal();
 	}
 
-	public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 	{
 		if (power == this)
 		{
 			RefreshDisplayVars();
+			if (amount > 0m && amount != base.Amount)
+			{
+				await TriggerBandAidHeal();
+			}
 		}
-		return Task.CompletedTask;
 	}
 
 	public override Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
@@ -113,6 +116,16 @@ public sealed class BeliefPower : SanaePowerModel
 		base.DynamicVars[_doubleAmountKey].BaseValue = GetDoubleAmount();
 		base.DynamicVars[_tenPercentAmountKey].BaseValue = GetTenPercentAmount(base.Owner.Block);
 		InvokeDisplayAmountChanged();
+	}
+
+	private async Task TriggerBandAidHeal()
+	{
+		if (base.Owner.Player?.GetRelic<BandAid>() == null)
+		{
+			return;
+		}
+
+		await CreatureCmd.Heal(base.Owner, 2m);
 	}
 }
 }

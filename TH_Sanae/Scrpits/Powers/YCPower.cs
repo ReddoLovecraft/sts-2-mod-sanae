@@ -1,14 +1,13 @@
 using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
-using Patchoulib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
 
 namespace TH_Sanae.Scripts.Powers
@@ -42,6 +41,7 @@ public sealed class YCPower : CustomPowerModel
         ((StringVar)base.DynamicVars["Card"]).StringValue = card.Title;
     }
     protected override IEnumerable<DynamicVar> CanonicalVars => [(new StringVar("Card"))];
+
 	public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if (player != base.Owner.Player)
@@ -61,5 +61,3 @@ public sealed class YCPower : CustomPowerModel
 
 }
 }
-
-

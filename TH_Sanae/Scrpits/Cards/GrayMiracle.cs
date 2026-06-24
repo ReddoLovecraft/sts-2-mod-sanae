@@ -41,8 +41,7 @@ public class GrayMiracle : YCCardModel
 
        if(!NotYC)
 	   {
-		 YCPower yc = await PowerCmd.Apply<YCPower>(choiceContext, Owner.Creature, YC_count, Owner.Creature,this);
-		 yc.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), $"yc-{CurrentUpgradeLevel}"),this);
+		 await QueueChantWithPreview(choiceContext, YC_count, $"yc-{CurrentUpgradeLevel}", cardPlay.Target);
 	   }
 	   else
 	   {

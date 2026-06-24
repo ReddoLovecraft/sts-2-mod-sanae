@@ -26,6 +26,7 @@ namespace TH_Sanae.Scripts.Main
 		public override int DisplayAmount => HealAmount;
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(0m)];
+		public override RelicModel? GetUpgradeReplacement() => ModelDb.Relic<TrueFaith>();
 
 		[SavedProperty]
 		public int HealAmount
@@ -66,9 +67,6 @@ namespace TH_Sanae.Scripts.Main
 			}
 		}
 
-		public override RelicModel GetUpgradeReplacement()
-		{
-			return ModelDb.Relic<TrueFaith>();
-		}
+		
 	}
 }
