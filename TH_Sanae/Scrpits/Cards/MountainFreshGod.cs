@@ -25,7 +25,7 @@ namespace TH_Sanae.Scrpits.Cards
 	{
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.ReplayStatic)];
 
-		public MountainFreshGod() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+		public MountainFreshGod() : base(3, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 		{
 		}
 

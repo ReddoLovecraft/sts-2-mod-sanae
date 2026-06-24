@@ -46,7 +46,7 @@ namespace TH_Sanae.Scrpits.Cards
 			await base.OnPlay(choiceContext, cardPlay);
 			if (!NotYC)
 			{
-				YCPower? yc = await CreateYCPower(choiceContext, YC_count);
+				YCPower? yc = await CreateImmediateSafeYCPower(choiceContext, YC_count);
 				if (yc != null)
 				{
 					yc.cardsTip.Clear();
@@ -57,7 +57,10 @@ namespace TH_Sanae.Scrpits.Cards
 					yc.cards.Add(card);
 					((StringVar)yc.DynamicVars["Card"]).StringValue = card.Title;
 				}
-				return;
+				else
+				{
+					NotYC = true;
+				}
 			}
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			if (Owner.PlayerCombatState != null)

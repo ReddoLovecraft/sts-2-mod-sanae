@@ -17,7 +17,7 @@ namespace TH_Sanae.Scrpits.Cards
 	{
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 
-		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<OnbashiraSummonPower>(), HoverTipFactory.FromKeyword(CardKeyword.Ethereal), HoverTipFactory.FromCard<KanakoSummonOnbashira>()];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [ HoverTipFactory.FromKeyword(CardKeyword.Ethereal), HoverTipFactory.FromCard<KanakoSummonOnbashira>()];
 
 		public KanakoOnbashiraSummon() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 		{

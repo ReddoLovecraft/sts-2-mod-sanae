@@ -4,6 +4,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchoulib.Scrpits.Main;
@@ -15,6 +16,8 @@ namespace TH_Sanae.Scrpits.Cards
 	public sealed class YokaiPunish : SanaeCardModel
 	{
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Move), new CardsVar(1)];
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Strike>(), HoverTipFactory.FromCard<Defend>()];
 
 		public YokaiPunish() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 		{

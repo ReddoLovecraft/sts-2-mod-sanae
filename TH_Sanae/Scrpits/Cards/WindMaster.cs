@@ -48,9 +48,8 @@ namespace TH_Sanae.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await base.OnPlay(choiceContext, cardPlay);
-			if (!NotYC)
+			if (!NotYC && await QueueSingleChantWithPreview(choiceContext, YC_count, $"yc-{CurrentUpgradeLevel}"))
 			{
-				await QueueChantWithPreview(choiceContext, YC_count, $"yc-{CurrentUpgradeLevel}");
 				return;
 			}
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);

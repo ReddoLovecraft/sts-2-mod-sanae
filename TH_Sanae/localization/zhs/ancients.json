@@ -1,19 +1,19 @@
 {
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-0.ancient": "哦？你既不算是活人，也并非是死灵，真是有趣的存在方式……介意让我研究一下么？",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-0.next": "继续",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-1.char": "这种事情怎么可能，总而言之先吃我一剑！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-1.next": "看剑！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-2.ancient": "……唉，那就……下次见！",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-0.char": "关注守矢神社喵！\n关注守矢神社谢谢喵！",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-0.next": "继续",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-1.ancient": "你这又是在做什么……现……神人小姑娘？",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-1.next": "继续",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-2.char": "当然是传教啊，即使在尖塔中我也要想办法为守矢神社增添香火！",
 
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-0r.char": "你是何人？",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-0r.next": "继续",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-1r.ancient": "我们还刚刚见过一面呢，这么快就忘了？",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-1r.next": "看剑！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-2r.char": "既然你不肯说的话，那就先砍了你好了！",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-0r.char": "所以，你就是这场异变的主谋么？",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-0r.next": "继续",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-1r.ancient": "异变？我不清楚你在说些什么……",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-1r.next": "动手！",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-2r.ancient": "唉，莽撞的小姑娘……下次再来见我吧！",
 
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-0.ancient": "看来你并非等闲之辈？不如……",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-0.next": "打断",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-1.char": "总而言之先砍了你再说！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-1.next": "看剑！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-2.ancient": "唉唉……这简直没办法沟通啊……"
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.ancient": "又一位人类小姑娘？你来到这座尖塔又是为了什么呢？",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.next": "继续",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.char": "我可不只是人类哦，我还是一名现人神！至于为什么来到这里，诹访子大人和神奈子大人说要让我来这里历练一番。",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.next": "继续",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "总感觉最近来到这座尖塔的人越来越多了……不要随便什么人都来这里啊！"
 }

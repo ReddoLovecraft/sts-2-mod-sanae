@@ -1,10 +1,10 @@
 { 
-  "TH_YOUMU-HEALTH_POWDER.title": "生命粉尘",
-  "TH_YOUMU-HEALTH_POWDER.description": "所有玩家回复最大生命值的[blue]35%[/blue]。",
-  "TH_YOUMU-ANCIENT_MEDIC.title": "远古秘药",
-  "TH_YOUMU-ANCIENT_MEDIC.description": "将你的生命和{Energy:energyIcons()}恢复到上限。", 
-  "TH_YOUMU-SWORD_POTION.title": "剑意药水",
-  "TH_YOUMU-SWORD_POTION.description": "获得[blue]9[/blue]层[gold]剑气[/gold]。",
-  "TH_YOUMU-FISH_FIN.title": "磨刀鱼鳞 ",
-  "TH_YOUMU-FISH_FIN.description": "[gold]开刃[/gold]。"
+  "TH_SANAE-FAITH_POTION.title": "信仰甘霖",
+  "TH_SANAE-FAITH_POTION.description": "获得[blue]{Amount}[/blue]层[gold]信仰[/gold]。",
+  "TH_SANAE-WIND_POTION.title": "风势药水",
+  "TH_SANAE-WIND_POTION.description": "获得[blue]{Amount}[/blue]层[gold]风势[/gold]。",
+  "TH_SANAE-WIND_STANCE_POTION.title": "风灵药水",
+  "TH_SANAE-WIND_STANCE_POTION.description": "[gold]唤风[/gold]。",
+  "TH_SANAE-VIGOR_POTION.title": "活力灵药",
+  "TH_SANAE-VIGOR_POTION.description": "获得[blue]{Amount}[/blue]层[gold]活力[/gold]。"
 }

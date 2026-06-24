@@ -15,7 +15,7 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(ColorlessCardPool))]
 	public sealed class BoilingBlood : SanaeCardModel
 	{
-		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BoilingBloodPower>(), HoverTipFactory.FromPower<VigorPower>()];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VigorPower>()];
 
 		public BoilingBlood() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 		{

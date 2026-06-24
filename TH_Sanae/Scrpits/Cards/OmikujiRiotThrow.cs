@@ -27,6 +27,8 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.DrawKeyword)];
+
 		public OmikujiRiotThrow() : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
 		{
 		}

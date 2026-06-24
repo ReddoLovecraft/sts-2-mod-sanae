@@ -27,6 +27,7 @@ public class GrayMiracle : YCCardModel
 				List<IHoverTip> tips = new List<IHoverTip>(UpgradeExtraHoverTips)
 				{
 					Tools.GetStaticKeyword("Spellcard"),
+					HoverTipFactory.FromKeyword(CardModifier.MiracleKeyword),
 					HoverTipFactory.FromPower<BeliefPower>(),
 					Tools.GetStaticKeyword("Chant")
 				};
@@ -39,9 +40,9 @@ public class GrayMiracle : YCCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 
-       if(!NotYC)
+       if(!NotYC && await QueueSingleChantWithPreview(choiceContext, YC_count, $"yc-{CurrentUpgradeLevel}", cardPlay.Target))
 	   {
-		 await QueueChantWithPreview(choiceContext, YC_count, $"yc-{CurrentUpgradeLevel}", cardPlay.Target);
+		 return;
 	   }
 	   else
 	   {

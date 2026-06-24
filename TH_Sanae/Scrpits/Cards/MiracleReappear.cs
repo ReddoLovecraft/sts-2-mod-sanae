@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
@@ -24,6 +24,8 @@ namespace TH_Sanae.Scrpits.Cards
 	public sealed class MiracleReappear : SanaeCardModel
 	{
 		public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.MiracleKeyword)];
 
 		public MiracleReappear() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 		{

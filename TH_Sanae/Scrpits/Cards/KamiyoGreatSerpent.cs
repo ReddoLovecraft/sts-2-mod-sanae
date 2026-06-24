@@ -35,8 +35,7 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				return;
 			}
-
-			await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreature(cardPlay.Target,"vfx/vfx_bite");
 			int poisonAmount = (await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this))
 				.Sum(static result => result.UnblockedDamage);
 			if (poisonAmount > 0)

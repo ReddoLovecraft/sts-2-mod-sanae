@@ -14,7 +14,7 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(ColorlessCardPool))]
 	public sealed class FaithCall : SanaeCardModel
 	{
-		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<FaithCaughtPower>(), HoverTipFactory.FromPower<BeliefPower>()];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [ HoverTipFactory.FromPower<BeliefPower>()];
 
 		public FaithCall() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 		{

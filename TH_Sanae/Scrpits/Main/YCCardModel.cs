@@ -137,7 +137,7 @@ namespace TH_Sanae.Scripts.Main
            
         }
 
-		protected async Task<YCPower?> CreateYCPower(PlayerChoiceContext choiceContext, int chantCount, Creature? directPlayTarget = null)
+		private async Task<int> ApplyBookOfMoriyaModifier(PlayerChoiceContext choiceContext, int chantCount)
 		{
 			if (Owner.GetRelic<BookOfMoriya>() is BookOfMoriya relic)
 			{
@@ -154,6 +154,13 @@ namespace TH_Sanae.Scripts.Main
 				chantCount -= 2;
 			}
 
+			return chantCount;
+		}
+
+		protected async Task<YCPower?> CreateYCPower(PlayerChoiceContext choiceContext, int chantCount, Creature? directPlayTarget = null)
+		{
+			chantCount = await ApplyBookOfMoriyaModifier(choiceContext, chantCount);
+
 			if (chantCount <= 0)
 			{
 				YCCardModel card = (YCCardModel)CreateDupe();
@@ -165,10 +172,53 @@ namespace TH_Sanae.Scripts.Main
 			return await PowerCmd.Apply<YCPower>(choiceContext, Owner.Creature, chantCount, Owner.Creature, this);
 		}
 
+		protected async Task<YCPower?> CreateImmediateSafeYCPower(PlayerChoiceContext choiceContext, int chantCount)
+		{
+			chantCount = await ApplyBookOfMoriyaModifier(choiceContext, chantCount);
+			if (chantCount <= 0)
+			{
+				NotYC = true;
+				return null;
+			}
+
+			return await PowerCmd.Apply<YCPower>(choiceContext, Owner.Creature, chantCount, Owner.Creature, this);
+		}
+
 		protected async Task QueueChantWithPreview(PlayerChoiceContext choiceContext, int chantCount, string previewId, Creature? directPlayTarget = null)
 		{
 			YCPower? yc = await CreateYCPower(choiceContext, chantCount, directPlayTarget);
 			yc?.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), previewId), this);
+		}
+
+		protected async Task<bool> QueueSingleChantWithPreview(PlayerChoiceContext choiceContext, int chantCount, string previewId, Creature? directPlayTarget = null)
+		{
+			YCPower? yc = await CreateImmediateSafeYCPower(choiceContext, chantCount);
+			if (yc == null)
+			{
+				return false;
+			}
+
+			yc.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), previewId), this);
+			return true;
+		}
+
+		protected async Task<int> QueueMultiChantWithPreview(PlayerChoiceContext choiceContext, IEnumerable<(int ChantCount, string PreviewId)> chantStages, Creature? directPlayTarget = null)
+		{
+			int immediateTriggerCount = 0;
+			foreach ((int chantCount, string previewId) in chantStages)
+			{
+				int modifiedChantCount = await ApplyBookOfMoriyaModifier(choiceContext, chantCount);
+				if (modifiedChantCount <= 0)
+				{
+					immediateTriggerCount++;
+					continue;
+				}
+
+				YCPower? yc = await PowerCmd.Apply<YCPower>(choiceContext, Owner.Creature, modifiedChantCount, Owner.Creature, this);
+				yc?.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), previewId), this);
+			}
+
+			return immediateTriggerCount;
 		}
 
 		protected void RefreshUpgradeExtraHoverTipsIfNeeded()

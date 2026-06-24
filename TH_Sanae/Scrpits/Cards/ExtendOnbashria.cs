@@ -15,7 +15,7 @@ namespace TH_Sanae.Scrpits.Cards
 	{
 		public override bool GainsBlock => true;
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(12, ValueProp.Move)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(6, ValueProp.Move),new CardsVar(6)];
 
 		public ExtendOnbashria() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 		{
@@ -25,7 +25,6 @@ namespace TH_Sanae.Scrpits.Cards
 		{
 			await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-
 			int extraHandCards = ToolBox.GetPile(Owner, PileType.Hand)?.Cards.Count ?? 0;
 			if (extraHandCards > 0)
 			{

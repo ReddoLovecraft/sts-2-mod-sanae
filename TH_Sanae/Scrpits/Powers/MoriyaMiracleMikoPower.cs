@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,18 +21,26 @@ public sealed class MoriyaMiracleMikoPower : SanaePowerModel
 	{
 		public override PowerType Type => PowerType.Buff;
 
-		public override PowerStackType StackType => PowerStackType.Single;
+		public override PowerStackType StackType => PowerStackType.Counter;
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.MiracleKeyword)];
 
 		public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (cardPlay.Card.Owner != Owner.Player || !cardPlay.IsFirstInSeries)
+			if (cardPlay.Card.Owner != Owner.Player || !cardPlay.IsFirstInSeries || Amount <= 0)
 			{
 				return;
 			}
-
+			if (!cardPlay.Card.Keywords.Contains(CardModifier.MiracleKeyword))
+			{
+				return;
+			}
+			
 			Flash();
-			await MiracleHelper.TryTriggerMiracle(choiceContext, cardPlay.Card);
+			for (int i = 0; i < Amount; i++)
+			{
+				await MiracleHelper.TryTriggerMiracle(choiceContext, cardPlay.Card);
+			}
 		}
 	}
 }
-

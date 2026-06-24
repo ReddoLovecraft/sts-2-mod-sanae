@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.Relics;
 using TH_Sanae.Scripts.Powers;
@@ -20,6 +21,8 @@ namespace TH_Sanae.Scripts.Main
 	[Pool(typeof(SanaeRelicPool))]
 	public sealed class SourceOfHumanGod : SanaeRelicModel
 	{
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		[
 			HoverTipFactory.FromPower<BeliefPower>(),
@@ -53,7 +56,7 @@ namespace TH_Sanae.Scripts.Main
 			{
 				Flash();
 				await PlayerCmd.GainEnergy(1, Owner);
-				await CardPileCmd.Draw(choiceContext, Owner);
+				await CardPileCmd.Draw(choiceContext, 1,Owner);
 			}
 		}
 

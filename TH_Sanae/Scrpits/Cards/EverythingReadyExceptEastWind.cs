@@ -25,6 +25,8 @@ namespace TH_Sanae.Scrpits.Cards
 	{
 		public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 
+		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardModifier.WindStepKeyword];
+
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new EnergyVar(2)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("WindSummon"), HoverTipFactory.ForEnergy(this)];

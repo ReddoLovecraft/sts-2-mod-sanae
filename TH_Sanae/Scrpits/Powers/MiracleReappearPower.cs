@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,11 +23,13 @@ public sealed class MiracleReappearPower : SanaePowerModel, IMiracleTriggeredLis
 
 		public override PowerType Type => PowerType.Buff;
 
-		public override PowerStackType StackType => PowerStackType.Single;
+		public override PowerStackType StackType => PowerStackType.Counter;
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.MiracleKeyword)];
 
 		public async Task AfterMiracleTriggered(PlayerChoiceContext choiceContext, CardModel sourceCard)
 		{
-			if (_isResolving || sourceCard.Owner != Owner.Player || Owner.CombatState == null)
+			if (_isResolving || sourceCard.Owner != Owner.Player || Owner.CombatState == null || Amount <= 0)
 			{
 				return;
 			}
@@ -38,8 +40,11 @@ public sealed class MiracleReappearPower : SanaePowerModel, IMiracleTriggeredLis
 				Flash();
 				foreach (Player player in Owner.CombatState.Players.Where(static player => player.Creature.IsAlive))
 				{
-					CardModel copy = MiracleHelper.CreateCombatCopyForPlayer(sourceCard, player);
-					await CardCmd.AutoPlay(choiceContext, copy, MiracleHelper.ResolveAutoPlayTarget(copy, sourceCard.CurrentTarget));
+					for (int i = 0; i < Amount; i++)
+					{
+						CardModel copy = MiracleHelper.CreateCombatCopyForPlayer(sourceCard, player);
+						await CardCmd.AutoPlay(choiceContext, copy, MiracleHelper.ResolveAutoPlayTarget(copy, sourceCard.CurrentTarget));
+					}
 				}
 			}
 			finally
@@ -49,4 +54,3 @@ public sealed class MiracleReappearPower : SanaePowerModel, IMiracleTriggeredLis
 		}
 	}
 }
-

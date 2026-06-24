@@ -18,7 +18,7 @@ namespace TH_Sanae.Scrpits.Cards
 	{
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(10)];
 
-		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<ArmyGodFormPower>(), HoverTipFactory.FromPower<VigorPower>()];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VigorPower>()];
 
 		public ArmyGodForm() : base(3, CardType.Power, CardRarity.Rare, TargetType.Self)
 		{

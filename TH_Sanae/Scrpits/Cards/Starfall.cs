@@ -39,8 +39,7 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				return;
 			}
-
-			await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreature(target,"vfx/vfx_starry_impact");
 			int strengthLoss = (await CreatureCmd.Damage(choiceContext, target, DynamicVars.Damage.BaseValue, ValueProp.Move, Owner.Creature, this))
 				.Sum(static result => result.TotalDamage);
 			if (strengthLoss > 0)

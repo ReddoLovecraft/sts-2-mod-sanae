@@ -21,13 +21,13 @@ namespace TH_Sanae.Scripts.Main
 		{
 			Flash();
 
-			var removableCurses = PileType.Deck.GetPile(Owner)
+			var removableDeckCards = PileType.Deck.GetPile(Owner)
 				.Cards
-				.Where(card => card.Type == CardType.Curse && card.IsRemovable)
+				.Where(card => card.Type == CardType.Curse || card.Type == CardType.Status)
 				.ToList();
-			if (removableCurses.Count > 0)
+			if (removableDeckCards.Count > 0)
 			{
-				await CardPileCmd.RemoveFromDeck(removableCurses);
+				await CardPileCmd.RemoveFromDeck(removableDeckCards);
 			}
 
 			var cardsToExhaust = Owner.PlayerCombatState?.AllCards

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
@@ -24,6 +24,8 @@ namespace TH_Sanae.Scrpits.Cards
 	public sealed class MiracleGenesis : SanaeCardModel
 	{
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(7, ValueProp.Move)];
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.MiracleKeyword)];
 
 		public MiracleGenesis() : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 		{

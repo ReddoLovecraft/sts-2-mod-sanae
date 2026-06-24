@@ -17,6 +17,7 @@ namespace TH_Sanae.Scripts.Powers
 		public override PowerType Type => PowerType.Buff;
 
 		public override PowerStackType StackType => PowerStackType.Single;
+		public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VigorPower>()];
 
@@ -26,9 +27,8 @@ namespace TH_Sanae.Scripts.Powers
 			{
 				return;
 			}
-
 			Flash();
-			await PowerCmd.Apply<VigorPower>(choiceContext, Owner, result.UnblockedDamage, Owner, cardSource);
+			await PowerCmd.Apply<VigorPower>(choiceContext, Owner, result.UnblockedDamage, null, null);
 		}
 	}
 }

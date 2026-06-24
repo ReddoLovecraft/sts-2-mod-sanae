@@ -16,7 +16,7 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(ColorlessCardPool))]
 	public sealed class MartialTraining : SanaeCardModel
 	{
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(8)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(6)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VigorPower>(), HoverTipFactory.FromPower<StrengthPower>()];
 

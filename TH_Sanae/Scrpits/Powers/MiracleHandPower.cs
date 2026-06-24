@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +22,8 @@ public sealed class MiracleHandPower : SanaePowerModel
 		public override PowerType Type => PowerType.Buff;
 
 		public override PowerStackType StackType => PowerStackType.Single;
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.MiracleKeyword)];
 
 		public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
 		{

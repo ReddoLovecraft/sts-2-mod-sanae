@@ -44,20 +44,50 @@ namespace TH_Sanae.Scrpits.Cards
 			await base.OnPlay(choiceContext, cardPlay);
 			if (!NotYC)
 			{
-				for (int i = 1; i <= YC_count; i++)
+				int immediateTriggerCount = await QueueMultiChantWithPreview(
+					choiceContext,
+					GetChantStages());
+
+				if (immediateTriggerCount <= 0)
 				{
-					await QueueChantWithPreview(choiceContext, i, $"yc-{CurrentUpgradeLevel}-{i}");
+					return;
 				}
+
+				NotYC = true;
+				try
+				{
+					for (int i = 0; i < immediateTriggerCount; i++)
+					{
+						await ExecuteResolvedEffect(choiceContext);
+					}
+				}
+				finally
+				{
+					NotYC = false;
+				}
+
 				return;
 			}
 
+			await ExecuteResolvedEffect(choiceContext);
+			NotYC = false;
+		}
+
+		private IEnumerable<(int ChantCount, string PreviewId)> GetChantStages()
+		{
+			for (int i = 1; i <= YC_count; i++)
+			{
+				yield return (i, $"yc-{CurrentUpgradeLevel}-{i}");
+			}
+		}
+
+		private async Task ExecuteResolvedEffect(PlayerChoiceContext choiceContext)
+		{
 			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
-				ToolBox.playWindSfx(DynamicVars.Cards.IntValue,new Color("f0d46279"));
+				ToolBox.playWindSfx(DynamicVars.Cards.IntValue, new Color("f0d46279"));
 				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitFx("vfx/vfx_starry_impact").FromCard(this).TargetingAllOpponents(CombatState!).Execute(choiceContext);
 			}
-
-			NotYC = false;
 		}
 
 		protected override void firstUpgrade()

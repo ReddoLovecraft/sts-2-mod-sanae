@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
@@ -23,6 +23,8 @@ namespace TH_Sanae.Scrpits.Cards
 [Pool(typeof(SanaeCardPool))]
 	public sealed class MoriyaMiracleMiko : SanaeCardModel
 	{
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.MiracleKeyword)];
+
 		public MoriyaMiracleMiko() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 		{
 		}
