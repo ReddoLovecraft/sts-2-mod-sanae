@@ -55,7 +55,7 @@ namespace TH_Sanae.Scrpits.Cards
 			}
 			if (previousCardType != CardType.Attack)
 			{
-				await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target,DynamicVars.Cards.IntValue, Owner.Creature, this);
 				await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
 				return;
 			}

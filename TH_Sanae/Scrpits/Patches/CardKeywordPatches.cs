@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
@@ -16,6 +17,8 @@ using MegaCrit.Sts2.Core.Models;
 using Patchoulib.Scrpits.Main;
 using TH_Sanae.Scrpits.Cards;
 using TH_Sanae.Scripts.Main;
+using BaseLib.Extensions;
+using TH_Sanae.Scripts.Powers;
 
 namespace TH_Sanae.Scripts.Patches
 {
@@ -30,6 +33,13 @@ namespace TH_Sanae.Scripts.Patches
 	[HarmonyPatch(typeof(Hook), nameof(Hook.AfterCardDrawn))]
 	public static class CardKeywordAfterDrawPatch
 	{
+		private sealed class DrawResultHolder
+		{
+			public DrawResultType Result;
+		}
+
+		private static readonly ConditionalWeakTable<CardModel, DrawResultHolder> DrawResults = new();
+
 		public static void Postfix(ref Task __result, PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
 		{
 			__result = ApplyKeywordEffectsAsync(__result, choiceContext, card, fromHandDraw);
@@ -58,17 +68,19 @@ namespace TH_Sanae.Scripts.Patches
 		private static void ApplyDrawKeyword(CardModel card)
 		{
 			DrawResultType result = RollDrawResult(card);
+			DrawResults.Remove(card);
+			DrawResults.Add(card, new DrawResultHolder { Result = result });
 			CardModel referenceCard = CreateReferenceCard(card);
 
-			ApplyVarIfPresent(card.DynamicVars, referenceCard.DynamicVars, "Cards", result);
-			ApplyVarIfPresent(card.DynamicVars, referenceCard.DynamicVars, "Damage", result);
-			ApplyVarIfPresent(card.DynamicVars, referenceCard.DynamicVars, "Block", result);
+			ApplyVarIfPresent(card, card.DynamicVars, referenceCard.DynamicVars, "Cards", result);
+			ApplyVarIfPresent(card, card.DynamicVars, referenceCard.DynamicVars, "Damage", result);
+			ApplyVarIfPresent(card, card.DynamicVars, referenceCard.DynamicVars, "Block", result);
 
 			foreach (KeyValuePair<string, DynamicVar> pair in card.DynamicVars.Where(static pair => pair.Key.EndsWith("Power", StringComparison.Ordinal)))
 			{
 				if (referenceCard.DynamicVars.TryGetValue(pair.Key, out DynamicVar? referenceVar) && referenceVar != null)
 				{
-					pair.Value.BaseValue = ConvertByDrawResult(referenceVar.BaseValue, result);
+					pair.Value.BaseValue = ConvertByDrawResult(card, referenceVar.BaseValue, result);
 				}
 			}
 
@@ -77,34 +89,30 @@ namespace TH_Sanae.Scripts.Patches
 
 		private static async Task ApplyMiracleKeyword(PlayerChoiceContext choiceContext, CardModel card)
 		{
-			if (card.EnergyCost.Canonical <= 0)
+			if (card.Owner.RunState.Rng.CombatEnergyCosts.NextFloat() < 0.2f||card.Owner.HasPower<AlwaysGoodLuckPower>())
 			{
-				return;
-			}
-
-			if (card.Owner.RunState.Rng.CombatEnergyCosts.NextFloat() < 0.2f)
-			{
+				ToolBox.PlayMiracleVfx(card.Owner);
 				await PlayerCmd.GainEnergy(card.EnergyCost.Canonical, card.Owner);
 			}
 		}
 
-		private static void ApplyVarIfPresent(DynamicVarSet currentVars, DynamicVarSet referenceVars, string key, DrawResultType result)
+		private static void ApplyVarIfPresent(CardModel card, DynamicVarSet currentVars, DynamicVarSet referenceVars, string key, DrawResultType result)
 		{
 			if (currentVars.TryGetValue(key, out DynamicVar? currentVar) && currentVar != null
 				&& referenceVars.TryGetValue(key, out DynamicVar? referenceVar) && referenceVar != null)
 			{
-				currentVar.BaseValue = ConvertByDrawResult(referenceVar.BaseValue, result);
+				currentVar.BaseValue = ConvertByDrawResult(card, referenceVar.BaseValue, result);
 			}
 		}
 
-		private static decimal ConvertByDrawResult(decimal baseValue, DrawResultType result)
+		private static decimal ConvertByDrawResult(CardModel card, decimal baseValue, DrawResultType result)
 		{
 			return result switch
 			{
 				DrawResultType.GreatLuck => baseValue * 2m,
 				DrawResultType.Luck => baseValue,
 				DrawResultType.BadLuck => decimal.Floor(baseValue * 0.5m),
-				DrawResultType.GreatCurse => 0m,
+				DrawResultType.GreatCurse => card is OmikujiBomb ? baseValue * 2m : 0m,
 				_ => baseValue
 			};
 		}
@@ -162,6 +170,11 @@ namespace TH_Sanae.Scripts.Patches
 			return inferredResult ?? DrawResultType.Luck;
 		}
 
+		internal static DrawResultType GetResolvedDrawResult(CardModel card)
+		{
+			return DrawResults.TryGetValue(card, out DrawResultHolder? holder) ? holder.Result : InferDrawResult(card);
+		}
+
 		private static IEnumerable<(DynamicVar currentVar, DynamicVar referenceVar)> GetTrackedVars(CardModel card, CardModel referenceCard)
 		{
 			string[] directKeys = ["Cards", "Damage", "Block"];
@@ -214,47 +227,57 @@ namespace TH_Sanae.Scripts.Patches
 	{
 		public static void Postfix(CardModel __instance, ref IEnumerable<IHoverTip> __result)
 		{
-			List<IHoverTip> tips = __result.ToList();
-			if (!__instance.Keywords.Contains(CardModifier.DrawKeyword))
+			__result = IHoverTip.RemoveDupes(__result.ToList()).ToList();
+		}
+	}
+
+	[HarmonyPatch(typeof(CardModel), nameof(CardModel.GetDescriptionForPile), [typeof(PileType), typeof(MegaCrit.Sts2.Core.Entities.Creatures.Creature)])]
+	public static class DrawKeywordDescriptionPatch
+	{
+		public static void Postfix(CardModel __instance, ref string __result)
+		{
+			__result = DrawKeywordTextHelper.ReplaceDrawKeywordLine(__instance, __result);
+		}
+	}
+
+	[HarmonyPatch(typeof(CardModel), nameof(CardModel.GetDescriptionForUpgradePreview))]
+	public static class DrawKeywordUpgradePreviewDescriptionPatch
+	{
+		public static void Postfix(CardModel __instance, ref string __result)
+		{
+			__result = DrawKeywordTextHelper.ReplaceDrawKeywordLine(__instance, __result);
+		}
+	}
+
+	internal static class DrawKeywordTextHelper
+	{
+		internal static string ReplaceDrawKeywordLine(CardModel card, string description)
+		{
+			if (!card.Keywords.Contains(CardModifier.DrawKeyword) || !HasBeenDrawn(card))
 			{
-				__result = IHoverTip.RemoveDupes(tips).ToList();
-				return;
+				return description;
 			}
 
-			string drawTipId = HoverTipFactory.FromKeyword(CardModifier.DrawKeyword).Id;
-			int drawTipIndex = tips.FindIndex(static tip => !string.IsNullOrEmpty(tip.Id));
-			drawTipIndex = tips.FindIndex(tip => tip.Id == drawTipId);
-			if (drawTipIndex < 0)
-			{
-				return;
-			}
-
-			tips[drawTipIndex] = CreateDrawHoverTip(__instance);
-			__result = IHoverTip.RemoveDupes(tips).ToList();
+			return description.Replace(GetDefaultDrawKeywordText(), GetResolvedDrawKeywordText(card), StringComparison.Ordinal);
 		}
 
-		private static IHoverTip CreateDrawHoverTip(CardModel card)
+		private static string GetResolvedDrawKeywordText(CardModel card)
 		{
-			LocString title = ToolBox.L10NStatic(GetDrawTitleKey(card), "card_keywords");
-			LocString description = ToolBox.L10NStatic("TH_SANAE-DRAW.description", "card_keywords");
-			return new HoverTip(title, description);
-		}
-
-		private static string GetDrawTitleKey(CardModel card)
-		{
-			if (!HasBeenDrawn(card))
+			return CardKeywordAfterDrawPatch.GetResolvedDrawResult(card) switch
 			{
-				return "TH_SANAE-DRAW.title";
-			}
-
-			return CardKeywordAfterDrawPatch.InferDrawResult(card) switch
-			{
-				DrawResultType.GreatLuck => "TH_SANAE-DRAW_GREAT_LUCK.title",
-				DrawResultType.Luck => "TH_SANAE-DRAW_LUCK.title",
-				DrawResultType.BadLuck => "TH_SANAE-DRAW_BAD_LUCK.title",
-				DrawResultType.GreatCurse => "TH_SANAE-DRAW_GREAT_CURSE.title",
-				_ => "TH_SANAE-DRAW.title"
+				DrawResultType.GreatLuck => "[gold]抽签·大吉[/gold]。",
+				DrawResultType.Luck => "[green]抽签·吉[/green]。",
+				DrawResultType.BadLuck => "[red]抽签·凶[/red]。",
+				DrawResultType.GreatCurse => "[purple]抽签·大凶[/purple]。",
+				_ => GetDefaultDrawKeywordText()
 			};
+		}
+
+		private static string GetDefaultDrawKeywordText()
+		{
+			LocString period = ToolBox.L10NStatic("PERIOD", "card_keywords");
+			string suffix = period.Exists() ? period.GetRawText() : "。";
+			return $"[gold]{ToolBox.L10NStatic("TH_SANAE-DRAW.title", "card_keywords").GetFormattedText()}[/gold]{suffix}";
 		}
 
 		private static bool HasBeenDrawn(CardModel card)

@@ -6,6 +6,8 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Sanae.Scripts.Main;
 
@@ -24,13 +26,14 @@ public sealed class OnceHealPower : SanaePowerModel
 		if (participants.Contains(base.Owner) && !base.Owner.IsDead)
 		{
 			Flash();
+			PlayerFullscreenHealVfx.Play(Owner.Player, base.Amount, NCombatRoom.Instance);
 			await CreatureCmd.Heal(base.Owner, base.Amount);
 		}
 	}
 
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
-		if (target == base.Owner && result.TotalDamage > 0)
+		if (target == base.Owner && result.UnblockedDamage > 0)
 		{
 			Flash();
 			await PowerCmd.Remove(this);

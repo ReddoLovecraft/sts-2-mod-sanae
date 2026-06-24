@@ -82,7 +82,7 @@ namespace TH_Sanae.Scrpits.Cards
 						await CreatureCmd.LoseBlock(cardPlay.Target, removedBlock);
 						await DamageCmd.Attack(removedBlock).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 					}
-					await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+					await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3").FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 					break;
 				case 1:
 					foreach (var enemy in CombatState?.HittableEnemies.ToList() ?? [])
@@ -91,10 +91,11 @@ namespace TH_Sanae.Scrpits.Cards
 						{
 							await CreatureCmd.LoseBlock(enemy, enemy.Block);
 						}
-						await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+						await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, DynamicVars.Cards.IntValue, Owner.Creature, this);
 						await PowerCmd.Apply<BeliefPower>(choiceContext, enemy, _beliefAmount, Owner.Creature, this);
 					}
-					await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!).Execute(choiceContext);
+					await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3")
+			.WithHitVfxSpawnedAtBase().TargetingAllOpponents(CombatState!).Execute(choiceContext);
 					break;
 				default:
 					ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
@@ -102,8 +103,8 @@ namespace TH_Sanae.Scrpits.Cards
 					{
 						await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
 					}
-					await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
-					await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
+					await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 					break;
 			}
 

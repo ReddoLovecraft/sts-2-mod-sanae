@@ -27,6 +27,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int totalCount = ResolveEnergyXValue();
 			if (CurrentUpgradeLevel > 0)
 			{
@@ -46,11 +47,10 @@ namespace TH_Sanae.Scrpits.Cards
 			var cards = new List<MegaCrit.Sts2.Core.Models.CardModel>();
 			for (int i = 0; i < totalCount; i++)
 			{
-				GrassTreeSolider card = Owner.RunState.CreateCard<GrassTreeSolider>(Owner);
+				GrassTreeSolider card = CombatState!.CreateCard<GrassTreeSolider>(Owner);
 				if (CurrentUpgradeLevel > 0)
 				{
-					card.UpgradeInternal();
-					card.FinalizeUpgradeInternal();
+					ToolBox.UpgradeCard(card);
 				}
 				cards.Add(card);
 			}

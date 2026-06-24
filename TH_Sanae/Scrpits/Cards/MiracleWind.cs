@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -67,23 +68,21 @@ namespace TH_Sanae.Scrpits.Cards
 				}
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await ToolBox.SummonWind(choiceContext, Owner.Creature);
 			switch (CurrentUpgradeLevel)
 			{
 				case 2:
 					int windAmount = Owner.Creature.GetPowerAmount<WindPower>();
-					for (int i = 0; i < windAmount; i++)
-					{
-						await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!).Execute(choiceContext);
-					}
+					ToolBox.playWindSfx(DynamicVars.Cards.IntValue,new Color("f0d46279"));
+					await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitCount(windAmount).WithHitFx("vfx/vfx_attack_slash").TargetingAllOpponents(CombatState!).Execute(choiceContext);
 					break;
 				case 1:
-					await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 					await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
 					break;
 				default:
-					await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 					break;
 			}
 

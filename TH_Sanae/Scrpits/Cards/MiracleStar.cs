@@ -6,9 +6,11 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchoulib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
@@ -67,7 +69,8 @@ namespace TH_Sanae.Scrpits.Cards
 			switch (CurrentUpgradeLevel)
 			{
 				case 2:
-					int totalHpLoss = (await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!).Execute(choiceContext))
+					int totalHpLoss = (await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_starry_impact")
+					.SpawningHitVfxOnEachCreature().TargetingAllOpponents(CombatState!).Execute(choiceContext))
 						.Results.SelectMany(results => results)
 						.Sum(result => result.TotalDamage + result.OverkillDamage);
 					if (totalHpLoss > 0)
@@ -76,12 +79,14 @@ namespace TH_Sanae.Scrpits.Cards
 					}
 					break;
 				case 1:
+					await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 					foreach (Creature enemy in CombatState.HittableEnemies.ToList())
 					{
-						await CreatureCmd.Stun(enemy, Id.ToString());
+						await CreatureCmd.Stun(enemy);
+						ToolBox.PlayMiracleVfx(enemy,StsColors.transparentWhite,true);
 						await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, 2, Owner.Creature, this);
 					}
-					await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 					break;
 				default:
 					for (int i = 0; i < 3; i++)
@@ -93,7 +98,7 @@ namespace TH_Sanae.Scrpits.Cards
 						}
 
 						Creature enemy = enemies[Owner.RunState.Rng.CombatCardGeneration.NextInt(enemies.Count)];
-						int hpLoss = (await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(enemy).Execute(choiceContext))
+						int hpLoss = (await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_starry_impact").Targeting(enemy).Execute(choiceContext))
 							.Results.SelectMany(results => results)
 							.Sum(result => result.TotalDamage + result.OverkillDamage);
 						if (hpLoss > 0)
@@ -101,7 +106,7 @@ namespace TH_Sanae.Scrpits.Cards
 							await PowerCmd.Apply<InducePower>(choiceContext, enemy, hpLoss, Owner.Creature, this);
 						}
 					}
-					await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 					break;
 			}
 

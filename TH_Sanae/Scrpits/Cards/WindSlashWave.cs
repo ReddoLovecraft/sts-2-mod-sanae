@@ -28,7 +28,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 			await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_flying_slash")
 			.Execute(choiceContext);

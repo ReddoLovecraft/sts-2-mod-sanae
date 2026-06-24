@@ -16,14 +16,16 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(StatusCardPool))]
 	public sealed class HarvestRice : SanaeCardModel
 	{
+
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 		protected override bool IsPlayable => false;
+		public override int MaxUpgradeLevel => 0;
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(3)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];
 
-		public HarvestRice() : base(-2, CardType.Status, CardRarity.Common, TargetType.None, showInCardLibrary: false)
+		public HarvestRice() : base(-1, CardType.Status, CardRarity.Status, TargetType.None)
 		{
 		}
 
@@ -45,13 +47,6 @@ namespace TH_Sanae.Scrpits.Cards
 			}
 		}
 
-		protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-		{
-			return Task.CompletedTask;
-		}
-
-		protected override void OnUpgrade()
-		{
-		}
+		
 	}
 }

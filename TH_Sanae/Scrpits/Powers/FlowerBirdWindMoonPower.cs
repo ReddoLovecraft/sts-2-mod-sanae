@@ -18,6 +18,7 @@ namespace TH_Sanae.Scripts.Powers
 		public override PowerType Type => PowerType.Buff;
 
 		public override PowerStackType StackType => PowerStackType.Single;
+		public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar(_phaseKey, "花")];
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -26,8 +27,8 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await ToolBox.SummonWind(choiceContext, Owner.Creature);
-
 			int hitCount = ResolveEnergyXValue();
 			if (IsUpgraded)
 			{
@@ -42,6 +43,7 @@ namespace TH_Sanae.Scrpits.Cards
 			decimal windDamage = Owner.Creature.GetPowerAmount<WindPower>();
 			foreach (int _ in Enumerable.Range(0, hitCount))
 			{
+				ToolBox.playWindSfx((float)windDamage, new Color("FFFFFF80"));
 				await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, windDamage, MegaCrit.Sts2.Core.ValueProps.ValueProp.Unpowered, Owner.Creature, this);
 			}
 		}

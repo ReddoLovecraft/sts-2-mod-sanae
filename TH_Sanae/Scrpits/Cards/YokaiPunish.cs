@@ -26,15 +26,11 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				return;
 			}
-
 			int defendCount = CountStarterCards(CardTag.Defend);
 			int strikeCount = CountStarterCards(CardTag.Strike);
 			decimal damage = DynamicVars.Damage.BaseValue + (IsUpgraded ? 5 : 3) * defendCount;
 			int hitCount = DynamicVars.Cards.IntValue + strikeCount;
-			for (int i = 0; i < hitCount; i++)
-			{
-				await DamageCmd.Attack(damage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
-			}
+			await DamageCmd.Attack(damage).WithHitCount(hitCount).FromCard(this).WithHitFx("vfx/vfx_attack_blunt").Targeting(cardPlay.Target).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()

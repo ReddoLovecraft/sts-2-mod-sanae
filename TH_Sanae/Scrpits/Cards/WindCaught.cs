@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchoulib.Scrpits.Main;
@@ -29,16 +32,13 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			foreach (var enemy in (CombatState?.HittableEnemies ?? []).ToList())
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			foreach (Creature mos in CombatState.HittableEnemies.ToList())
 			{
-				if (enemy.HasPower<ArtifactPower>())
-				{
-					continue;
-				}
-
-				await PowerCmd.Apply<StrengthPower>(choiceContext, enemy, -DynamicVars["Cards"].IntValue, Owner.Creature, this);
-				await PowerCmd.Apply<TemporaryStrengthPower>(choiceContext, enemy, DynamicVars["Cards"].IntValue, Owner.Creature, this);
-				await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				ToolBox.playWindSfx(DynamicVars.Cards.IntValue, new Color("FFFFFF80"));
+				//ToolBox.playWindSfx( DynamicVars.Cards.IntValue, new Color("9fdfff56"));
+				await PowerCmd.Apply<PiercingWailPower>(choiceContext, mos, DynamicVars.Cards.IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 		}
 

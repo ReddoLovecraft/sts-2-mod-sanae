@@ -31,12 +31,13 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			if (ToolBox.IsPiety(Owner.Creature, 4))
 			{
 				await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
 			}
 
-			await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 			await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 		}
 

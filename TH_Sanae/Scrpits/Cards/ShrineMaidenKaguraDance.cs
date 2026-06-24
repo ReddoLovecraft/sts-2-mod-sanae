@@ -30,7 +30,8 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await Tools.Forseen(choiceContext, Owner, DynamicVars["Cards"].IntValue);
+				await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			await Tools.Forseen(choiceContext, Owner, DynamicVars.Cards.IntValue);
 			await CardPileCmd.Draw(choiceContext, 2, Owner);
 			if (!ToolBox.IsPiety(Owner.Creature, 5))
 			{

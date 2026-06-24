@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -33,12 +34,13 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				return;
 			}
-
-			int hpLoss = (await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext))
+			int hpLoss = (await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3")
+			.WithHitVfxSpawnedAtBase().Execute(choiceContext))
 				.Results.SelectMany(results => results)
 				.Sum(result => result.TotalDamage + result.OverkillDamage);
 			if (hpLoss > 0)
 			{
+				ToolBox.playWindSfx(hpLoss, new Color("FFFFFF80"));
 				await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, hpLoss, Owner.Creature, this);
 			}
 		}

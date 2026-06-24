@@ -30,14 +30,15 @@ namespace TH_Sanae.Scrpits.Cards
 			await base.AfterCardExhausted(choiceContext, card, fromEndOfTurn);
 			if (card == this)
 			{
-				Hisoutensoku hisoutensoku = Owner.RunState.CreateCard<Hisoutensoku>(Owner);
-				await CardPileCmd.AddGeneratedCardToCombat(hisoutensoku, PileType.Discard, Owner, CardPilePosition.Random);
+				Hisoutensoku hisoutensoku = CombatState!.CreateCard<Hisoutensoku>(Owner);
+				CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(hisoutensoku, PileType.Discard, Owner, CardPilePosition.Random));
 			}
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await PowerCmd.Apply<InducePower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			await PowerCmd.Apply<InducePower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()

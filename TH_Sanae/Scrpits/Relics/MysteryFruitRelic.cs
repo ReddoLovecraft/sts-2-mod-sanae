@@ -45,16 +45,13 @@ namespace TH_Sanae.Scripts.Main
 		{
 			EnergyAmount += 1;
 		}
-
-		public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+		public override decimal ModifyMaxEnergy(Player player, decimal amount)
 		{
-			if (player != Owner)
-			{
-				return;
-			}
-
-			Flash();
-			await PlayerCmd.GainEnergy(EnergyAmount, player);
+		if (player != base.Owner)
+		{
+			return amount;
+		}
+		return amount + EnergyAmount;
 		}
 	}
 }

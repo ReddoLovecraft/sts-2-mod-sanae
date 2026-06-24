@@ -22,7 +22,7 @@ namespace TH_Sanae.Scrpits.Cards
 		{
 			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_cross_heal").Targeting(cardPlay.Target).Execute(choiceContext);
 			}
 		}
 

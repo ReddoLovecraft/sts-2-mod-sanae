@@ -41,7 +41,7 @@ namespace TH_Sanae.Scrpits.Cards
 			}
 		}
 
-		public WindMaster() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.None)
+		public WindMaster() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 		{
 		}
 
@@ -54,7 +54,7 @@ namespace TH_Sanae.Scrpits.Cards
 				yc.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), $"yc-{CurrentUpgradeLevel}"), this);
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await ToolBox.DoubleWind(choiceContext, Owner.Creature);
 			if (Owner.Creature.HasPower<WindPower>())
 			{
@@ -74,7 +74,8 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override void secondUpgrade()
 		{
-			DynamicVars.Cards.UpgradeValueBy(2);
+			this.EnergyCost.UpgradeBy(-1);
+			DynamicVars.Cards.UpgradeValueBy(1);
 		}
 	}
 }

@@ -27,18 +27,18 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			foreach (CardModel card in ToolBox.GetAllCombatCards(Owner).Distinct().ToList())
 			{
-				if (!ToolBox.IsWindRelatedCard(card) || card.CurrentUpgradeLevel >= card.MaxUpgradeLevel)
+				if (!ToolBox.IsWindRelatedCard(card))
 				{
 					continue;
 				}
 
-				card.UpgradeInternal();
-				card.FinalizeUpgradeInternal();
+				ToolBox.UpgradeCard(card);
 			}
 
-			await PowerCmd.Apply<TH10Power>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<TH10Power>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()

@@ -26,23 +26,16 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int totalStrengthGain = 0;
 			foreach (var enemy in (CombatState?.HittableEnemies ?? []).ToList())
 			{
-				await PowerCmd.Apply<StrengthPower>(choiceContext, enemy, -DynamicVars["Cards"].IntValue, Owner.Creature, this);
-				if (enemy.HasPower<ArtifactPower>())
-				{
-					continue;
-				}
-
-				await PowerCmd.Apply<TemporaryStrengthPower>(choiceContext, enemy, DynamicVars["Cards"].IntValue, Owner.Creature, this);
-				totalStrengthGain += DynamicVars["Cards"].IntValue;
+				await PowerCmd.Apply<PiercingWailPower>(choiceContext, enemy, DynamicVars.Cards.IntValue, Owner.Creature, this);
+				totalStrengthGain += DynamicVars.Cards.IntValue;
 			}
-
 			if (totalStrengthGain > 0)
 			{
-				await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, totalStrengthGain, Owner.Creature, this);
-				await PowerCmd.Apply<TemporaryStrengthPower>(choiceContext, Owner.Creature, totalStrengthGain, Owner.Creature, this);
+				await PowerCmd.Apply<FlexPotionPower>(choiceContext, Owner.Creature, totalStrengthGain, Owner.Creature, this);
 			}
 		}
 

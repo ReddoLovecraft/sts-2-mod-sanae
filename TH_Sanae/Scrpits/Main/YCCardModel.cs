@@ -129,7 +129,7 @@ namespace TH_Sanae.Scripts.Main
 				}
 
 				await CreatureCmd.Damage(context,Owner.Creature,new DamageVar(hpLoss,ValueProp.Unpowered|ValueProp.Unblockable),this);
-				CardCmd.Upgrade(this);
+				ToolBox.UpgradeCard(this);
 				this.NotYC=true;
 			}
            

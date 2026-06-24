@@ -20,11 +20,11 @@ namespace TH_Sanae.Scrpits.Cards
 	{
 		public override int YC_count
 		{
-			get => CurrentUpgradeLevel >= 2 ? 1 : 2;
+			get => 1;
 			set { }
 		}
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move), new CardsVar(4)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10, ValueProp.Move), new CardsVar(3)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips
 		{
@@ -53,26 +53,30 @@ namespace TH_Sanae.Scrpits.Cards
 				yc.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), $"yc-{CurrentUpgradeLevel}"), this);
 				return;
 			}
-
 			if (cardPlay.Target != null)
 			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_scratch").Targeting(cardPlay.Target).Execute(choiceContext);
 			}
-			await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
-			await PowerCmd.Apply<TemporaryStrengthPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+			if(CurrentUpgradeLevel<=1)
+			{
+				await PowerCmd.Apply<FlexPotionPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			}
+			else
+			{
+				await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			}
 			NotYC = false;
 		}
 
 		protected override void firstUpgrade()
 		{
-			DynamicVars.Damage.UpgradeValueBy(4);
+			DynamicVars.Damage.UpgradeValueBy(2);
 			DynamicVars.Cards.UpgradeValueBy(2);
 		}
 
 		protected override void secondUpgrade()
 		{
-			DynamicVars.Damage.UpgradeValueBy(4);
-			DynamicVars.Cards.UpgradeValueBy(2);
+			
 		}
 	}
 }

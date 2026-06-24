@@ -27,7 +27,7 @@ namespace TH_Sanae.Scripts.Powers
 
 			for (int i = 0; i < Amount; i++)
 			{
-				Omikuji omikuji = player.RunState.CreateCard<Omikuji>(player);
+				Omikuji omikuji = player.Creature.CombatState!.CreateCard<Omikuji>(player);
 				await CardPileCmd.AddGeneratedCardToCombat(omikuji, PileType.Hand, player, CardPilePosition.Random);
 			}
 		}

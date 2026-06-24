@@ -32,6 +32,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
 			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
 			if (ToolBox.IsWindControl(Owner.Creature, 8))

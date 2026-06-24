@@ -27,6 +27,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			IReadOnlyList<CardModel> handCards = PileType.Hand.GetPile(Owner).Cards.ToList();
 			if (handCards.Count > 0)
 			{

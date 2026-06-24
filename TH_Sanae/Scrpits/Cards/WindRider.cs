@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -53,7 +54,8 @@ namespace TH_Sanae.Scrpits.Cards
 				yc.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), $"yc-{CurrentUpgradeLevel}"), this);
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			ToolBox.playWindSfx( DynamicVars.Cards.IntValue, new Color("9fdfff56"));
 			await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
 			await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext,Owner.Creature,DynamicVars.Cards.IntValue,Owner.Creature,this);
 			NotYC = false;

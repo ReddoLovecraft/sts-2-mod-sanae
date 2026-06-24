@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
@@ -17,6 +18,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
@@ -31,6 +33,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 namespace TH_Sanae.Scripts.Main
 {
 	public static class ToolBox
@@ -38,14 +41,36 @@ namespace TH_Sanae.Scripts.Main
         private static HashSet<string>? _windRelatedTipIds;
 
         private static List<Type>? _sanaeSpellCardTypes;
-        public static void playWindSfx(float specialNum,Color color)
+        public static void playWindSfx(float specialNum,Color? color = null)
         {
-            if(color==null)
-            color = new Color("FFFFFF80");
+            Color actualColor = color ?? new Color("FFFFFF80");
 			double num2 = ((SaveManager.Instance.PrefsSave.FastMode == FastModeType.Fast) ? 0.2 : 0.3);
-			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NHorizontalLinesVfx.Create(color, 0.8 + specialNum * num2));
+			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NHorizontalLinesVfx.Create(actualColor, 0.8 + specialNum * num2));
 			SfxCmd.Play("event:/sfx/characters/ironclad/ironclad_whirlwind");
-			NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(color, color));
+			NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(actualColor, actualColor));
+        }
+        public static void PlayMiracleVfx(Player? player)
+        {
+            if (player?.Creature == null)
+            {
+                return;
+            }
+
+            PlayMiracleVfx(player.Creature,StsColors.gold);
+        }
+        public static void PlayMiracleVfx(Creature? target,Color borderTint,bool hasColor=false)
+        {
+            if (target == null)
+            {
+                return;
+            }
+            if(!hasColor)
+                borderTint = StsColors.gold;
+            borderTint.A = 0.28f;
+            Color highlightTint = new Color(1f, 0.6f, 0.2f, 0.18f);
+
+            NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(borderTint, highlightTint));
+            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NMiracleVfx.Create(target));
         }
         public static bool IsDevotee(Creature creature)
         {
@@ -172,12 +197,18 @@ namespace TH_Sanae.Scripts.Main
 
             int index = player.RunState.Rng.CombatCardGeneration.NextInt(spellCardTypes.Count);
             Type cardType = spellCardTypes[index];
-            if (Activator.CreateInstance(cardType) is not CardModel prototype)
+            if (player.Creature.CombatState == null)
             {
                 return null;
             }
 
-            return ModelDb.GetById<CardModel>(prototype.Id).ToMutable();
+            CardModel? canonicalCard = GetCanonicalCard(cardType);
+            if (canonicalCard == null)
+            {
+                return null;
+            }
+
+            return player.Creature.CombatState.CreateCard(canonicalCard, player);
         }
 
         public static CardModel? CreateRandomKanakoCard(Player player, bool upgraded = false)
@@ -196,18 +227,23 @@ namespace TH_Sanae.Scripts.Main
             }
 
             Type cardType = kanakoCardTypes[player.RunState.Rng.CombatCardGeneration.NextInt(kanakoCardTypes.Count)];
-            if (Activator.CreateInstance(cardType) is not CardModel prototype)
+            if (player.Creature.CombatState == null)
             {
                 return null;
             }
 
-            CardModel card = ModelDb.GetById<CardModel>(prototype.Id).ToMutable();
+            CardModel? canonicalCard = GetCanonicalCard(cardType);
+            if (canonicalCard == null)
+            {
+                return null;
+            }
+
+            CardModel card = player.Creature.CombatState.CreateCard(canonicalCard, player);
             if (upgraded)
             {
                 while (card.CurrentUpgradeLevel < card.MaxUpgradeLevel)
                 {
-                    card.UpgradeInternal();
-                    card.FinalizeUpgradeInternal();
+                    UpgradeCard(card);
                 }
             }
             return card;
@@ -225,7 +261,7 @@ namespace TH_Sanae.Scripts.Main
                 return true;
             }
 
-            return creature.Player?.RunState.Rng.CombatCardGeneration.NextInt(1, 102) <= 20;
+            return creature.Player?.RunState.Rng.CombatCardGeneration.NextInt(1, 101) <= 20;
         }
 
         public static string RollOmikuji(Creature creature)
@@ -304,6 +340,26 @@ namespace TH_Sanae.Scripts.Main
             return player.Piles.FirstOrDefault(pile => pile.Type == pileType);
         }
 
+        public static void UpgradeCard(CardModel card, CardPreviewStyle style = CardPreviewStyle.None)
+        {
+            UpgradeCards([card], style);
+        }
+
+        public static void UpgradeCards(IEnumerable<CardModel> cards, CardPreviewStyle style = CardPreviewStyle.None)
+        {
+            List<CardModel> upgradableCards = cards
+                .Where(card => card.IsUpgradable)
+                .Distinct()
+                .ToList();
+            if (upgradableCards.Count == 0)
+            {
+                return;
+            }
+
+            CardCmd.Upgrade(upgradableCards, style);
+            PlaySmithUpgradeVfx(upgradableCards);
+        }
+
         public static async Task UpgradeCardsInHand(Player player)
         {
             CardPile? hand = GetPile(player, PileType.Hand);
@@ -312,16 +368,7 @@ namespace TH_Sanae.Scripts.Main
                 return;
             }
 
-            foreach (CardModel card in hand.Cards.ToList())
-            {
-                if (card.CurrentUpgradeLevel >= card.MaxUpgradeLevel)
-                {
-                    continue;
-                }
-
-                card.UpgradeInternal();
-                card.FinalizeUpgradeInternal();
-            }
+            UpgradeCards(hand.Cards.ToList());
         }
 
         private static HashSet<string> GetWindRelatedTipIds()
@@ -336,6 +383,72 @@ namespace TH_Sanae.Scripts.Main
             ];
 
             return _windRelatedTipIds;
+        }
+
+        private static CardModel? GetCanonicalCard(Type cardType)
+        {
+            if (!typeof(CardModel).IsAssignableFrom(cardType))
+            {
+                return null;
+            }
+
+            return ModelDb.GetById<CardModel>(ModelDb.GetId(cardType));
+        }
+
+        private static void PlaySmithUpgradeVfx(IReadOnlyCollection<CardModel> cards)
+        {
+            if (cards.Count == 0 || !LocalContext.IsMine(cards.First()))
+            {
+                return;
+            }
+
+            List<CardModel> visibleCards = cards
+                .Where(card => card.Pile != null)
+                .ToList();
+            if (visibleCards.Count == 0)
+            {
+                return;
+            }
+
+            List<CardModel> handCards = visibleCards
+                .Where(card => card.Pile!.Type == PileType.Hand)
+                .ToList();
+            List<CardModel> otherCards = visibleCards
+                .Where(card => card.Pile!.Type != PileType.Hand)
+                .ToList();
+
+            bool playedSfx = false;
+            foreach (CardModel handCard in handCards)
+            {
+                var nCard = NCombatRoom.Instance?.Ui.Hand.GetCard(handCard);
+                if (nCard == null)
+                {
+                    otherCards.Add(handCard);
+                    continue;
+                }
+
+                NCardSmithVfx? vfx = NCardSmithVfx.Create(nCard, playSfx: !playedSfx);
+                if (vfx == null)
+                {
+                    continue;
+                }
+
+                NRun.Instance?.GlobalUi.AboveTopBarVfxContainer.AddChildSafely(vfx);
+                playedSfx = true;
+            }
+
+            if (otherCards.Count == 0)
+            {
+                return;
+            }
+
+            NCardSmithVfx? previewVfx = NCardSmithVfx.Create(otherCards, playSfx: !playedSfx);
+            if (previewVfx == null)
+            {
+                return;
+            }
+
+            NRun.Instance?.GlobalUi.CardPreviewContainer.AddChildSafely(previewVfx);
         }
 
         private static List<Type> GetSanaeSpellCardTypes()

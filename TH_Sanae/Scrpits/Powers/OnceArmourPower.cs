@@ -34,7 +34,7 @@ public sealed class OnceArmourPower : SanaePowerModel
 
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
-		if (target == base.Owner && props.IsPoweredAttack() && result.TotalDamage > 0)
+		if (target == base.Owner && props.IsPoweredAttack() && result.UnblockedDamage > 0)
 		{
 			Flash();
 			await PowerCmd.Remove(this);

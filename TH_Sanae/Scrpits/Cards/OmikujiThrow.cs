@@ -1,14 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchoulib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
+using TH_Sanae.Scripts.Patches;
 
 namespace TH_Sanae.Scrpits.Cards
 {
@@ -29,6 +36,7 @@ namespace TH_Sanae.Scrpits.Cards
 				return;
 			}
 
+			DrawResultType drawResult = CardKeywordAfterDrawPatch.InferDrawResult(this);
 			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
 				Creature? enemy = Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
@@ -36,9 +44,43 @@ namespace TH_Sanae.Scrpits.Cards
 				{
 					return;
 				}
+				if (NCombatRoom.Instance != null)
+				{
+					NCreature? attackerNode = NCombatRoom.Instance.GetCreatureNode(Owner.Creature);
+					NCreature? targetNode = NCombatRoom.Instance.GetCreatureNode(enemy);
+					if (attackerNode != null && targetNode != null)
+					{
+						Vector2 startPos = attackerNode.VfxSpawnPosition;
+						Vector2 endPos = targetNode.GetTopOfHitbox() + Vector2.Up * 18f;
+						var vfx = NOmikujiBulletVfx.Create(startPos, endPos, drawResult);
+						if (vfx != null)
+						{
+							NCombatRoom.Instance.CombatVfxContainer.AddChildSafely(vfx);
+						}
+						await Cmd.Wait(0.35f);
+					}
+				}
 
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(enemy).Execute(choiceContext);
+				if (Owner.Character is SanaeCharacter)
+				{
+					await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+						.FromCard(this)
+						.WithHitFx(null)
+						.WithAttackerAnim("Throw", base.Owner.Character.CastAnimDelay, base.Owner.Creature)
+						.Targeting(enemy)
+						.Execute(choiceContext);
+				}
+				else
+				{
+					await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+						.FromCard(this)
+						.WithHitFx(null)
+						.WithAttackerAnim("Cast", base.Owner.Character.CastAnimDelay, base.Owner.Creature)
+						.Targeting(enemy)
+						.Execute(choiceContext);
+				}
 			}
+				
 		}
 
 		protected override void OnUpgrade()
@@ -47,5 +89,3 @@ namespace TH_Sanae.Scrpits.Cards
 		}
 	}
 }
-
-

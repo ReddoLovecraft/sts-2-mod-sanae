@@ -28,11 +28,12 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			List<MegaCrit.Sts2.Core.Models.CardModel> cards = Enumerable.Range(0, DynamicVars["Power"].IntValue)
-				.Select(_ => (MegaCrit.Sts2.Core.Models.CardModel)Owner.RunState.CreateCard<Congratulation>(Owner))
+				.Select(_ => (MegaCrit.Sts2.Core.Models.CardModel)CombatState!.CreateCard<Congratulation>(Owner))
 				.ToList();
-			await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Draw, Owner, CardPilePosition.Random);
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Draw, Owner, CardPilePosition.Random));
 
 			if (ToolBox.IsPiety(Owner.Creature, 8))
 			{
@@ -43,6 +44,7 @@ namespace TH_Sanae.Scrpits.Cards
 		protected override void OnUpgrade()
 		{
 			DynamicVars["Power"].UpgradeValueBy(2);
+			DynamicVars.Cards.UpgradeValueBy(1);
 		}
 	}
 }

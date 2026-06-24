@@ -8,6 +8,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchoulib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
@@ -19,7 +21,8 @@ namespace TH_Sanae.Scrpits.Cards
 	public sealed class FaithHeal : SanaeCardModel
 	{
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(4)];
+		public override bool CanBeGeneratedInCombat => false;
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(6)];
 
 		protected override bool ShouldGlowGoldInternal => ToolBox.IsPiety(Owner.Creature, 8);
 
@@ -31,9 +34,11 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			if (ToolBox.IsPiety(Owner.Creature, 8))
 			{
-				await PowerCmd.Apply<OnceHealPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				PlayerFullscreenHealVfx.Play(Owner, DynamicVars.Cards.IntValue, NCombatRoom.Instance);
+				await PowerCmd.Apply<OnceHealPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 		}
 

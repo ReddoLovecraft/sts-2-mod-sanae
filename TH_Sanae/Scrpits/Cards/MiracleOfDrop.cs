@@ -29,12 +29,12 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await PowerCmd.Apply<InducePower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
 			if (cardPlay.Target != null)
 			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)	.WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3")
+				.WithHitVfxSpawnedAtBase().Targeting(cardPlay.Target).Execute(choiceContext);
 			}
-
+			await PowerCmd.Apply<InducePower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			if (ToolBox.IsPiety(Owner.Creature, 5))
 			{
 				await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);

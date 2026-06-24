@@ -16,7 +16,7 @@ using TH_Sanae.Scripts.Powers;
 
 namespace TH_Sanae.Scrpits.Cards
 {
-	[Pool(typeof(ColorlessCardPool))]
+	[Pool(typeof(StatusCardPool))]
 	public sealed class Hisoutensoku : SanaeCardModel
 	{
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Ethereal];
@@ -28,7 +28,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<InducePower>(), HoverTipFactory.FromPower<BeliefPower>(), Tools.GetStaticKeyword("Piety"), Tools.GetStaticKeyword("Persuasion"), ..HoverTipFactory.FromCardWithCardHoverTips<FaithBroken>()];
 
-		public Hisoutensoku() : base(0, CardType.Skill, CardRarity.Token, TargetType.AllEnemies, showInCardLibrary: false)
+		public Hisoutensoku() : base(0, CardType.Skill, CardRarity.Common, TargetType.AllEnemies)
 		{
 		}
 
@@ -50,6 +50,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int counts = 20;
 			if (Owner.Creature.HasPower<BeliefPower>())
 			{
@@ -80,11 +81,10 @@ namespace TH_Sanae.Scrpits.Cards
 				await ToolBox.Persuasion(Owner.Creature, enemy);
 			}
 
-			FaithBroken deckCard = Owner.RunState.CreateCard<FaithBroken>(Owner);
-			Owner.RunState.AddCard(deckCard, Owner);
+			await CardPileCmd.AddCurseToDeck<FaithBroken>(Owner);
 
-			FaithBroken combatCard = Owner.RunState.CreateCard<FaithBroken>(Owner);
-			await CardPileCmd.AddGeneratedCardToCombat(combatCard, PileType.Discard, Owner, CardPilePosition.Random);
+		// 	FaithBroken combatCard = CombatState!.CreateCard<FaithBroken>(Owner);
+		// 	CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(combatCard, PileType.Discard, Owner, CardPilePosition.Random));
 		}
 
 		protected override void OnUpgrade()

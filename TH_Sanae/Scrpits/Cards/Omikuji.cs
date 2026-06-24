@@ -15,7 +15,7 @@ using TH_Sanae.Scripts.Main;
 
 namespace TH_Sanae.Scrpits.Cards
 {
-	[Pool(typeof(ColorlessCardPool))]
+	[Pool(typeof(StatusCardPool))]
 	public sealed class Omikuji : SanaeCardModel
 	{
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Ethereal];
@@ -25,18 +25,21 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.DrawKeyword)];
 
-		public Omikuji() : base(0, CardType.Skill, CardRarity.Token, TargetType.Self, showInCardLibrary: false)
+		public Omikuji() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 		{
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			int selectCount = DynamicVars["Cards"].IntValue;
-			if (selectCount <= 0)
+			if(Owner.Character is SanaeCharacter)
 			{
-				return;
+				await CreatureCmd.TriggerAnim(base.Owner.Creature, "Throw", base.Owner.Character.CastAnimDelay);
 			}
-
+			else
+			{
+				await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			}
+			int selectCount = DynamicVars.Cards.IntValue;
 			IReadOnlyList<CardModel> handCards = PileType.Hand.GetPile(Owner).Cards
 				.Where(card => card != this)
 				.ToList();

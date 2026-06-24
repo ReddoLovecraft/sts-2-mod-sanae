@@ -22,6 +22,8 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override bool ShouldGlowRedInternal => GetPreviousPlayedCardType() == CardType.Attack;
 
+		protected override bool ShouldGlowGreenInternal => GetPreviousPlayedCardType() == CardType.Skill;
+
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new EnergyVar(2)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -37,13 +39,14 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			switch (GetPreviousPlayedCardType())
 			{
 				case CardType.Skill:
-					await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 					break;
 				case CardType.Attack:
-					await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 					break;
 				case CardType.Power:
 					await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);

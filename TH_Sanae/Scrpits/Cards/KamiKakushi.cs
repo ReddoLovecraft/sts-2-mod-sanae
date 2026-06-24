@@ -17,21 +17,22 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(ColorlessCardPool))]
 	public sealed class KamiKakushi : SanaeCardModel
 	{
-		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Ethereal];
+		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 		public override int MaxUpgradeLevel => 99;
 
-		public override CardPoolModel VisualCardPool => ModelDb.CardPool<ColorlessCardPool>();
+		//public override CardPoolModel VisualCardPool => ModelDb.CardPool<ColorlessCardPool>();
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<IntangiblePower>(1)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IntangiblePower>()];
 
-		public KamiKakushi() : base(1, CardType.Skill, CardRarity.Token, TargetType.Self, showInCardLibrary: false)
+		public KamiKakushi() : base(1, CardType.Skill, CardRarity.Event, TargetType.Self)
 		{
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await PowerCmd.Apply<IntangiblePower>(choiceContext, Owner.Creature, DynamicVars["IntangiblePower"].BaseValue, Owner.Creature, this);
 			PlayerCmd.EndTurn(Owner, canBackOut: false);
 		}

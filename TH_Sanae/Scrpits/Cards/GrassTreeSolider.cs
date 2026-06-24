@@ -19,7 +19,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move)];
 
-		public GrassTreeSolider() : base(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy, showInCardLibrary: false)
+		public GrassTreeSolider() : base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 		{
 		}
 
@@ -29,18 +29,13 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				return;
 			}
-
 			CardPile? hand = ToolBox.GetPile(Owner, PileType.Hand);
-			int hitCount = (hand?.Cards.Count ?? 0) + 1;
-			for (int i = 0; i < hitCount; i++)
-			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
-			}
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitCount(hand.Cards.Count).WithHitFx("vfx/vfx_attack_slash",null,"slash_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()
 		{
-			DynamicVars.Damage.UpgradeValueBy(2);
+			DynamicVars.Damage.UpgradeValueBy(3);
 		}
 	}
 }

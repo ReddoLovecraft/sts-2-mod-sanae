@@ -47,7 +47,7 @@ namespace TH_Sanae.Scrpits.Cards
 					return;
 				}
 
-				await DamageCmd.Attack(damage).FromCard(this).Targeting(enemy).Execute(choiceContext);
+				await DamageCmd.Attack(damage).WithHitFx("vfx/vfx_starry_impact").FromCard(this).Targeting(enemy).Execute(choiceContext);
 			}
 		}
 

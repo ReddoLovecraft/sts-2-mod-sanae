@@ -29,15 +29,15 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				return;
 			}
-
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_attack_blunt").Targeting(cardPlay.Target).Execute(choiceContext);
 			if (ToolBox.IsDevotee(cardPlay.Target))
 			{
-				await PowerCmd.Apply<BeliefPower>(choiceContext, cardPlay.Target, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<BeliefPower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 			else
 			{
-				await PowerCmd.Apply<InducePower>(choiceContext, cardPlay.Target, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<InducePower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 
 			await ToolBox.Persuasion(Owner.Creature, cardPlay.Target);

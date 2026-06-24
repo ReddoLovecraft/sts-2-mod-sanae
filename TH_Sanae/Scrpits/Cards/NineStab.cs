@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -51,9 +52,10 @@ namespace TH_Sanae.Scrpits.Cards
 				return;
 			}
 
-			for (int i = 0; i < DynamicVars["Cards"].IntValue; i++)
+			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!).Execute(choiceContext);
+				ToolBox.playWindSfx(DynamicVars.Cards.IntValue,new Color("f0d46279"));
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitFx("vfx/vfx_starry_impact").FromCard(this).TargetingAllOpponents(CombatState!).Execute(choiceContext);
 			}
 
 			NotYC = false;

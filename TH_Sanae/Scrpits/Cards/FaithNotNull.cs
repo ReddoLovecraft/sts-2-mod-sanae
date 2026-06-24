@@ -34,14 +34,11 @@ namespace TH_Sanae.Scrpits.Cards
 			if (!ToolBox.IsDevotee(cardPlay.Target))
 			{
 				int hitCount = Owner.Creature.HasPower<BeliefPower>() ? Owner.Creature.GetPowerAmount<BeliefPower>() : 0;
-				for (int i = 0; i < hitCount; i++)
-				{
-					await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
-				}
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitCount(hitCount).WithHitFx("vfx/vfx_starry_impact").Targeting(cardPlay.Target).Execute(choiceContext);
 			}
 			else
 			{
-				await PowerCmd.Apply<InducePower>(choiceContext, cardPlay.Target, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<InducePower>(choiceContext, cardPlay.Target,DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 
 			if (cardPlay.Target.IsAlive)

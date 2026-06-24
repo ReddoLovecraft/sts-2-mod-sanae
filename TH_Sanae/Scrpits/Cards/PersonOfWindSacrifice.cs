@@ -25,8 +25,9 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int windAmount = Owner.Creature.HasPower<WindPower>() ? Owner.Creature.GetPowerAmount<WindPower>() : 0;
-			int faithAmount = windAmount / DynamicVars["Cards"].IntValue;
+			int faithAmount = windAmount / DynamicVars.Cards.IntValue;
 			if (faithAmount > 0)
 			{
 				await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, faithAmount, Owner.Creature, this);

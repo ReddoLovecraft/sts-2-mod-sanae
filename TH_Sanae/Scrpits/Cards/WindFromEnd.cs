@@ -15,6 +15,7 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(SanaeCardPool))]
 	public sealed class WindFromEnd : SanaeCardModel
 	{
+		protected override bool ShouldGlowGoldInternal =>  Owner.Creature.HasPower<WindPower>();
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 		protected override bool IsPlayable => base.IsPlayable && (!IsMutable || !Owner.Creature.HasPower<WindStatePower>());
 
@@ -28,19 +29,20 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await ToolBox.SummonWind(choiceContext, Owner.Creature);
 			if (Owner.Creature.HasPower<WindPower>())
 			{
 				int currentWind = Owner.Creature.GetPowerAmount<WindPower>();
-				int extraWind = currentWind * (DynamicVars["Cards"].IntValue - 1);
+				int extraWind = currentWind * (DynamicVars.Cards.IntValue - 1);
 				if (extraWind > 0)
 				{
 					await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, extraWind, Owner.Creature, this);
 				}
 			}
 
-			WindEndGrass grass = Owner.RunState.CreateCard<WindEndGrass>(Owner);
-			await CardPileCmd.AddGeneratedCardToCombat(grass, PileType.Discard, Owner, CardPilePosition.Random);
+			WindEndGrass grass = CombatState!.CreateCard<WindEndGrass>(Owner);
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(grass, PileType.Discard, Owner, CardPilePosition.Random));
 		}
 
 		protected override void OnUpgrade()

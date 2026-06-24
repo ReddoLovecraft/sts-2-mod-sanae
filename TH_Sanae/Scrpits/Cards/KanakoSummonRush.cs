@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using Patchoulib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
 
@@ -35,13 +36,13 @@ namespace TH_Sanae.Scrpits.Cards
 
 			if (!(target.IsMonster && target.Monster?.IntendsToAttack == true))
 			{
-				await PowerCmd.Apply<VulnerablePower>(choiceContext, target, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<VulnerablePower>(choiceContext, target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(target).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(target).WithHitVfxNode((Creature t) => NStabVfx.Create(t, facingEnemies: true, VfxColor.Gold)).Execute(choiceContext);
 			if (target.Block > 0)
 			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(target).Execute(choiceContext);
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(target).WithHitVfxNode((Creature t) => NStabVfx.Create(t, facingEnemies: true, VfxColor.Gold)).Execute(choiceContext);
 			}
 		}
 

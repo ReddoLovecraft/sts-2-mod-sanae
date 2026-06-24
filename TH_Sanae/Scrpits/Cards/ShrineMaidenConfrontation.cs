@@ -39,8 +39,8 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				return;
 			}
-
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!).Execute(choiceContext);
+			SfxCmd.Play("event:/sfx/characters/ironclad/ironclad_whirlwind");
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)	.WithHitFx("vfx/vfx_giant_horizontal_slash").TargetingAllOpponents(CombatState!).Execute(choiceContext);
 			await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
 		}
 

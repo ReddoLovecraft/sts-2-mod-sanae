@@ -15,14 +15,15 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(StatusCardPool))]
 	public sealed class Congratulation : SanaeCardModel
 	{
+		public override int MaxUpgradeLevel => 0;
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable, CardKeyword.Ethereal];
 		protected override bool IsPlayable => false;
 
-		protected override System.Collections.Generic.IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 
-		protected override System.Collections.Generic.IEnumerable<MegaCrit.Sts2.Core.HoverTips.IHoverTip> ExtraHoverTips => [MegaCrit.Sts2.Core.HoverTips.HoverTipFactory.FromPower<BeliefPower>()];
+		protected override IEnumerable<MegaCrit.Sts2.Core.HoverTips.IHoverTip> ExtraHoverTips => [MegaCrit.Sts2.Core.HoverTips.HoverTipFactory.FromPower<BeliefPower>()];
 
-		public Congratulation() : base(-2, CardType.Status, CardRarity.Common, TargetType.None, showInCardLibrary: false)
+		public Congratulation() : base(-2, CardType.Status, CardRarity.Status, TargetType.None)
 		{
 		}
 
@@ -31,17 +32,8 @@ namespace TH_Sanae.Scrpits.Cards
 			await base.AfterCardExhausted(choiceContext, card, fromEndOfTurn);
 			if (card == this)
 			{
-				await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
-		}
-
-		protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-		{
-			return Task.CompletedTask;
-		}
-
-		protected override void OnUpgrade()
-		{
 		}
 	}
 }

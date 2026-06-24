@@ -18,7 +18,7 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override IEnumerable<MegaCrit.Sts2.Core.HoverTips.IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("StopWind")];
 
-		public WindEndGrass() : base(-2, CardType.Status, CardRarity.Common, TargetType.None, showInCardLibrary: false)
+		public WindEndGrass() : base(-2, CardType.Status, CardRarity.Status, TargetType.None)
 		{
 		}
 
@@ -41,9 +41,7 @@ namespace TH_Sanae.Scrpits.Cards
 			return Task.CompletedTask;
 		}
 
-		protected override void OnUpgrade()
-		{
-		}
+		public override int MaxUpgradeLevel => 0;
 	}
 }
 

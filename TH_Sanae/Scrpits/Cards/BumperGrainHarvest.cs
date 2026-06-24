@@ -27,10 +27,11 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			List<CardModel> cards = Enumerable.Range(0, DynamicVars["Cards"].IntValue)
-				.Select(_ => (CardModel)Owner.RunState.CreateCard<HarvestRice>(Owner))
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			List<CardModel> cards = Enumerable.Range(0, DynamicVars.Cards.IntValue)
+				.Select(_ => (CardModel)CombatState!.CreateCard<HarvestRice>(Owner))
 				.ToList();
-			await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Discard, Owner, CardPilePosition.Random);
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Discard, Owner));
 		}
 
 		protected override void OnUpgrade()

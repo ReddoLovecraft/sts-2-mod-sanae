@@ -36,7 +36,7 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				ToolBox.playWindSfx(DynamicVars["Power"].IntValue, new Color("FFFFFF80"));
 				await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_attack_slash").Targeting(cardPlay.Target).Execute(choiceContext);
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_molten_fist", null, "blunt_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
 			}
 		}
 

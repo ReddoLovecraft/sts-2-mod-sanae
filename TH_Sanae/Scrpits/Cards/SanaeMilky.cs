@@ -18,22 +18,23 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(SanaeCardPool))]
 	public sealed class SanaeMilky : SanaeCardModel
 	{
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
-
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
+		 public override bool CanBeGeneratedInCombat => false;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => HoverTipFactory.FromCardWithCardHoverTips<SanaeMilk>();
 
-		public SanaeMilky() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+		public SanaeMilky() : base(3, CardType.Power, CardRarity.Rare, TargetType.Self)
 		{
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await PowerCmd.Apply<MilkyPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			await PowerCmd.Apply<MilkyPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
 		{
-			DynamicVars.Cards.UpgradeValueBy(2);
+			this.EnergyCost.UpgradeBy(-1);
 		}
 	}
 }

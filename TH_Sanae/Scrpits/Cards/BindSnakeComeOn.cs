@@ -20,13 +20,13 @@ namespace TH_Sanae.Scrpits.Cards
 	{
 		public override int YC_count
 		{
-			get => 1;
+			get => CurrentUpgradeLevel >= 2 ? 1 : 2;
 			set { }
 		}
 
 		public override bool GainsBlock => true;
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(5, ValueProp.Move), new CardsVar(4)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(7, ValueProp.Move), new CardsVar(7)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips
 		{
@@ -55,10 +55,10 @@ namespace TH_Sanae.Scrpits.Cards
 				yc?.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), $"yc-{CurrentUpgradeLevel}"), this);
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			if (cardPlay.Target != null)
 			{
-				await PowerCmd.Apply<ConstrictPower>(choiceContext, cardPlay.Target, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<ConstrictPower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 
 			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
@@ -67,13 +67,13 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override void firstUpgrade()
 		{
-			DynamicVars.Cards.UpgradeValueBy(4);
+			DynamicVars.Cards.UpgradeValueBy(3);
+			DynamicVars.Block.UpgradeValueBy(3);
 		}
 
 		protected override void secondUpgrade()
 		{
-			DynamicVars.Cards.UpgradeValueBy(2);
-			DynamicVars.Block.UpgradeValueBy(3);
+			this.YC_count=1;
 		}
 	}
 }

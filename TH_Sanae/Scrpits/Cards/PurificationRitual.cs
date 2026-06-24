@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using Patchoulib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
@@ -48,11 +49,17 @@ namespace TH_Sanae.Scrpits.Cards
 				YCPower? yc = await PowerCmd.Apply<YCPower>(choiceContext, Owner.Creature, YC_count, Owner.Creature, this);
 				if (yc != null)
 				{
-					yc.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), $"yc-{CurrentUpgradeLevel}"), this);
+					yc.cardsTip.Clear();
+					yc.cards.Clear();
+					YCCardModel card = (YCCardModel)CreateDupe();
+					card.YC_count = YC_count;
+					card.NotYC = true;
+					yc.cards.Add(card);
+					((StringVar)yc.DynamicVars["Card"]).StringValue = card.Title;
 				}
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			if (Owner.PlayerCombatState != null)
 			{
 				List<CardModel> cardsToExhaust = Owner.PlayerCombatState.AllCards
@@ -74,5 +81,3 @@ namespace TH_Sanae.Scrpits.Cards
 		}
 	}
 }
-
-

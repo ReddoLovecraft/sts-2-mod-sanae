@@ -24,9 +24,11 @@ namespace TH_Sanae.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await CreatureCmd.Damage(choiceContext, Owner.Creature, IsUpgraded ? 5 : 3, MegaCrit.Sts2.Core.ValueProps.ValueProp.Unpowered | MegaCrit.Sts2.Core.ValueProps.ValueProp.Unblockable, Owner.Creature, this);
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreatureCenter(base.Owner.Creature, "vfx/vfx_bloody_impact");
+			await CreatureCmd.Damage(choiceContext, Owner.Creature, IsUpgraded ? 3 : 2, MegaCrit.Sts2.Core.ValueProps.ValueProp.Unpowered | MegaCrit.Sts2.Core.ValueProps.ValueProp.Unblockable, Owner.Creature, this);
 			await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
-			await CardPileCmd.Draw(choiceContext, DynamicVars["Cards"].IntValue, Owner);
+			await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
 		}
 
 		protected override void OnUpgrade()

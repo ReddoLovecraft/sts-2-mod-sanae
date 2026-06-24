@@ -29,7 +29,8 @@ namespace TH_Sanae.Scrpits.Cards
 
 			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3")
+			.WithHitVfxSpawnedAtBase().FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 			}
 		}
 

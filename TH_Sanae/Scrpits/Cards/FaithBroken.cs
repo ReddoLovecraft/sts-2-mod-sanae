@@ -17,6 +17,9 @@ namespace TH_Sanae.Scrpits.Cards
 	{
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 		protected override bool IsPlayable => false;
+		public override int MaxUpgradeLevel => 0;
+		public override bool HasTurnEndInHandEffect => true;
+
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BeliefPower>()];
 
@@ -33,13 +36,6 @@ namespace TH_Sanae.Scrpits.Cards
 			}
 		}
 
-		protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-		{
-			return Task.CompletedTask;
-		}
-
-		protected override void OnUpgrade()
-		{
-		}
+		
 	}
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -37,7 +38,8 @@ namespace TH_Sanae.Scrpits.Cards
 
 			if (ToolBox.IsWindControl(Owner.Creature, 18) && cardPlay.Target != null)
 			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+				ToolBox.playWindSfx(DynamicVars.Damage.IntValue, new Color("FFFFFF80"));
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_heavy_blunt").Targeting(cardPlay.Target).Execute(choiceContext);
 			}
 		}
 

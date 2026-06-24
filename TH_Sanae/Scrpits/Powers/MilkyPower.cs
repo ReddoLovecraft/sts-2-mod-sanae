@@ -26,13 +26,13 @@ namespace TH_Sanae.Scripts.Powers
 				return;
 			}
 
-			SanaeMilk milk = player.RunState.CreateCard<SanaeMilk>(player);
+			SanaeMilk milk = player.Creature.CombatState!.CreateCard<SanaeMilk>(player);
 			await CardPileCmd.AddGeneratedCardToCombat(milk, MegaCrit.Sts2.Core.Entities.Cards.PileType.Hand, player, MegaCrit.Sts2.Core.Entities.Cards.CardPilePosition.Random);
 			if (Amount > 1)
 			{
 				for (int i = 1; i < Amount; i++)
 				{
-					SanaeMilk extraMilk = player.RunState.CreateCard<SanaeMilk>(player);
+					SanaeMilk extraMilk = player.Creature.CombatState!.CreateCard<SanaeMilk>(player);
 					await CardPileCmd.AddGeneratedCardToCombat(extraMilk, MegaCrit.Sts2.Core.Entities.Cards.PileType.Hand, player, MegaCrit.Sts2.Core.Entities.Cards.CardPilePosition.Random);
 				}
 			}

@@ -22,38 +22,12 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Single;
 
-		public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
-
 		public override LocString Description => ToolBox.GetCustomText("powers", Id.Entry, ".description");
 
 		protected override void DeepCloneFields()
 		{
 			base.DeepCloneFields();
 			_skipFirstTrigger = true;
-		}
-
-		public override bool TryModifyEnergyCostInCombatLate(CardModel card, decimal originalCost, out decimal modifiedCost)
-		{
-			modifiedCost = originalCost;
-			if (card.Owner.Creature != Owner)
-			{
-				return false;
-			}
-
-			if (card.EnergyCost.CostsX)
-			{
-				return false;
-			}
-
-			switch (card.Pile?.Type)
-			{
-				case PileType.Hand:
-				case PileType.Play:
-					modifiedCost = 0m;
-					return true;
-				default:
-					return false;
-			}
 		}
 
 		public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)

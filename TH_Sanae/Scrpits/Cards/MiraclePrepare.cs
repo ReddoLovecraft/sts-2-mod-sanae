@@ -17,7 +17,7 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(SanaeCardPool))]
 	public sealed class MiraclePrepare : YCCardModel
 	{
-		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardModifier.MiracleKeyword];
+		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardModifier.MiracleKeyword,CardKeyword.Exhaust];
 		protected override bool ShouldGlowGoldInternal => CurrentUpgradeLevel == 2 && ToolBox.IsPiety(Owner.Creature, 50);
 		public override int YC_count
 		{
@@ -74,11 +74,11 @@ namespace TH_Sanae.Scrpits.Cards
 				yc.SetCardAndHoverTip(new YCPreviewCardHoverTip((YCCardModel)CreateDupe(), $"yc-{CurrentUpgradeLevel}"), this);
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			switch (CurrentUpgradeLevel)
 			{
 				case 2:
-					await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 					foreach (Creature enemy in CombatState.HittableEnemies.ToList())
 					{
 						await PowerCmd.Apply<InducePower>(choiceContext, enemy, 10, Owner.Creature, this);
@@ -109,21 +109,20 @@ namespace TH_Sanae.Scrpits.Cards
 						"吉" => 1,
 						_ => 0
 					};
-					MiracleWind miracleWind = Owner.RunState.CreateCard<MiracleWind>(Owner);
+					MiracleWind miracleWind = CombatState!.CreateCard<MiracleWind>(Owner);
 					for (int i = 0; i < stage; i++)
 					{
-						miracleWind.UpgradeInternal();
-						miracleWind.FinalizeUpgradeInternal();
+						ToolBox.UpgradeCard(miracleWind);
 					}
 					miracleWind.NotYC = false;
 					miracleWind.EnergyCost.SetThisTurn(0);
 					await CardPileCmd.AddGeneratedCardToCombat(miracleWind, PileType.Hand, Owner, CardPilePosition.Random);
-					await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<WindPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 					break;
 				default:
 					await CardPileCmd.Draw(choiceContext, 2, Owner);
 					await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
-					await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature, DynamicVars["Cards"].IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<BeliefPower>(choiceContext, Owner.Creature,DynamicVars.Cards.IntValue, Owner.Creature, this);
 					break;
 			}
 
