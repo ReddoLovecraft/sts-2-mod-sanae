@@ -17,7 +17,7 @@ namespace TH_Sanae.Scripts.Events
 	public sealed class SearchForNewsTengu : SanaeEventModel
 	{
 		public override string? CustomInitialPortraitPath => "res://TH_Sanae/ArtWorks/Events/searchfortengu.png";
-		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 2, 3 };
+		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 1, 2 };
 		protected override bool RequiresSanaeInParty => true;
 		protected override IEnumerable<DynamicVar> CanonicalVars =>
 		[

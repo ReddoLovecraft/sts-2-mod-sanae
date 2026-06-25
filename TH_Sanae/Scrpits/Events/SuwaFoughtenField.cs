@@ -14,7 +14,7 @@ namespace TH_Sanae.Scripts.Events;
 public sealed class SuwaFoughtenField : SanaeEventModel
 {
 	public override string? CustomInitialPortraitPath => "res://TH_Sanae/ArtWorks/Events/suwafield.png";
-	protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 3 };
+	protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 2 };
 	protected override bool RequiresAllSanaeParty => true;
 	public override bool IsShared => true;
 	private enum SuwaRoute

@@ -17,7 +17,7 @@ namespace TH_Sanae.Scripts.Events
 	public sealed class WindGodLake : SanaeEventModel
 	{
 		public override string? CustomInitialPortraitPath => "res://TH_Sanae/ArtWorks/Events/windgodlake.png";
-		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 1, 2 };
+		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 0, 1 };
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(0)];
 
 		public override void CalculateVars()

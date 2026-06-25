@@ -15,7 +15,7 @@ namespace TH_Sanae.Scripts.Events
 	public sealed class AnotherMe : SanaeEventModel
 	{
 		public override string? CustomInitialPortraitPath => "res://TH_Sanae/ArtWorks/Events/anotherme.png";
-		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 1, 3 };
+		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 0, 2 };
 		protected override bool RequiresAllSanaeParty => true;
 		protected override IReadOnlyList<EventOption> GenerateInitialOptions()
 		{
