@@ -3,7 +3,7 @@
   "name": "东风谷早苗",
   "author": "Reddo",
   "description": "加入了来自东方Project的角色，奇迹的现人神，东风谷早苗。",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [

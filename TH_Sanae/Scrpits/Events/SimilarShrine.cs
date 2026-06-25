@@ -17,6 +17,7 @@ namespace TH_Sanae.Scripts.Events
 	public sealed class SimilarShrine : SanaeEventModel
 	{
 		public override string? CustomInitialPortraitPath => "res://TH_Sanae/ArtWorks/Events/similarshrine.png";
+		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 2, 3 };
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new HpLossVar(0)];
 
 		public override void CalculateVars()

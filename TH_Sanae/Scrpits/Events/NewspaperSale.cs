@@ -12,6 +12,7 @@ namespace TH_Sanae.Scripts.Events
 	public sealed class NewspaperSale : SanaeEventModel
 	{
 		public override string? CustomInitialPortraitPath => "res://TH_Sanae/ArtWorks/Events/newspapersale.png";
+		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 1, 2 };
 		private int GoldCost => Owner.RunState.AscensionLevel >= 10 ? 125 : 100;
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new GoldVar(0)];

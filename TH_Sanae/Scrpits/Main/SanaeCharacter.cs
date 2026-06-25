@@ -47,7 +47,7 @@ namespace TH_Sanae.Scripts.Main
 		public override string CustomCastSfx => SanaeInit.ToModSfxPath("TH_Sanae/ArtWorks/SFX/cast.wav");
 		// // 死亡音效
 		public override string CustomDeathSfx => SanaeInit.ToModSfxPath("TH_Sanae/ArtWorks/SFX/die.ogg");
-		public override string CharacterSelectSfx  => SanaeInit.ToModSfxPath("TH_Sanae/ArtWorks/SFX/characterselect.wav");
+		public override string CharacterSelectSfx  => SanaeInit.ToModSfxPath("TH_Sanae/ArtWorks/SFX/characterselect.ogg");
 		public override string CharacterTransitionSfx => SanaeInit.ToModSfxPath("TH_Sanae/ArtWorks/SFX/transition.wav");
 		public override CardPoolModel CardPool => ModelDb.CardPool<SanaeCardPool>();
 		public override RelicPoolModel RelicPool => ModelDb.RelicPool<SanaeRelicPool>();

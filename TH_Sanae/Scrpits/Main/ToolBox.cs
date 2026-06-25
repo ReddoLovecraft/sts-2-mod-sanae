@@ -84,7 +84,7 @@ namespace TH_Sanae.Scripts.Main
                 borderTint = StsColors.gold;
             borderTint.A = 0.28f;
             Color highlightTint = new Color(1f, 0.6f, 0.2f, 0.18f);
-
+            SfxCmd.Play(SanaeInit.ToModSfxPath("TH_Sanae/ArtWorks/SFX/miracle.wav"));
             NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(borderTint, highlightTint));
             NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NMiracleVfx.Create(target));
         }

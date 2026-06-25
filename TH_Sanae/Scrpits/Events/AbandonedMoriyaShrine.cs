@@ -15,6 +15,8 @@ namespace TH_Sanae.Scripts.Events
 	public sealed class AbandonedMoriyaShrine : SanaeEventModel
 	{
 		public override string? CustomInitialPortraitPath => "res://TH_Sanae/ArtWorks/Events/abandonedmoriyashrine.png";
+		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 2 };
+		protected override bool RequiresAllSanaeParty => true;
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(0)];
 
 		public override void CalculateVars()

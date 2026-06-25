@@ -15,6 +15,8 @@ namespace TH_Sanae.Scripts.Events
 	public sealed class CollectBadLuckHina : SanaeEventModel
 	{
 		public override string? CustomInitialPortraitPath => "res://TH_Sanae/ArtWorks/Events/collectbadluckhina.png";
+		protected override IReadOnlySet<int> AllowedActs => new HashSet<int> { 2, 3 };
+		protected override bool RequiresSanaeInParty => true;
 		private const int GoldCost = 80;
 
 		protected override IReadOnlyList<EventOption> GenerateInitialOptions()
