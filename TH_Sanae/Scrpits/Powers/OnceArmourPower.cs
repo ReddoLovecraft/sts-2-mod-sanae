@@ -19,6 +19,9 @@ public sealed class OnceArmourPower : SanaePowerModel
 
 	public override PowerStackType StackType => PowerStackType.Counter;
 
+	public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/OA32.png";
+	public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/OA64.png";
+
 	public override bool ShouldScaleInMultiplayer => true;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];

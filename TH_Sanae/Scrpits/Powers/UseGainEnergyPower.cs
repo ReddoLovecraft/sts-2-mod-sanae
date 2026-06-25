@@ -19,6 +19,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/UGEP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/UGEP64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];
 
 		public override LocString Description => ToolBox.GetCustomText("powers", Id.Entry, ".description");

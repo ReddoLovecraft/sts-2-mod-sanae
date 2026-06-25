@@ -23,10 +23,14 @@ namespace TH_Sanae.Scripts.Main
 	[Pool(typeof(SanaeRelicPool))]
 	public sealed class ItemP : SanaeRelicModel, IRightCilckable
 	{
+		public override string PackedIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+    	protected override string PackedIconOutlinePath => $"res://TH_Sanae/ArtWorks/Relics/Outlines/{Id.Entry}.png";
+    	protected override string BigIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+
 		private const string _percentKey = "Percent";
 		private int _count;
 
-		public override RelicRarity Rarity => RelicRarity.Shop;
+		public override RelicRarity Rarity => RelicRarity.Uncommon;
 
 		public override bool ShowCounter => true;
 

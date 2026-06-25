@@ -13,6 +13,20 @@ namespace TH_Sanae.Scrpits.Cards
 [Pool(typeof(SanaeCardPool))]
 public class GrayMiracle : YCCardModel
 {
+	public override string PortraitPath => CurrentUpgradeLevel switch
+	{
+		2 => "res://TH_Sanae/ArtWorks/Cards/SingleLineageBarrage.png",
+		1 => "res://TH_Sanae/ArtWorks/Cards/ForgottenSacrificial.png",
+		_ => "res://TH_Sanae/ArtWorks/Cards/GrayMiracle.png"
+	};
+
+	public override IEnumerable<string> AllPortraitPaths =>
+	[
+		"res://TH_Sanae/ArtWorks/Cards/GrayMiracle.png",
+		"res://TH_Sanae/ArtWorks/Cards/ForgottenSacrificial.png",
+		"res://TH_Sanae/ArtWorks/Cards/SingleLineageBarrage.png"
+	];
+
 	public override int YC_count
 	{
 		get => 1;

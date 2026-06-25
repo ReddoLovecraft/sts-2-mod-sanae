@@ -26,6 +26,9 @@ public sealed class WindPower : SanaePowerModel
 
 	public override PowerStackType StackType => PowerStackType.Counter;
 
+	public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/WP32.png";
+	public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/WP64.png";
+
 	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 	{
 		if (power != this || amount <= 0m || _applyingAyaFollowBonus)

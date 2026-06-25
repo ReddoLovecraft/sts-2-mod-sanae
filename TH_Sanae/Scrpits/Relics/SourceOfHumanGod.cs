@@ -21,6 +21,10 @@ namespace TH_Sanae.Scripts.Main
 	[Pool(typeof(SanaeRelicPool))]
 	public sealed class SourceOfHumanGod : SanaeRelicModel
 	{
+		public override string PackedIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+    	protected override string PackedIconOutlinePath => $"res://TH_Sanae/ArtWorks/Relics/Outlines/{Id.Entry}.png";
+    	protected override string BigIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -29,7 +33,7 @@ namespace TH_Sanae.Scripts.Main
 			HoverTipFactory.FromPower<InducePower>()
 		];
 
-		public override RelicRarity Rarity => RelicRarity.Ancient;
+		public override RelicRarity Rarity => RelicRarity.Rare;
 
 		public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
 		{

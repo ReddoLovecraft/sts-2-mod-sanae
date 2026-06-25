@@ -17,8 +17,8 @@ public sealed class YCPower : CustomPowerModel
 	public override PowerType Type => PowerType.Buff;
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
-    //public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/YCP32.png";
-    //public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/YCP64.png";
+    public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/YC32.png";
+    public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/YC64.png";
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => cardsTip;
     public List<IHoverTip> cardsTip=new List<IHoverTip>();

@@ -17,6 +17,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/BAP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/BAP64.png";
+
 		public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 		{
 			if (!participants.Contains(Owner))

@@ -20,6 +20,20 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(SanaeCardPool))]
 	public sealed class SeaOpening : YCCardModel
 	{
+		public override string PortraitPath => CurrentUpgradeLevel switch
+		{
+			2 => "res://TH_Sanae/ArtWorks/Cards/SeaOpeningMosesMiracle.png",
+			1 => "res://TH_Sanae/ArtWorks/Cards/SeaOpeningTheDayTheSeaRoad.png",
+			_ => "res://TH_Sanae/ArtWorks/Cards/SeaOpeningTheDayTheSeaSplit.png"
+		};
+
+		public override IEnumerable<string> AllPortraitPaths =>
+		[
+			"res://TH_Sanae/ArtWorks/Cards/SeaOpeningTheDayTheSeaSplit.png",
+			"res://TH_Sanae/ArtWorks/Cards/SeaOpeningTheDayTheSeaRoad.png",
+			"res://TH_Sanae/ArtWorks/Cards/SeaOpeningMosesMiracle.png"
+		];
+
 		public override bool GainsBlock => true;
 		private const int _beliefAmount = 6;
 

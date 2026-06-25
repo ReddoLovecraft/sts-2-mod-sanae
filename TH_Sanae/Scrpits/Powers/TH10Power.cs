@@ -17,6 +17,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/TH32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/TH64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.FromKeyword(CardKeyword.Ethereal), Tools.GetStaticKeyword("Spellcard")];
 
 		public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

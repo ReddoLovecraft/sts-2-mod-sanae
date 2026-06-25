@@ -17,6 +17,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Single;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/FC32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/FC64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BeliefPower>()];
 
 		public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

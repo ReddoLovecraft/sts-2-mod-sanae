@@ -17,6 +17,20 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(SanaeCardPool))]
 	public sealed class MiraclePrepare : YCCardModel
 	{
+		public override string PortraitPath => CurrentUpgradeLevel switch
+		{
+			2 => "res://TH_Sanae/ArtWorks/Cards/MiraclePrepareSummonTakeminakata.png",
+			1 => "res://TH_Sanae/ArtWorks/Cards/MiraclePrepareStarRitualCallGodWind.png",
+			_ => "res://TH_Sanae/ArtWorks/Cards/MiraclePrepareSacrifice.png"
+		};
+
+		public override IEnumerable<string> AllPortraitPaths =>
+		[
+			"res://TH_Sanae/ArtWorks/Cards/MiraclePrepareSacrifice.png",
+			"res://TH_Sanae/ArtWorks/Cards/MiraclePrepareStarRitualCallGodWind.png",
+			"res://TH_Sanae/ArtWorks/Cards/MiraclePrepareSummonTakeminakata.png"
+		];
+
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardModifier.MiracleKeyword,CardKeyword.Exhaust];
 		protected override bool ShouldGlowGoldInternal => CurrentUpgradeLevel == 2 && ToolBox.IsPiety(Owner.Creature, 50);
 		public override int YC_count

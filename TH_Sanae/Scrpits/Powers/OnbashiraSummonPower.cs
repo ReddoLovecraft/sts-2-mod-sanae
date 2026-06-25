@@ -18,6 +18,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/OSP232.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/OSP264.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => HoverTipFactory.FromCardWithCardHoverTips<KanakoSummonOnbashira>();
 
 		public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

@@ -18,11 +18,15 @@ namespace TH_Sanae.Scripts.Main
 	[Pool(typeof(SanaeRelicPool))]
 	public sealed class HecatiaTShirt : SanaeRelicModel
 	{
+		public override string PackedIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+    	protected override string PackedIconOutlinePath => $"res://TH_Sanae/ArtWorks/Relics/Outlines/{Id.Entry}.png";
+    	protected override string BigIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>(), HoverTipFactory.FromPower<FrailPower>()];
 
-		public override RelicRarity Rarity => RelicRarity.Ancient;
+		public override RelicRarity Rarity => RelicRarity.Rare;
 
 		public override decimal ModifyMaxEnergy(Player player, decimal amount)
 		{

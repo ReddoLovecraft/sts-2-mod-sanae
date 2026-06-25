@@ -12,6 +12,9 @@ namespace TH_Sanae.Scripts.Main
 	[Pool(typeof(SanaeRelicPool))]
 	public sealed class BookOfMoriya : SanaeRelicModel
 	{
+		public override string PackedIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+    	protected override string PackedIconOutlinePath => $"res://TH_Sanae/ArtWorks/Relics/Outlines/{Id.Entry}.png";
+    	protected override string BigIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Chant")];
 
 		public override RelicRarity Rarity => RelicRarity.Rare;

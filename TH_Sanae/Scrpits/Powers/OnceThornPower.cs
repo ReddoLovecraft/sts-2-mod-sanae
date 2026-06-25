@@ -18,6 +18,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/OT32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/OT64.png";
+
 		public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, MegaCrit.Sts2.Core.Entities.Players.Player player)
 		{
 			if (player == Owner.Player)

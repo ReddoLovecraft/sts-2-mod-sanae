@@ -21,6 +21,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Single;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/CFP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/CFP64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("WindSummon"), HoverTipFactory.FromPower<WindPower>(), HoverTipFactory.Static(StaticHoverTip.Block)];
 
 		public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

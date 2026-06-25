@@ -21,6 +21,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/QY32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/QY64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BeliefPower>()];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar(_tenPercentAmountKey, 0m)];

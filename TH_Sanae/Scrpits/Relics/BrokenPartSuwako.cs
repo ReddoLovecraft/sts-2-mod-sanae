@@ -12,6 +12,9 @@ namespace TH_Sanae.Scripts.Main
 	[Pool(typeof(SanaeRelicPool))]
 	public sealed class BrokenPartSuwako : SanaeRelicModel
 	{
+		public override string PackedIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+    	protected override string PackedIconOutlinePath => $"res://TH_Sanae/ArtWorks/Relics/Outlines/{Id.Entry}.png";
+    	protected override string BigIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
 		public override RelicRarity Rarity => RelicRarity.Event;
 
 		public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)

@@ -16,6 +16,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/OSP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/OSP64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => HoverTipFactory.FromCardWithCardHoverTips<Omikuji>();
 
 		public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

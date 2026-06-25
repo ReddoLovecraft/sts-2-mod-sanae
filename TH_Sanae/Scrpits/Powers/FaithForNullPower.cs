@@ -18,6 +18,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Single;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/NotFD32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/NotFD64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IntangiblePower>(), HoverTipFactory.FromPower<MinionPower>(), Tools.GetStaticKeyword("Devotee")];
 
 		public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, System.Collections.Generic.IEnumerable<Creature> participants)

@@ -23,7 +23,7 @@ namespace TH_Sanae.Scripts.Main
 
 		protected virtual bool ShouldGlowGreenInternal => false;
 
-		//public override string PortraitPath => $"res://TH_Sanae/ArtWorks/Cards/{Id.Entry}.png";
+		public override string PortraitPath => $"res://TH_Sanae/ArtWorks/Cards/{GetType().Name}.png";
 
 		protected override bool IsPlayable
 		{

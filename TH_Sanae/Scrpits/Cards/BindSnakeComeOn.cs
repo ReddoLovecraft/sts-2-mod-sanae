@@ -46,6 +46,16 @@ namespace TH_Sanae.Scrpits.Cards
 		{
 		}
 
+		protected override string GetCustomPortraitPath(int level)
+		{
+			return level switch
+			{
+				1 => "res://TH_Sanae/ArtWorks/Cards/BindSnakeComeOnUP.png",
+				2 => "res://TH_Sanae/ArtWorks/Cards/BindSnakeComeOnUPUP.png",
+				_ => base.GetCustomPortraitPath(level)
+			};
+		}
+
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await base.OnPlay(choiceContext, cardPlay);

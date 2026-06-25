@@ -21,6 +21,20 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(SanaeCardPool))]
 	public sealed class MiracleStar : YCCardModel
 	{
+		public override string PortraitPath => CurrentUpgradeLevel switch
+		{
+			2 => "res://TH_Sanae/ArtWorks/Cards/MiracleStarOverlyBrightGuest.png",
+			1 => "res://TH_Sanae/ArtWorks/Cards/MiracleStarBrightGuest.png",
+			_ => "res://TH_Sanae/ArtWorks/Cards/MiracleStarDaytimeGuest.png"
+		};
+
+		public override IEnumerable<string> AllPortraitPaths =>
+		[
+			"res://TH_Sanae/ArtWorks/Cards/MiracleStarDaytimeGuest.png",
+			"res://TH_Sanae/ArtWorks/Cards/MiracleStarBrightGuest.png",
+			"res://TH_Sanae/ArtWorks/Cards/MiracleStarOverlyBrightGuest.png"
+		];
+
 		public override bool GainsBlock => true;
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardModifier.MiracleKeyword];
 		public override int YC_count

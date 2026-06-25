@@ -19,6 +19,9 @@ public sealed class OnceHealPower : SanaePowerModel
 
 	public override PowerStackType StackType => PowerStackType.Counter;
 
+	public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/OH32.png";
+	public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/OH64.png";
+
 	public override bool ShouldScaleInMultiplayer => true;
 
 	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

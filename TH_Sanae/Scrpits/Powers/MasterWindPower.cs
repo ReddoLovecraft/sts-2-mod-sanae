@@ -17,6 +17,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Single;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/WM32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/WM64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("WindState"), HoverTipFactory.FromPower<WindPower>()];
 
 		public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

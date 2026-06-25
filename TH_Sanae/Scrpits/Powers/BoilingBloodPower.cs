@@ -19,6 +19,9 @@ namespace TH_Sanae.Scripts.Powers
 		public override PowerStackType StackType => PowerStackType.Single;
 		public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/BBP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/BBP64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VigorPower>()];
 
 		public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)

@@ -15,6 +15,10 @@ namespace TH_Sanae.Scripts.Main
 	[Pool(typeof(SanaeRelicPool))]
 	public sealed class HinaNingyou : SanaeRelicModel, IRightCilckable
 	{
+		public override string PackedIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+    	protected override string PackedIconOutlinePath => $"res://TH_Sanae/ArtWorks/Relics/Outlines/{Id.Entry}.png";
+    	protected override string BigIconPath => $"res://TH_Sanae/ArtWorks/Relics/{Id.Entry}.png";
+
 		public override RelicRarity Rarity => RelicRarity.Shop;
 
 		public async Task OnRightClick(PlayerChoiceContext context)

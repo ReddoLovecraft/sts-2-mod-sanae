@@ -20,6 +20,9 @@ namespace TH_Sanae.Scripts.Powers
 		public override PowerStackType StackType => PowerStackType.Single;
 		public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/HNFY32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/HNFY64.png";
+
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar(_phaseKey, "花")];
 
 		public override Task AfterApplied(MegaCrit.Sts2.Core.Entities.Creatures.Creature? applier, MegaCrit.Sts2.Core.Models.CardModel? cardSource)

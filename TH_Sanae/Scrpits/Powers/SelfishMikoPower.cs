@@ -22,6 +22,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Single;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/SM32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/SM64.png";
+
 		public override LocString Description => ToolBox.GetCustomText("powers", Id.Entry, ".description");
 
 		protected override void DeepCloneFields()

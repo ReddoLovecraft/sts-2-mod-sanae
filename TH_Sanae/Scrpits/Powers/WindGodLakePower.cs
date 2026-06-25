@@ -19,6 +19,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/WGLP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/WGLP64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("WindState"), HoverTipFactory.FromPower<WindPower>()];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar(_tenPercentAmountKey, 0m)];

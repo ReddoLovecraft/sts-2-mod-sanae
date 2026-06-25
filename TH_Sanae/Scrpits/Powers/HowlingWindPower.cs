@@ -17,6 +17,9 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/HWP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/HWP64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("WindSummon")];
 
 		public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

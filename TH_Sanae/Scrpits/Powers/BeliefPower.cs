@@ -16,6 +16,7 @@ namespace TH_Sanae.Scripts.Powers
 {
 public sealed class BeliefPower : SanaePowerModel
 {
+	
 	private const string _doubleAmountKey = "DoubleAmount";
 
 	private const string _tenPercentAmountKey = "TenPercentAmount";
@@ -23,6 +24,9 @@ public sealed class BeliefPower : SanaePowerModel
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
+
+	public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/XY32.png";
+	public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/XY64.png";
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
 
