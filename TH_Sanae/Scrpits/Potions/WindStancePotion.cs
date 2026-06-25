@@ -22,6 +22,9 @@ namespace TH_Sanae.Scripts.Potions
 		public override PotionUsage Usage => PotionUsage.CombatOnly;
 
 		public override TargetType TargetType => TargetType.AnyPlayer;
+		
+		public override string? CustomPackedImagePath => "res://TH_Sanae/ArtWorks/Potions/WIND_STANCE_POTION.png";
+     	public override string? CustomPackedOutlinePath => "res://TH_Sanae/ArtWorks/Potions/Outlines/WIND_STANCE_POTION.png"; 
 
 		public override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("WindSummon"), Tools.GetStaticKeyword("WindState")];
 

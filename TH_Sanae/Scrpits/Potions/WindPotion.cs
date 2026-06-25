@@ -24,6 +24,9 @@ namespace TH_Sanae.Scripts.Potions
 		public override PotionRarity Rarity => PotionRarity.Common;
 
 		public override PotionUsage Usage => PotionUsage.CombatOnly;
+		
+		public override string? CustomPackedImagePath => "res://TH_Sanae/ArtWorks/Potions/WIND_POTION.png";
+     	public override string? CustomPackedOutlinePath => "res://TH_Sanae/ArtWorks/Potions/Outlines/WIND_POTION.png"; 
 
 		public override TargetType TargetType => TargetType.AnyPlayer;
 

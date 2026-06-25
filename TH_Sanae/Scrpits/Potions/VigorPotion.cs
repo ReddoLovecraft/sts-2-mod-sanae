@@ -23,6 +23,9 @@ namespace TH_Sanae.Scripts.Potions
 
 		public override PotionRarity Rarity => PotionRarity.Common;
 
+		public override string? CustomPackedImagePath => "res://TH_Sanae/ArtWorks/Potions/VIGOR_POTION.png";
+    	public override string? CustomPackedOutlinePath => "res://TH_Sanae/ArtWorks/Potions/Outlines/VIGOR_POTION.png"; 
+
 		public override PotionUsage Usage => PotionUsage.CombatOnly;
 
 		public override TargetType TargetType => TargetType.AnyPlayer;

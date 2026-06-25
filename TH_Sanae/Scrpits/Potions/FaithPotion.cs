@@ -26,6 +26,8 @@ namespace TH_Sanae.Scripts.Potions
 		public override PotionUsage Usage => PotionUsage.CombatOnly;
 
 		public override TargetType TargetType => TargetType.AnyPlayer;
+		public override string? CustomPackedImagePath => "res://TH_Sanae/ArtWorks/Potions/FAITH_POTION.png";
+    	public override string? CustomPackedOutlinePath => "res://TH_Sanae/ArtWorks/Potions/Outlines/FAITH_POTION.png"; 
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar(AmountVarKey, 12)];
 
