@@ -22,6 +22,8 @@ public sealed class AmbitiousMikoPower : SanaePowerModel
 		public override PowerType Type => PowerType.Buff;
 
 		public override PowerStackType StackType => PowerStackType.Counter;
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/AMP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/AMP64.png";
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<BeliefPower>(), HoverTipFactory.FromPower<StrengthPower>(), HoverTipFactory.FromPower<DexterityPower>()];
 

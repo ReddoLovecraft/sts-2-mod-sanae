@@ -22,6 +22,8 @@ public sealed class MountainFreshGodPower : SanaePowerModel
 		public override PowerType Type => PowerType.Buff;
 
 		public override PowerStackType StackType => PowerStackType.Counter;
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/MFGP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/MFGP64.png";
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.ReplayStatic)];
 

@@ -24,7 +24,7 @@ namespace TH_Sanae.Scrpits.Cards
 	public sealed class ManipulateToad : SanaeCardModel
 	{
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
-		protected override IEnumerable<IHoverTip> ExtraHoverTips => IsUpgraded?[HoverTipFactory.FromKeyword(CardKeyword.Exhaust)]:null;
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => IsUpgraded?[HoverTipFactory.FromKeyword(CardKeyword.Exhaust)]:[];
 
 		public ManipulateToad() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 		{

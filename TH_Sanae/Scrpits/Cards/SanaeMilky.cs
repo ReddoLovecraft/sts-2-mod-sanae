@@ -18,6 +18,8 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(SanaeCardPool))]
 	public sealed class SanaeMilky : SanaeCardModel
 	{
+		public override string NSFWPath => $"res://TH_Sanae/ArtWorks/Cards/NSFW/{GetType().Name}.png";
+
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 		 public override bool CanBeGeneratedInCombat => false;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => HoverTipFactory.FromCardWithCardHoverTips<SanaeMilk>();

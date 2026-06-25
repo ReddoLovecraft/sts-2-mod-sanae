@@ -1,0 +1,6 @@
+{
+  "TH_SANAE.mod_title": "东风谷早苗",
+  "Cards": "卡图",
+  "TH_SANAE-NSFW_CARD_ART.title": "NSFW卡图",
+  "TH_SANAE-NSFW_CARD_ART.hover.desc": "开启后，ILikeIt、SanaeMilk、SanaeMilky 会优先读取 NSFW 卡图；其他卡牌仍使用默认卡图。"
+}

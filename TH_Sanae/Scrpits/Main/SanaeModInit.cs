@@ -1,3 +1,4 @@
+using BaseLib.Config;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
@@ -25,6 +26,7 @@ namespace TH_Sanae.Scripts.Main
 	public static void Init()
 	{
 		 TryRegisterGodotScriptAssembly();
+		ModConfigRegistry.Register("TH_Sanae", new SanaeModConfig());
 		_harmony = new Harmony("TH_Sanae");
 		_harmony.PatchAll();
 		Log.Debug("Sanae mod has been loaded successfully");

@@ -23,7 +23,11 @@ namespace TH_Sanae.Scripts.Main
 
 		protected virtual bool ShouldGlowGreenInternal => false;
 
-		public override string PortraitPath => $"res://TH_Sanae/ArtWorks/Cards/{GetType().Name}.png";
+		public virtual string DefaultPortraitPath => $"res://TH_Sanae/ArtWorks/Cards/{GetType().Name}.png";
+
+		public virtual string NSFWPath => DefaultPortraitPath;
+
+		public override string PortraitPath => SanaeModConfig.NsfwCardArt ? NSFWPath : DefaultPortraitPath;
 
 		protected override bool IsPlayable
 		{

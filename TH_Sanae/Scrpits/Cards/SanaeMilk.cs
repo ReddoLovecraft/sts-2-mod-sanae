@@ -21,6 +21,8 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(StatusCardPool))]
 	public sealed class SanaeMilk : SanaeCardModel
 	{
+		public override string NSFWPath => $"res://TH_Sanae/ArtWorks/Cards/NSFW/{GetType().Name}.png";
+
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Ethereal];
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(1),new CardsVar(4)];
 

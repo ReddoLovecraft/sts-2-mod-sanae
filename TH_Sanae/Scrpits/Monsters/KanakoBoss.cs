@@ -100,11 +100,11 @@ public sealed class KanakoBoss : CustomMonsterModel
 	private bool IsBelowHalfHealth() =>
 		Creature != null && Creature.CurrentHp < Creature.MaxHp / 2m;
 
-	private bool HasFreeOnbashiraSlot() => GetAvailableOnbashiraSlots().Count > 0;
+	private int RemainingOnbashiraCapacity => int.Max(0, MaxOnbashiraCount - AliveOnbashiraCount);
 
 	private bool ShouldUseSummon()
 	{
-		if (_lastMoveWasSummon || !HasFreeOnbashiraSlot())
+		if (_lastMoveWasSummon || RemainingOnbashiraCapacity <= 0)
 		{
 			return false;
 		}
@@ -115,18 +115,6 @@ public sealed class KanakoBoss : CustomMonsterModel
 		}
 
 		return AliveOnbashiraCount < MaxOnbashiraCount && _turnsSinceSummon >= SummonCooldownTurns;
-	}
-
-	private List<string> GetAvailableOnbashiraSlots()
-	{
-		HashSet<string> occupiedSlots = Creature?.CombatState?.Enemies
-			.Where(enemy => enemy.IsAlive && enemy.SlotName != null)
-			.Select(enemy => enemy.SlotName!)
-			.ToHashSet() ?? [];
-
-		return KanakoAndOnbashiraEventEncounter.OnbashiraSlots
-			.Where(slot => !occupiedSlots.Contains(slot))
-			.ToList();
 	}
 
 	private void AdvanceCycle()
@@ -159,9 +147,10 @@ public sealed class KanakoBoss : CustomMonsterModel
 		_turnsSinceSummon = 0;
 		await CreatureCmd.TriggerAnim(Creature, "Summon", 0.35f);
 
-		foreach (string slot in GetAvailableOnbashiraSlots().Take(SummonBatchSize))
+		int summonCount = int.Min(SummonBatchSize, RemainingOnbashiraCapacity);
+		for (int i = 0; i < summonCount; i++)
 		{
-			Creature onbashira = await CreatureCmd.Add<OnbashiraMinion>(CombatState, slot);
+			Creature onbashira = await CreatureCmd.Add(ModelDb.Monster<OnbashiraMinion>().ToMutable(), CombatState, Creature.Side, null);
 			await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), onbashira, 1m, Creature, null);
 		}
 	}

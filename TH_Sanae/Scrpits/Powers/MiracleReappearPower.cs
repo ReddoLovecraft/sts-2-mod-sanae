@@ -24,6 +24,8 @@ public sealed class MiracleReappearPower : SanaePowerModel, IMiracleTriggeredLis
 		public override PowerType Type => PowerType.Buff;
 
 		public override PowerStackType StackType => PowerStackType.Counter;
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/MRP32.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/MRP64.png";
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardModifier.MiracleKeyword)];
 

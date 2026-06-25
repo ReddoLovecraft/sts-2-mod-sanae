@@ -15,8 +15,8 @@ namespace TH_Sanae.Scripts.Powers
 
 		public override PowerStackType StackType => PowerStackType.Counter;
 
-		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/FSM32.png";
-		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/FSM64.png";
+		public override string? CustomPackedIconPath => "res://TH_Sanae/ArtWorks/Powers/FP232.png";
+		public override string? CustomBigIconPath => "res://TH_Sanae/ArtWorks/Powers/FP264.png";
 
 		public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{

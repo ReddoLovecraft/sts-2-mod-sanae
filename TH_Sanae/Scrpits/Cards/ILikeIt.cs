@@ -17,6 +17,8 @@ namespace TH_Sanae.Scrpits.Cards
 	[Pool(typeof(SanaeCardPool))]
 	public sealed class ILikeIt : SanaeCardModel
 	{
+		public override string NSFWPath => $"res://TH_Sanae/ArtWorks/Cards/NSFW/{GetType().Name}.png";
+
 		public override bool GainsBlock => true;
 
 		protected override bool ShouldGlowGoldInternal => HasPietyRequirementMet;

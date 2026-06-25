@@ -59,7 +59,7 @@
   "TH_SANAE-USE_GAIN_ENERGY_ALL_CARDS_POWER.title": "明日ハレの日、ケの昨日",
   "TH_SANAE-USE_GAIN_ENERGY_ALL_CARDS_POWER.description": "每打出一张卡牌，获得{Amount:energyIcons()}。",
   "TH_SANAE-USE_GAIN_ENERGY_ALL_CARDS_POWER.smartDescription": "每打出一张卡牌，获得{Amount:energyIcons()}。",
-  "TH_SANAE-CLEAN_UP_POWER.title": "净化",
+  "TH_SANAE-CLEAN_UP_POWER.title": "净明正直",
   "TH_SANAE-CLEAN_UP_POWER.description": "每当你抽到[gold]状态[/gold]牌时，将其[gold]消耗[/gold]并抽{Amount}张牌。",
   "TH_SANAE-CLEAN_UP_POWER.smartDescription": "每当你抽到[gold]状态[/gold]牌时，将其[gold]消耗[/gold]并抽[blue]{Amount}[/blue]张牌。",
   "TH_SANAE-BOMB_ALL_POWER.title": "神风特攻队",

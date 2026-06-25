@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -18,13 +19,11 @@ namespace TH_Sanae.Scripts.Monsters;
 
 public sealed class OnbashiraMinion : CustomMonsterModel
 {
-	private int InitialHp => OwnerAscension >= 9 ? 88 : 66;
-	private int AttackDamage => OwnerAscension >= 2 ? 6 : 4;
-	private int StrengthGain => OwnerAscension >= 17 ? 4 : 2;
+	private int InitialHp => AscensionHelper.GetValueIfAscension(AscensionLevel.ToughEnemies, 88, 66);
+	private int AttackDamage => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 6, 4);
+	private int StrengthGain => AscensionHelper.GetValueIfAscension(AscensionLevel.DeadlyEnemies, 4, 2);
 
 	private int _attackHits = 1;
-
-	private int OwnerAscension => Creature?.CombatState?.Players.FirstOrDefault()?.RunState.AscensionLevel ?? 0;
 
 	public override LocString Title => MonsterModel.L10NMonsterLookup(GetType().Name + ".name");
 
