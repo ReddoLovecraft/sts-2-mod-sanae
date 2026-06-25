@@ -1,19 +1,19 @@
 {
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-0.ancient": "Oh? You are neither truly alive nor a dead spirit. What an interesting way to exist... Would you mind if I studied you?",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-0.next": "Continue",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-1.char": "As if I'd allow that. Anyway, take this!",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-1.next": "Take this!",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-2.ancient": "...Sigh, then... see you next time!",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-0.char": "Follow Moriya Shrine, nya!\nFollow Moriya Shrine, thank you nya!",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-0.next": "Continue",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-1.ancient": "What are you doing now... you... living god girl?",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-1.next": "Continue",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-2.char": "Proselytizing, of course! Even in the Spire, I must find ways to bring more worshippers to Moriya Shrine!",
 
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-0r.char": "Who are you?",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-0r.next": "Continue",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-1r.ancient": "We just met a moment ago. Did you forget so soon?",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-1r.next": "Take this!",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-2r.char": "If you won't talk, I'll just cut you down first!",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-0r.char": "So, you're the mastermind behind this incident?",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-0r.next": "Continue",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-1r.ancient": "Incident? I don't know what you're talking about...",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-1r.next": "Attack!",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-2r.ancient": "Sigh, such a rash young girl... Come see me again next time!",
 
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-0.ancient": "You seem no ordinary person. How about...",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-0.next": "Interrupt",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-1.char": "I'll just cut you down first!",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-1.next": "Take this!",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-2.ancient": "Sigh... This is impossible to communicate with..."
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.ancient": "Another young human girl? What brings you to this Spire?",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.next": "Continue",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.char": "I'm not just human—I'm a living god! As for why I'm here, Lady Suwako and Lady Kanako said they wanted me to come here for training.",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.next": "Continue",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "I feel like more and more people have been coming to this Spire lately... Don't just let anyone in here!"
 }

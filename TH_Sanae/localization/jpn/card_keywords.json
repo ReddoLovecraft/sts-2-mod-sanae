@@ -1,4 +1,12 @@
 {
-    "TH_YOUMU-GUARD.description": "このキーワードを持つカードは、あなたが攻撃された時に自動的に攻撃者に対して使用される。",
-    "TH_YOUMU-GUARD.title": "当身技"
+    "TH_SANAE-DRAW.description": "このキーワードを持つカードは、引かれた時に基礎数値が引いたおみくじの結果に応じて変化する。\n[gold]大吉[/gold]：数値が2倍になる\n[green]吉[/green]：数値が変わらない\n[red]凶[/red]：数値が半分になる\n[purple]大凶[/purple]：数値が0になる",
+    "TH_SANAE-DRAW.title": "おみくじ",
+    "TH_SANAE-DRAW_GREAT_LUCK.title": "おみくじ・大吉",
+    "TH_SANAE-DRAW_LUCK.title": "おみくじ・吉",
+    "TH_SANAE-DRAW_BAD_LUCK.title": "おみくじ・凶",
+    "TH_SANAE-DRAW_GREAT_CURSE.title": "おみくじ・大凶",
+    "TH_SANAE-WIND_STEP.description": "このキーワードを持つカードは、自身が[gold]風起[/gold]状態の時のみプレイできる。",
+    "TH_SANAE-WIND_STEP.title": "風行",
+    "TH_SANAE-MIRACLE.description": "このキーワードを持つカードは、引かれた時にその基礎コストに等しいエネルギーを得る確率がある。",
+    "TH_SANAE-MIRACLE.title": "奇跡"
 }

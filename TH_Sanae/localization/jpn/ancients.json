@@ -1,19 +1,19 @@
 {
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-0.ancient": "おや？君は生者でもなければ、死霊でもない。実に興味深い存在だ…研究させてもらっても構わないか？",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-0.next": "続ける",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-1.char": "そんなことできるわけないだろ。とにかく一太刀受けよ！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-1.next": "受けよ！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.1-2.ancient": "……はあ、では……また会おう！",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-0.char": "守矢神社をフォローしてニャ！\n守矢神社をフォローしてくれてありがとうニャ！",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-0.next": "次へ",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-1.ancient": "お前はまた何を…現…神人少女よ？",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-1.next": "次へ",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.1-2.char": "もちろん布教よ！塔の中でも守矢神社の信仰を集める方法を考えるわ！",
 
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-0r.char": "あなたは誰だ？",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-0r.next": "続ける",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-1r.ancient": "さっき会ったばかりだろう。もう忘れたのか？",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-1r.next": "受けよ！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.2-2r.char": "言わないなら、先に斬ってしまうまでだ！",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-0r.char": "つまり、あなたがこの異変の黒幕ってわけ？",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-0r.next": "次へ",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-1r.ancient": "異変？何のことを言っているのか…",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-1r.next": "戦闘開始！",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.2-2r.ancient": "はぁ、向こう見ずな少女よ…また来い！",
 
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-0.ancient": "どうやら君は並々ならぬ者のようだ？ いっそ…",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-0.next": "遮る",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-1.char": "とにかくまずは斬る！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-1.next": "受けよ！",
-  "THE_ARCHITECT.talk.TH_YOUMU-YOUMU_CHARACTER.0-2.ancient": "あああ……これでは話が通じないな……"
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.ancient": "また人間の少女か？この塔に何を求めて来た？",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.next": "次へ",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.char": "私はただの人間じゃないわよ、現人神よ！何でここに来たかって、諏訪子様と神奈子様が修行しろって言ったからよ。",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.next": "次へ",
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "最近この塔に来る者が増えた気がする…誰でも来ていい場所じゃないんだぞ！"
 }

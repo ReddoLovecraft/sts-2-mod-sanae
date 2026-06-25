@@ -1,4 +1,12 @@
 {
-    "TH_YOUMU-GUARD.description": "Cards with this keyword will be automatically played against the attacker when you are attacked.",
-    "TH_YOUMU-GUARD.title": "Counter"
+  "TH_SANAE-DRAW.description": "Cards with this keyword have their base values changed when drawn, based on the fortune drawn.\n[gold]Great Luck[/gold]: Double the values\n[green]Luck[/green]: No change\n[red]Bad Luck[/gold]: Halve the values\n[purple]Great Curse[/purple]: Values become 0",
+  "TH_SANAE-DRAW.title": "Fortune Draw",
+  "TH_SANAE-DRAW_GREAT_LUCK.title": "Fortune Draw · Great Luck",
+  "TH_SANAE-DRAW_LUCK.title": "Fortune Draw · Luck",
+  "TH_SANAE-DRAW_BAD_LUCK.title": "Fortune Draw · Bad Luck",
+  "TH_SANAE-DRAW_GREAT_CURSE.title": "Fortune Draw · Great Curse",
+  "TH_SANAE-WIND_STEP.description": "Cards with this keyword can only be played while you are in [gold]Wind Rising[/gold].",
+  "TH_SANAE-WIND_STEP.title": "Wind Step",
+  "TH_SANAE-MIRACLE.description": "Cards with this keyword have a chance to grant Energy equal to their base cost when drawn.",
+  "TH_SANAE-MIRACLE.title": "Miracle"
 }

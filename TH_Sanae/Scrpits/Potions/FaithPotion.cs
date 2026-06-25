@@ -21,7 +21,7 @@ namespace TH_Sanae.Scripts.Potions
 	{
 		private const string AmountVarKey = "Amount";
 
-		public override PotionRarity Rarity => PotionRarity.Uncommon;
+		public override PotionRarity Rarity => PotionRarity.Rare;
 
 		public override PotionUsage Usage => PotionUsage.CombatOnly;
 

@@ -22,7 +22,7 @@ namespace TH_Sanae.Scripts.Main
 		public override Color RemoteTargetingLineColor => new Color("00bd16ff");
 		public override Color RemoteTargetingLineOutline => new Color("3b9000ff");
 		public override CharacterGender Gender => CharacterGender.Feminine;
-		public override int StartingHp => 99;
+		public override int StartingHp => 70;
 		public override string CustomVisualPath => "res://TH_Sanae/ArtWorks/Character/sanae.tscn";
 		public override string CustomTrailPath => "res://TH_Sanae/ArtWorks/VFX/SanaeCardTrail.tscn";
 		public override string CustomIconTexturePath => "res://TH_Sanae/ArtWorks/Character/sanae_icon.png";
