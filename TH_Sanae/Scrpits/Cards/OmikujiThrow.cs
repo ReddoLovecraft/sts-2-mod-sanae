@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BaseLib.Utils;
 using Godot;
@@ -20,9 +20,10 @@ using TH_Sanae.Scripts.Patches;
 namespace TH_Sanae.Scrpits.Cards
 {
 	[Pool(typeof(SanaeCardPool))]
-	public sealed class OmikujiThrow : SanaeCardModel
+	public sealed class OmikujiThrow : SanaeCardModel, IResolvedDrawResultCard
 	{
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardModifier.DrawKeyword];
+		DrawResultType? IResolvedDrawResultCard.ResolvedDrawResult { get; set; }
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(3, ValueProp.Move), new CardsVar(3)];
 
 		public OmikujiThrow() : base(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)

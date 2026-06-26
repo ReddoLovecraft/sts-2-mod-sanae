@@ -23,9 +23,10 @@ using TH_Sanae.Scripts.Powers;
 namespace TH_Sanae.Scrpits.Cards
 {
 	[Pool(typeof(SanaeCardPool))]
-	public sealed class OmikujiBomb : SanaeCardModel
+	public sealed class OmikujiBomb : SanaeCardModel, IResolvedDrawResultCard
 	{
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardModifier.DrawKeyword];
+		DrawResultType? IResolvedDrawResultCard.ResolvedDrawResult { get; set; }
 
 		protected override bool ShouldGlowGoldInternal => CardKeywordAfterDrawPatch.GetResolvedDrawResult(this) == DrawResultType.GreatLuck;
 
@@ -52,6 +53,9 @@ namespace TH_Sanae.Scrpits.Cards
 				if (attackerNode != null)
 				{
 					List<Creature> targets = [Owner.Creature];
+					targets.AddRange(CombatState.Players
+						.Where(player => player != Owner && player.Creature.IsAlive)
+						.Select(player => player.Creature));
 					targets.AddRange(CombatState.HittableEnemies.ToList());
 					foreach (Creature target in targets)
 					{
@@ -82,6 +86,14 @@ namespace TH_Sanae.Scrpits.Cards
 			{
 				await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.Damage.BaseValue, MegaCrit.Sts2.Core.ValueProps.ValueProp.Unpowered, Owner.Creature, this);
 			}
+
+			foreach (Creature teammate in CombatState.Players
+				.Where(player => player != Owner && player.Creature.IsAlive)
+				.Select(player => player.Creature))
+			{
+				await CreatureCmd.Damage(choiceContext, teammate, DynamicVars.Damage.BaseValue, MegaCrit.Sts2.Core.ValueProps.ValueProp.Unpowered, Owner.Creature, this);
+			}
+
 			await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
 				.FromCard(this)
 				.WithHitFx(null)

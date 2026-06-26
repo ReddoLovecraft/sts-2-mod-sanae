@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchoulib.Scrpits.Main;
 using Patchouib.Scrpits.Main;
+using TH_Sanae.Scripts.Multiplayer;
 using TH_Sanae.Scripts.Powers;
 
 namespace TH_Sanae.Scripts.Main
@@ -130,9 +131,7 @@ namespace TH_Sanae.Scripts.Main
 					hpLoss = YC_count;
 				}
 
-				await CreatureCmd.Damage(context,Owner.Creature,new DamageVar(hpLoss,ValueProp.Unpowered|ValueProp.Unblockable),this);
-				ToolBox.UpgradeCard(this);
-				this.NotYC=true;
+				await YCRightClickSync.DoLocalAndSync(Owner, this, context, hpLoss);
 			}
            
         }

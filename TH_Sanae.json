@@ -2,8 +2,8 @@
   "id": "TH_Sanae",
   "name": "东风谷早苗",
   "author": "Reddo",
-  "description": "加入了来自东方Project的角色，奇迹的现人神，东风谷早苗。",
-  "version": "1.0.4",
+  "description": "增加了一个来自东方Project的新角色，奇迹的现人神，东风谷早苗。\n拥有101张角色卡牌(含多人游戏卡牌与先古牌)，9件新事件、20件新遗物和4瓶新药水。",
+  "version": "1.0.5",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [

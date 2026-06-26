@@ -4,10 +4,17 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using HarmonyLib;
+using Godot;
+using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.UI;
+using MegaCrit.Sts2.Core.Nodes.Cards;
+using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -30,6 +37,11 @@ namespace TH_Sanae.Scripts.Patches
 		GreatCurse
 	}
 
+	internal interface IResolvedDrawResultCard
+	{
+		DrawResultType? ResolvedDrawResult { get; set; }
+	}
+
 	[HarmonyPatch(typeof(Hook), nameof(Hook.AfterCardDrawn))]
 	public static class CardKeywordAfterDrawPatch
 	{
@@ -38,7 +50,8 @@ namespace TH_Sanae.Scripts.Patches
 			public DrawResultType Result;
 		}
 
-		private static readonly ConditionalWeakTable<CardModel, DrawResultHolder> DrawResults = new();
+		private static ConditionalWeakTable<CardModel, DrawResultHolder> DrawResults = new();
+		private static readonly Dictionary<uint, DrawResultType> MultiplayerDrawResults = new();
 
 		public static void Postfix(ref Task __result, PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
 		{
@@ -68,8 +81,7 @@ namespace TH_Sanae.Scripts.Patches
 		private static void ApplyDrawKeyword(CardModel card)
 		{
 			DrawResultType result = RollDrawResult(card);
-			DrawResults.Remove(card);
-			DrawResults.Add(card, new DrawResultHolder { Result = result });
+			StoreResolvedDrawResult(card, result);
 			CardModel referenceCard = CreateReferenceCard(card);
 
 			ApplyVarIfPresent(card, card.DynamicVars, referenceCard.DynamicVars, "Cards", result);
@@ -85,6 +97,67 @@ namespace TH_Sanae.Scripts.Patches
 			}
 
 			card.DynamicVars.RecalculateForUpgradeOrEnchant();
+			RefreshDrawKeywordCardVisuals(card);
+		}
+
+		private static void RefreshDrawKeywordCardVisuals(CardModel card)
+		{
+			PileType? pileType = card.Pile?.Type;
+			NCard? nCard = pileType != null ? NCard.FindOnTable(card, pileType) : null;
+			if (nCard == null && TryGetTrackedCardId(ResolveTrackedCard(card), out uint trackedId))
+			{
+				NCombatUi? ui = NCombatRoom.Instance?.Ui;
+				if (ui != null)
+				{
+					nCard = FindCardNodeByTrackedId(ui, trackedId);
+				}
+			}
+
+			if (nCard == null)
+			{
+				return;
+			}
+
+			PileType displayingPile = nCard.DisplayingPile;
+			CardModel? model = nCard.Model;
+			MegaCrit.Sts2.Core.Entities.UI.ModelVisibility visibility = nCard.Visibility;
+			nCard.Model = null;
+			nCard.Visibility = visibility;
+			nCard.Model = model ?? card;
+			nCard.UpdateVisuals(displayingPile, CardPreviewMode.Normal);
+		}
+
+		private static NCard? FindCardNodeByTrackedId(NCombatUi ui, uint trackedId)
+		{
+			foreach (NHandCardHolder holder in ui.Hand.ActiveHolders)
+			{
+				NCard? node = holder.CardNode;
+				CardModel? model = node?.Model;
+				if (model != null && TryGetTrackedCardId(ResolveTrackedCard(model), out uint id) && id == trackedId)
+				{
+					return node;
+				}
+			}
+
+			foreach (NCard node in ui.PlayContainer.GetChildren().OfType<NCard>())
+			{
+				CardModel? model = node.Model;
+				if (model != null && TryGetTrackedCardId(ResolveTrackedCard(model), out uint id) && id == trackedId)
+				{
+					return node;
+				}
+			}
+
+			foreach (NCard node in ui.PlayQueue.GetChildren().OfType<NCard>())
+			{
+				CardModel? model = node.Model;
+				if (model != null && TryGetTrackedCardId(ResolveTrackedCard(model), out uint id) && id == trackedId)
+				{
+					return node;
+				}
+			}
+
+			return null;
 		}
 
 		private static async Task ApplyMiracleKeyword(PlayerChoiceContext choiceContext, CardModel card)
@@ -168,7 +241,18 @@ namespace TH_Sanae.Scripts.Patches
 
 		internal static DrawResultType GetResolvedDrawResult(CardModel card)
 		{
-			return DrawResults.TryGetValue(card, out DrawResultHolder? holder) ? holder.Result : InferDrawResult(card);
+			return TryGetStoredDrawResult(card, out DrawResultType result) ? result : InferDrawResult(card);
+		}
+
+		internal static bool HasStoredDrawResult(CardModel card)
+		{
+			return TryGetStoredDrawResult(card, out _);
+		}
+
+		internal static void ClearStoredDrawResults()
+		{
+			DrawResults = new ConditionalWeakTable<CardModel, DrawResultHolder>();
+			MultiplayerDrawResults.Clear();
 		}
 
 		private static IEnumerable<(DynamicVar currentVar, DynamicVar referenceVar)> GetTrackedVars(CardModel card, CardModel referenceCard)
@@ -216,6 +300,133 @@ namespace TH_Sanae.Scripts.Patches
 
 			return null;
 		}
+
+		internal static void StoreResolvedDrawResult(CardModel card, DrawResultType result)
+		{
+			CardModel resolvedCard = ResolveTrackedCard(card);
+			StoreResolvedDrawResultOnCard(card, result);
+			if (!ReferenceEquals(resolvedCard, card))
+			{
+				StoreResolvedDrawResultOnCard(resolvedCard, result);
+			}
+
+			DrawResults.Remove(resolvedCard);
+			DrawResults.Add(resolvedCard, new DrawResultHolder { Result = result });
+
+			if (TryGetTrackedCardId(card, out uint cardId) || TryGetTrackedCardId(resolvedCard, out cardId))
+			{
+				MultiplayerDrawResults[cardId] = result;
+			}
+		}
+
+		private static bool TryGetStoredDrawResult(CardModel card, out DrawResultType result)
+		{
+			CardModel resolvedCard = ResolveTrackedCard(card);
+			if (TryGetStoredDrawResultFromCard(card, out result) || (!ReferenceEquals(resolvedCard, card) && TryGetStoredDrawResultFromCard(resolvedCard, out result)))
+			{
+				return true;
+			}
+
+			if (DrawResults.TryGetValue(resolvedCard, out DrawResultHolder? holder))
+			{
+				result = holder.Result;
+				return true;
+			}
+
+			if ((TryGetTrackedCardId(card, out uint cardId) || TryGetTrackedCardId(resolvedCard, out cardId))
+				&& MultiplayerDrawResults.TryGetValue(cardId, out result))
+			{
+				return true;
+			}
+
+			result = default;
+			return false;
+		}
+
+		private static void StoreResolvedDrawResultOnCard(CardModel card, DrawResultType result)
+		{
+			if (card is IResolvedDrawResultCard resolvedDrawResultCard)
+			{
+				resolvedDrawResultCard.ResolvedDrawResult = result;
+			}
+		}
+
+		private static bool TryGetStoredDrawResultFromCard(CardModel card, out DrawResultType result)
+		{
+			if (card is IResolvedDrawResultCard { ResolvedDrawResult: DrawResultType resolvedResult })
+			{
+				result = resolvedResult;
+				return true;
+			}
+
+			result = default;
+			return false;
+		}
+
+		internal static CardModel ResolveTrackedCard(CardModel card)
+		{
+			HashSet<CardModel> visited = new(ReferenceEqualityComparer.Instance);
+			CardModel current = card;
+			while (current.CloneOf != null && visited.Add(current))
+			{
+				current = current.CloneOf;
+			}
+
+			return current;
+		}
+
+		internal static bool TryGetTrackedCardId(CardModel card, out uint cardId)
+		{
+			if (card.IsInCombat && NetCombatCardDb.Instance.TryGetCardId(card, out cardId))
+			{
+				return true;
+			}
+
+			cardId = 0;
+			return false;
+		}
+
+		private sealed class ReferenceEqualityComparer : IEqualityComparer<CardModel>
+		{
+			internal static readonly ReferenceEqualityComparer Instance = new();
+
+			public bool Equals(CardModel? x, CardModel? y)
+			{
+				return ReferenceEquals(x, y);
+			}
+
+			public int GetHashCode(CardModel obj)
+			{
+				return RuntimeHelpers.GetHashCode(obj);
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(NetCombatCardDb), nameof(NetCombatCardDb.StartCombat))]
+	public static class DrawKeywordNetCombatCardDbStartPatch
+	{
+		public static void Prefix()
+		{
+			CardKeywordAfterDrawPatch.ClearStoredDrawResults();
+		}
+	}
+
+	[HarmonyPatch(typeof(NetCombatCardDb), "OnCombatEnded")]
+	public static class DrawKeywordNetCombatCardDbEndPatch
+	{
+		public static void Prefix()
+		{
+			CardKeywordAfterDrawPatch.ClearStoredDrawResults();
+		}
+	}
+
+	[HarmonyPatch(typeof(NetCombatCardDb), nameof(NetCombatCardDb.ClearCardsForTesting))]
+	public static class DrawKeywordNetCombatCardDbClearPatch
+	{
+		public static void Prefix()
+		{
+			CardKeywordAfterDrawPatch.ClearStoredDrawResults();
+		}
 	}
 
 	[HarmonyPatch(typeof(CardModel), "get_HoverTips")]
@@ -228,57 +439,142 @@ namespace TH_Sanae.Scripts.Patches
 	}
 
 	[HarmonyPatch(typeof(CardModel), nameof(CardModel.GetDescriptionForPile), [typeof(PileType), typeof(MegaCrit.Sts2.Core.Entities.Creatures.Creature)])]
+	[HarmonyPriority(Priority.Last)]
 	public static class DrawKeywordDescriptionPatch
 	{
-		public static void Postfix(CardModel __instance, ref string __result)
+		public static void Postfix(CardModel __instance, PileType pileType, MegaCrit.Sts2.Core.Entities.Creatures.Creature? target, ref string __result)
 		{
-			__result = DrawKeywordTextHelper.ReplaceDrawKeywordLine(__instance, __result);
+			__result = DrawKeywordTextHelper.ReplaceDrawKeywordLine(__instance, __result, pileType);
 		}
 	}
 
 	[HarmonyPatch(typeof(CardModel), nameof(CardModel.GetDescriptionForUpgradePreview))]
+	[HarmonyPriority(Priority.Last)]
 	public static class DrawKeywordUpgradePreviewDescriptionPatch
 	{
 		public static void Postfix(CardModel __instance, ref string __result)
 		{
-			__result = DrawKeywordTextHelper.ReplaceDrawKeywordLine(__instance, __result);
+			__result = DrawKeywordTextHelper.ReplaceDrawKeywordLine(__instance, __result, PileType.None);
+		}
+	}
+
+	[HarmonyPatch(typeof(NCard), nameof(NCard.UpdateVisuals))]
+	[HarmonyPriority(Priority.Last)]
+	public static class DrawKeywordNCardUpdateVisualsPatch
+	{
+		public static void Postfix(NCard __instance, PileType pileType, CardPreviewMode previewMode)
+		{
+			if (__instance.Visibility != ModelVisibility.Visible)
+			{
+				return;
+			}
+
+			CardModel? model = __instance.Model;
+			if (model == null || !model.Keywords.Contains(CardModifier.DrawKeyword))
+			{
+				return;
+			}
+
+			MegaRichTextLabel label = __instance.GetNode<MegaRichTextLabel>("%DescriptionLabel");
+			string current = label.Text;
+			string replaced = DrawKeywordTextHelper.ReplaceDrawKeywordLine(model, current, pileType);
+			if (!string.Equals(current, replaced, StringComparison.Ordinal))
+			{
+				label.SetTextAutoSize(replaced);
+			}
 		}
 	}
 
 	internal static class DrawKeywordTextHelper
 	{
-		internal static string ReplaceDrawKeywordLine(CardModel card, string description)
+		internal static string ReplaceDrawKeywordLine(CardModel card, string description, PileType displayingPile)
 		{
-			if (!card.Keywords.Contains(CardModifier.DrawKeyword) || !HasBeenDrawn(card))
+			if (!card.Keywords.Contains(CardModifier.DrawKeyword) || !ShouldReplaceDrawKeywordLine(card, displayingPile))
 			{
 				return description;
 			}
 
-			return description.Replace(GetDefaultDrawKeywordText(), GetResolvedDrawKeywordText(card), StringComparison.Ordinal);
+			string replaced = description.Replace(GetDefaultDrawKeywordText(), GetResolvedDrawKeywordText(card), StringComparison.Ordinal);
+			return replaced.Replace(GetDefaultDrawKeywordTag(), GetResolvedDrawKeywordTag(card), StringComparison.Ordinal);
 		}
 
 		private static string GetResolvedDrawKeywordText(CardModel card)
 		{
-			return CardKeywordAfterDrawPatch.GetResolvedDrawResult(card) switch
+			LocString period = ToolBox.L10NStatic("PERIOD", "card_keywords");
+			string suffix = period.Exists() ? period.GetRawText() : "。";
+			return $"{GetResolvedDrawKeywordTag(card)}{suffix}";
+		}
+
+		private static string GetResolvedDrawKeywordTag(CardModel card)
+		{
+			(string color, string key) = CardKeywordAfterDrawPatch.GetResolvedDrawResult(card) switch
 			{
-				DrawResultType.GreatLuck => "[gold]抽签·大吉[/gold]。",
-				DrawResultType.Luck => "[green]抽签·吉[/green]。",
-				DrawResultType.BadLuck => "[red]抽签·凶[/red]。",
-				DrawResultType.GreatCurse => "[purple]抽签·大凶[/purple]。",
-				_ => GetDefaultDrawKeywordText()
+				DrawResultType.GreatLuck => ("gold", "TH_SANAE-DRAW_GREAT_LUCK.title"),
+				DrawResultType.Luck => ("green", "TH_SANAE-DRAW_LUCK.title"),
+				DrawResultType.BadLuck => ("red", "TH_SANAE-DRAW_BAD_LUCK.title"),
+				DrawResultType.GreatCurse => ("purple", "TH_SANAE-DRAW_GREAT_CURSE.title"),
+				_ => ("gold", "TH_SANAE-DRAW.title")
 			};
+			string title = ToolBox.L10NStatic(key, "card_keywords").GetFormattedText();
+			return $"[{color}]{title}[/{color}]";
 		}
 
 		private static string GetDefaultDrawKeywordText()
 		{
 			LocString period = ToolBox.L10NStatic("PERIOD", "card_keywords");
 			string suffix = period.Exists() ? period.GetRawText() : "。";
-			return $"[gold]{ToolBox.L10NStatic("TH_SANAE-DRAW.title", "card_keywords").GetFormattedText()}[/gold]{suffix}";
+			return $"{GetDefaultDrawKeywordTag()}{suffix}";
+		}
+
+		private static string GetDefaultDrawKeywordTag()
+		{
+			return $"[gold]{ToolBox.L10NStatic("TH_SANAE-DRAW.title", "card_keywords").GetFormattedText()}[/gold]";
 		}
 
 		private static bool HasBeenDrawn(CardModel card)
 		{
-			return CombatManager.Instance.History.Entries.OfType<CardDrawnEntry>().Any(entry => entry.Card == card);
+			return CombatManager.Instance.History.Entries
+				.OfType<CardDrawnEntry>()
+				.Any(entry => IsSameTrackedCard(entry.Card, card));
+		}
+
+		private static bool HasResolvedDrawKeyword(CardModel card)
+		{
+			return CardKeywordAfterDrawPatch.HasStoredDrawResult(card) || HasBeenDrawn(card);
+		}
+
+		private static bool ShouldReplaceDrawKeywordLine(CardModel card, PileType displayingPile)
+		{
+			if (HasResolvedDrawKeyword(card))
+			{
+				return true;
+			}
+
+			if (!card.IsMutable || card.CombatState == null)
+			{
+				return false;
+			}
+
+			return displayingPile is PileType.Hand or PileType.Play;
+		}
+
+		private static bool IsSameTrackedCard(CardModel left, CardModel right)
+		{
+			if (ReferenceEquals(left, right))
+			{
+				return true;
+			}
+
+			CardModel resolvedLeft = CardKeywordAfterDrawPatch.ResolveTrackedCard(left);
+			CardModel resolvedRight = CardKeywordAfterDrawPatch.ResolveTrackedCard(right);
+			if (ReferenceEquals(resolvedLeft, resolvedRight))
+			{
+				return true;
+			}
+
+			return CardKeywordAfterDrawPatch.TryGetTrackedCardId(resolvedLeft, out uint leftId)
+				&& CardKeywordAfterDrawPatch.TryGetTrackedCardId(resolvedRight, out uint rightId)
+				&& leftId == rightId;
 		}
 	}
 }

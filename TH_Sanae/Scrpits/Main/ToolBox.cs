@@ -19,6 +19,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
@@ -342,6 +343,29 @@ namespace TH_Sanae.Scripts.Main
                     }
                     break;
             }
+
+            RefreshCardVisuals(card);
+        }
+
+        public static void RefreshCardVisuals(CardModel card)
+        {
+            PileType? pileType = card.Pile?.Type;
+            if (pileType == null)
+            {
+                return;
+            }
+
+            NCard? nCard = NCard.FindOnTable(card, pileType);
+            if (nCard == null)
+            {
+                return;
+            }
+
+            MegaCrit.Sts2.Core.Entities.UI.ModelVisibility visibility = nCard.Visibility;
+            nCard.Model = null;
+            nCard.Visibility = visibility;
+            nCard.Model = card;
+            nCard.UpdateVisuals(pileType.Value, CardPreviewMode.Normal);
         }
 
         public static CardPile? GetPile(Player player, PileType pileType)
@@ -366,6 +390,10 @@ namespace TH_Sanae.Scripts.Main
             }
 
             CardCmd.Upgrade(upgradableCards, style);
+            foreach (CardModel card in upgradableCards.Where(card => card.Pile != null))
+            {
+                RefreshCardVisuals(card);
+            }
             PlaySmithUpgradeVfx(upgradableCards);
         }
 

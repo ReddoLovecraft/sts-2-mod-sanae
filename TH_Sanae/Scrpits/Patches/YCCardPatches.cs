@@ -31,4 +31,16 @@ namespace TH_Sanae.Scripts.Patches
 			__result = ycCard.GetDescriptionForPile(PileType.None);
 		}
 	}
+
+	[HarmonyPatch(typeof(CardModel), "FinalizeUpgradeInternal")]
+	public static class YCCardFinalizeUpgradePatch
+	{
+		public static void Postfix(CardModel __instance)
+		{
+			if (__instance is YCCardModel ycCard && ycCard.Pile != null)
+			{
+				ToolBox.RefreshCardVisuals(ycCard);
+			}
+		}
+	}
 }
