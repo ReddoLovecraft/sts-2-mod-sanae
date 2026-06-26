@@ -1,0 +1,118 @@
+
+skeleton.png
+size: 1588,789
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Atk/Atk_0000_kanakoBa004.png
+  rotate: true
+  xy: 1051, 538
+  size: 249, 269
+  orig: 512, 512
+  offset: 104, 13
+  index: -1
+Atk/Atk_0001_kanakoBa003.png
+  rotate: true
+  xy: 557, 295
+  size: 254, 269
+  orig: 512, 512
+  offset: 104, 13
+  index: -1
+Atk/Atk_0002_kanakoBa002.png
+  rotate: false
+  xy: 1097, 2
+  size: 357, 271
+  orig: 512, 512
+  offset: 104, 11
+  index: -1
+Atk/Atk_0003_kanakoBa001.png
+  rotate: false
+  xy: 2, 34
+  size: 281, 264
+  orig: 512, 512
+  offset: 104, 18
+  index: -1
+Atk/Atk_0004_kanakoBa000.png
+  rotate: true
+  xy: 2, 569
+  size: 218, 257
+  orig: 512, 512
+  offset: 104, 25
+  index: -1
+Idle/Idle_0000_kanakoAa005.png
+  rotate: false
+  xy: 1122, 275
+  size: 297, 257
+  orig: 512, 512
+  offset: 108, 24
+  index: -1
+Idle/Idle_0001_kanakoAa004.png
+  rotate: false
+  xy: 828, 279
+  size: 292, 257
+  orig: 512, 512
+  offset: 110, 24
+  index: -1
+Idle/Idle_0002_kanakoAa003.png
+  rotate: false
+  xy: 260, 300
+  size: 295, 249
+  orig: 512, 512
+  offset: 109, 32
+  index: -1
+Idle/Idle_0003_kanakoAa002.png
+  rotate: true
+  xy: 285, 33
+  size: 265, 268
+  orig: 512, 512
+  offset: 124, 13
+  index: -1
+Idle/Idle_0004_kanakoAa001.png
+  rotate: false
+  xy: 825, 9
+  size: 270, 268
+  orig: 512, 512
+  offset: 121, 13
+  index: -1
+Idle/Idle_0005_kanakoAa000.png
+  rotate: false
+  xy: 555, 28
+  size: 268, 265
+  orig: 512, 512
+  offset: 127, 16
+  index: -1
+Summon/Summon_0000_kanakoCa004.png
+  rotate: true
+  xy: 785, 551
+  size: 236, 264
+  orig: 512, 512
+  offset: 144, 17
+  index: -1
+Summon/Summon_0001_kanakoCa003.png
+  rotate: true
+  xy: 1322, 534
+  size: 253, 264
+  orig: 512, 512
+  offset: 135, 17
+  index: -1
+Summon/Summon_0002_kanakoCa002.png
+  rotate: true
+  xy: 261, 551
+  size: 236, 264
+  orig: 512, 512
+  offset: 144, 17
+  index: -1
+Summon/Summon_0003_kanakoCa001.png
+  rotate: true
+  xy: 2, 314
+  size: 253, 256
+  orig: 512, 512
+  offset: 135, 25
+  index: -1
+Summon/Summon_0004_kanakoCa000.png
+  rotate: true
+  xy: 527, 551
+  size: 236, 256
+  orig: 512, 512
+  offset: 144, 25
+  index: -1

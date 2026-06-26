@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -36,11 +38,52 @@ public sealed class SuwakoBoss : CustomMonsterModel
 
 	public override LocString Title => MonsterModel.L10NMonsterLookup(GetType().Name + ".name");
 
-	protected override string VisualsPath => SceneHelper.GetScenePath("creature_visuals/defect");
+	protected override string VisualsPath => "res://TH_Sanae/ArtWorks/Character/suwako.tscn";
 
 	public override int MinInitialHp => InitialHp;
 
 	public override int MaxInitialHp => InitialHp;
+
+	public override CreatureAnimator GenerateAnimator(MegaSprite controller)
+	{
+		string idle = PickAnim(controller, "Idle", "idle_loop", "idle");
+		string defend = PickAnim(controller, "Defend", "cast", "Cast");
+		string atk = PickAnim(controller, "Atk", "attack", "Attack");
+		string atk2 = PickAnim(controller, "Atk2", "attack2", "Attack2");
+		string hit = PickAnim(controller, "OnHit", "hurt", "Hit");
+		string dead = PickAnim(controller, "die", "Dead");
+
+		AnimState idleState = new AnimState(idle, isLooping: true);
+		AnimState defendState = new AnimState(defend) { NextState = idleState };
+		AnimState atkState = new AnimState(atk) { NextState = idleState };
+		AnimState atk2State = new AnimState(atk2) { NextState = idleState };
+		AnimState hitState = new AnimState(hit) { NextState = idleState };
+		AnimState deadState = new AnimState(dead);
+
+		CreatureAnimator animator = new CreatureAnimator(idleState, controller);
+		animator.AddAnyState("Idle", idleState);
+		animator.AddAnyState("Defend", defendState);
+		animator.AddAnyState("Atk", atkState);
+		animator.AddAnyState("Attack", atkState);
+		animator.AddAnyState("Atk2", atk2State);
+		animator.AddAnyState("Hit", hitState);
+		animator.AddAnyState("OnHit", hitState);
+		animator.AddAnyState("Dead", deadState);
+		return animator;
+	}
+
+	private static string PickAnim(MegaSprite controller, params string[] candidates)
+	{
+		foreach (string candidate in candidates)
+		{
+			if (controller.HasAnimation(candidate))
+			{
+				return candidate;
+			}
+		}
+
+		return candidates[0];
+	}
 
 	public override async Task BeforeCombatStart()
 	{
@@ -59,7 +102,7 @@ public sealed class SuwakoBoss : CustomMonsterModel
 		List<MonsterState> states = [];
 		MoveState divineIronRing = new("DIVINE_IRON_RING", DivineIronRingMove, new SingleAttackIntent(HeavyDamage), new BuffIntent());
 		MoveState curseWheel = new("CURSE_WHEEL", CurseWheelMove, new MultiAttackIntent(MultiDamage, CurseWheelHits), new DebuffIntent(), new StatusIntent(CurseWheelStatusCount));
-		MoveState calamity = new("CALAMITY", CalamityMove, new DebuffIntent());
+		MoveState calamity = new("CALAMITY", CalamityMove, new CardDebuffIntent());
 		MoveState recover = new("RECOVER", RecoverMove, new DefendIntent(), new BuffIntent());
 		MoveState voidGuard = new("VOID_GUARD", VoidGuardMove, new DefendIntent(), new StatusIntent(VoidGuardVoidCount));
 		MoveState tripleSlash = new("TRIPLE_SLASH", TripleSlashMove, new MultiAttackIntent(MultiDamage, CurseWheelHits));
@@ -73,21 +116,20 @@ public sealed class SuwakoBoss : CustomMonsterModel
 			states.Add(state);
 		}
 
-		chooser.AddState(emergencyBlessing, () => !HasOnceArmour() && !_lastMoveWasEmergencyBlessing);
-		chooser.AddState(divineIronRing, () => !HasOnceArmour() && !HasIntangible());
-		chooser.AddState(voidGuard, () => !HasOnceArmour() && HasIntangible());
+		chooser.AddState(emergencyBlessing, () => !HasOnceArmour() && !_lastMoveWasEmergencyBlessing && !WouldRepeatIntent(emergencyBlessing.Id));
+		chooser.AddState(divineIronRing, () => !HasOnceArmour() && !HasIntangible() && !WouldRepeatIntent(divineIronRing.Id));
+		chooser.AddState(voidGuard, () => !HasOnceArmour() && HasIntangible() && !WouldRepeatIntent(voidGuard.Id));
 		chooser.AddState(omikujiBranch, HasOnceArmour);
 
-		omikujiBranch.AddBranch(divineIronRing, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(10f));
-		omikujiBranch.AddBranch(curseWheel, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(10f));
-		omikujiBranch.AddBranch(calamity, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(12f));
-		omikujiBranch.AddBranch(voidGuard, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(12f));
-		omikujiBranch.AddBranch(recover, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(21f));
-		omikujiBranch.AddBranch(tripleSlash, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(35f, forceWhenAlwaysGoodLuck: true));
+		omikujiBranch.AddBranch(divineIronRing, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(10f, divineIronRing.Id));
+		omikujiBranch.AddBranch(curseWheel, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(10f, curseWheel.Id));
+		omikujiBranch.AddBranch(voidGuard, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(12f, voidGuard.Id));
+		omikujiBranch.AddBranch(recover, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(21f, recover.Id));
+		omikujiBranch.AddBranch(tripleSlash, MoveRepeatType.CanRepeatForever, GetOmikujiWeight(35f, tripleSlash.Id, forceWhenAlwaysGoodLuck: true));
 
 		states.Add(chooser);
 		states.Add(omikujiBranch);
-		return new MonsterMoveStateMachine(states, chooser);
+		return new MonsterMoveStateMachine(states, calamity);
 	}
 
 	private Creature? GetPlayerCreature()
@@ -99,10 +141,15 @@ public sealed class SuwakoBoss : CustomMonsterModel
 
 	private bool HasIntangible() => Creature?.HasPower<IntangiblePower>() == true;
 
-	private Func<float> GetOmikujiWeight(float baseWeight, bool forceWhenAlwaysGoodLuck = false)
+	private Func<float> GetOmikujiWeight(float baseWeight, string moveId, bool forceWhenAlwaysGoodLuck = false)
 	{
 		return () =>
 		{
+			if (WouldRepeatIntent(moveId))
+			{
+				return 0f;
+			}
+
 			Creature? playerCreature = GetPlayerCreature();
 			if (playerCreature != null && ToolBox.HasAlwaysGoodLuck(playerCreature))
 			{
@@ -110,6 +157,38 @@ public sealed class SuwakoBoss : CustomMonsterModel
 			}
 
 			return baseWeight;
+		};
+	}
+
+	private bool WouldRepeatIntent(string nextMoveId)
+	{
+		MonsterMoveStateMachine? machine = Creature?.Monster?.MoveStateMachine;
+		if (machine == null)
+		{
+			return false;
+		}
+
+		MonsterState? lastMove = machine.StateLog.LastOrDefault(state => state.IsMove);
+		if (lastMove == null)
+		{
+			return false;
+		}
+
+		return GetPrimaryIntentType(lastMove.Id) == GetPrimaryIntentType(nextMoveId);
+	}
+
+	private static IntentType GetPrimaryIntentType(string moveId)
+	{
+		return moveId switch
+		{
+			"DIVINE_IRON_RING" => IntentType.Attack,
+			"CURSE_WHEEL" => IntentType.Attack,
+			"TRIPLE_SLASH" => IntentType.Attack,
+			"RECOVER" => IntentType.Defend,
+			"VOID_GUARD" => IntentType.Defend,
+			"EMERGENCY_BLESSING" => IntentType.Buff,
+			"CALAMITY" => IntentType.CardDebuff,
+			_ => IntentType.Unknown
 		};
 	}
 
@@ -126,6 +205,7 @@ public sealed class SuwakoBoss : CustomMonsterModel
 		}
 
 		MarkEmergencyBlessing(false);
+		await CreatureCmd.TriggerAnim(Creature, "Atk", 0.35f);
 		await DamageCmd.Attack(HeavyDamage)
 			.FromMonster(this)
 			.WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3")
@@ -136,6 +216,10 @@ public sealed class SuwakoBoss : CustomMonsterModel
 	private async Task CurseWheelMove(IReadOnlyList<Creature> targets)
 	{
 		MarkEmergencyBlessing(false);
+		if (Creature != null)
+		{
+			await CreatureCmd.TriggerAnim(Creature, "Atk", 0.35f);
+		}
 		IReadOnlyList<Creature> livingTargets = targets.Where(target => target.IsAlive).ToList();
 		if (livingTargets.Count == 0)
 		{
@@ -158,6 +242,10 @@ public sealed class SuwakoBoss : CustomMonsterModel
 	private async Task CalamityMove(IReadOnlyList<Creature> targets)
 	{
 		MarkEmergencyBlessing(false);
+		if (Creature != null)
+		{
+			await CreatureCmd.TriggerAnim(Creature, "Atk2", 0.35f);
+		}
 		IReadOnlyList<Creature> livingTargets = targets.Where(target => target.IsAlive).ToList();
 		if (livingTargets.Count == 0)
 		{
@@ -194,6 +282,7 @@ public sealed class SuwakoBoss : CustomMonsterModel
 		}
 
 		MarkEmergencyBlessing(false);
+		await CreatureCmd.TriggerAnim(Creature, "Defend", 0.25f);
 		await CreatureCmd.GainBlock(Creature, 80m, ValueProp.Unpowered | ValueProp.Move, null);
 		await PowerCmd.Apply<OnceArmourPower>(new ThrowingPlayerChoiceContext(), Creature, 50m, Creature, null);
 		await PowerCmd.Apply<OnceThornPower>(new ThrowingPlayerChoiceContext(), Creature, 3m, Creature, null);
@@ -207,6 +296,7 @@ public sealed class SuwakoBoss : CustomMonsterModel
 		}
 
 		MarkEmergencyBlessing(false);
+		await CreatureCmd.TriggerAnim(Creature, "Defend", 0.25f);
 		await CreatureCmd.GainBlock(Creature, 80m, ValueProp.Unpowered | ValueProp.Move, null);
 		IReadOnlyList<Creature> livingTargets = targets.Where(target => target.IsAlive).ToList();
 		if (livingTargets.Count > 0)
@@ -218,6 +308,10 @@ public sealed class SuwakoBoss : CustomMonsterModel
 	private async Task TripleSlashMove(IReadOnlyList<Creature> targets)
 	{
 		MarkEmergencyBlessing(false);
+		if (Creature != null)
+		{
+			await CreatureCmd.TriggerAnim(Creature, "Atk2", 0.35f);
+		}
 		await DamageCmd.Attack(MultiDamage)
 			.FromMonster(this)
 			.WithHitCount(CurseWheelHits)
@@ -233,6 +327,7 @@ public sealed class SuwakoBoss : CustomMonsterModel
 		}
 
 		MarkEmergencyBlessing(true);
+		await CreatureCmd.TriggerAnim(Creature, "Atk2", 0.35f);
 		await PowerCmd.Apply<OnceArmourPower>(new ThrowingPlayerChoiceContext(), Creature, EmergencyArmourAmount, Creature, null);
 		await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, EmergencyStrengthAmount, Creature, null);
 	}

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Abstracts;
+using Godot;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,6 +15,8 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace TH_Sanae.Scripts.Monsters;
@@ -27,7 +31,7 @@ public sealed class OnbashiraMinion : CustomMonsterModel
 
 	public override LocString Title => MonsterModel.L10NMonsterLookup(GetType().Name + ".name");
 
-	protected override string VisualsPath => SceneHelper.GetScenePath("creature_visuals/defect");
+	protected override string VisualsPath => "res://TH_Sanae/ArtWorks/Character/onbashira.tscn";
 
 	public override int MinInitialHp => InitialHp;
 
@@ -57,6 +61,7 @@ public sealed class OnbashiraMinion : CustomMonsterModel
 
 	private async Task AttackMove(IReadOnlyList<Creature> targets)
 	{
+		await BumpAttack();
 		await DamageCmd.Attack(AttackDamage)
 			.FromMonster(this)
 			.WithHitCount(_attackHits)
@@ -70,6 +75,33 @@ public sealed class OnbashiraMinion : CustomMonsterModel
 		}
 
 		_attackHits++;
+	}
+
+	private async Task BumpAttack()
+	{
+		if (Creature == null)
+		{
+			return;
+		}
+
+		NCreature? node = Creature.GetCreatureNode();
+		if (node == null)
+		{
+			return;
+		}
+
+		Node2D body = node.Body;
+		Vector2 start = body.Position;
+		Vector2 dir = Creature.Side == CombatSide.Enemy ? Vector2.Left : Vector2.Right;
+		Vector2 target = start + dir * 120f;
+
+		Tween tweenOut = node.CreateTween();
+		tweenOut.TweenProperty(body, "position", target, 0.12).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+		await tweenOut.AwaitFinished(node);
+
+		Tween tweenBack = node.CreateTween();
+		tweenBack.TweenProperty(body, "position", start, 0.18).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
+		await tweenBack.AwaitFinished(node);
 	}
 
 	private async Task SupportMove(IReadOnlyList<Creature> targets)

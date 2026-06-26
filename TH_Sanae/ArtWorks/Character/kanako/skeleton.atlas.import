@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bgedv7iodlcgq"
+path="res://.godot/imported/skeleton.atlas-10ae36bf1172e60a4696b695c3f25e06.spatlas"
+
+[deps]
+
+source_file="res://TH_Sanae/ArtWorks/Character/kanako/skeleton.atlas"
+dest_files=["res://.godot/imported/skeleton.atlas-10ae36bf1172e60a4696b695c3f25e06.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

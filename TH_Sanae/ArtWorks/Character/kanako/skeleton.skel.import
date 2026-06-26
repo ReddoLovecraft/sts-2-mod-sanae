@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://chb2ur1pvp5up"
+path="res://.godot/imported/skeleton.skel-945501b5eff7a287e2c52570b0119949.spskel"
+
+[deps]
+
+source_file="res://TH_Sanae/ArtWorks/Character/kanako/skeleton.skel"
+dest_files=["res://.godot/imported/skeleton.skel-945501b5eff7a287e2c52570b0119949.spskel"]
+
+[params]
+

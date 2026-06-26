@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy866s6gpd4h"
-path="res://.godot/imported/skeleton.png-d6442630e7999d2945e746ddb4e30989.ctex"
+uid="uid://6bikfujdk5b6"
+path="res://.godot/imported/skeleton.png-fb40fd9b4c5883c8302435a670d1f636.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TH_Sanae/ArtWorks/Character/normal/skeleton.png"
-dest_files=["res://.godot/imported/skeleton.png-d6442630e7999d2945e746ddb4e30989.ctex"]
+source_file="res://TH_Sanae/ArtWorks/Character/suwako/skeleton.png"
+dest_files=["res://.godot/imported/skeleton.png-fb40fd9b4c5883c8302435a670d1f636.ctex"]
 
 [params]
 

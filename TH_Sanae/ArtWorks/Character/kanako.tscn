@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://b67ss3bbxr0o7"]
+
+[ext_resource type="Script" path="res://TH_Sanae/Scrpits/Nodes/SanaeCreatureVisuals.cs" id="1_0y4yh"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dpxt2v6avosa6" path="res://TH_Sanae/ArtWorks/Character/kanako.tres" id="1_6icwg"]
+
+[node name="Kanako" type="Node2D"]
+script = ExtResource("1_0y4yh")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_6icwg")
+preview_skin = "default"
+preview_animation = "Idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(-1.2, 1.2)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -99.0
+offset_top = -319.0
+offset_right = 136.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -350)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

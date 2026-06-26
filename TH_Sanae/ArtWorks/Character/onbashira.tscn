@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3g2x5v1qqg4y"]
+
+[ext_resource type="Script" uid="uid://dfv6078788cux" path="res://TH_Sanae/Scrpits/Nodes/SanaeCreatureVisuals.cs" id="1_2qjok"]
+[ext_resource type="Texture2D" uid="uid://cxs206n4j23jf" path="res://TH_Sanae/ArtWorks/Character/yz.png" id="2_0gfb0"]
+
+[node name="Onbashira" type="Node2D"]
+script = ExtResource("1_2qjok")
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -100)
+scale = Vector2(-1.2, 1.2)
+texture = ExtResource("2_0gfb0")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -60.0
+offset_top = -180.0
+offset_right = 60.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -90)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -220)

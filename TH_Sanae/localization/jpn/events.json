@@ -108,7 +108,8 @@
   "TH_SANAE-WIND_GOD_LAKE.pages.INITIAL.options.BATHE.description": "[gold]デッキ[/gold]から[blue]3[/blue]枚のカードを[gold]除去[/gold]する。\n[red]羞恥[/red]を1枚[gold]デッキ[/gold]に加える。",
   "TH_SANAE-WIND_GOD_LAKE.pages.BATHE.description": "聖なる湖水での沐浴は最高の効果をもたらし、最善の選択だ。\n\nそう思い、服を脱いで湖に入り、簡単に体を洗った。\n\n効果は予想通り素晴らしかった。ただ、なぜか常に誰かに見られているような感覚があり、不安になったので長くは浸からず、すぐに上がって服を着た。",
 
-  "TH_SANAE-SUWA_FOUGHTEN_FIELD.title": "諏訪大戦",
+  "TH_SANAE-SUWA_FOUGHTEN_FIELD.title": "諏訪大战",
+  "TH_SANAE-SUWA_FOUGHTEN_FIELD.loss":"戦いを失敗しました。",
   "TH_SANAE-SUWA_FOUGHTEN_FIELD.pages.INITIAL.description": "空き地に来ると、見覚えのある二人が対峙しているのが見えた。まさに今にも戦いが始まりそうだ。\n\nよく見ると、それは諏訪子と神奈子様ではないか！\n\n近づいて何かしようとしたその時、二人もあなたの存在に気づいた。\n\n「あなたは私の子孫だろ、こいつを倒すのを手伝え！」\n\n諏訪子がそう言うと、神奈子は腕を組み、同じくあなたに視線を向けた。",
   "TH_SANAE-SUWA_FOUGHTEN_FIELD.pages.INITIAL.options.HELP_KANAKO.title": "神奈子を助ける",
   "TH_SANAE-SUWA_FOUGHTEN_FIELD.pages.INITIAL.options.HELP_KANAKO.description": "諏訪子と戦う",

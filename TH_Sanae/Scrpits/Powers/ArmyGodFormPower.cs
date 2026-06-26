@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -21,15 +22,21 @@ namespace TH_Sanae.Scripts.Powers
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VigorPower>()];
 
-		public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+		public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 		{
-			if (player != Owner.Player || Amount <= 0)
+			if (Amount <= 0 || Owner.IsDead || !participants.Contains(Owner))
+			{
+				return;
+			}
+
+			bool ownerIsPlayer = Owner.Player != null;
+			if ((side == CombatSide.Player) != ownerIsPlayer)
 			{
 				return;
 			}
 
 			Flash();
-			await PowerCmd.Apply<VigorPower>(choiceContext, Owner, Amount, Owner, null);
+			await PowerCmd.Apply<VigorPower>(new ThrowingPlayerChoiceContext(), Owner, Amount, Owner, null);
 		}
 	}
 }

@@ -1,0 +1,251 @@
+
+skeleton.png
+size: 1750,1122
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Atk/Atk_0000_opSuwakoBa009.png
+  rotate: false
+  xy: 364, 860
+  size: 352, 260
+  orig: 512, 512
+  offset: 149, 46
+  index: -1
+Atk/Atk_0001_opSuwakoBa008.png
+  rotate: true
+  xy: 362, 575
+  size: 283, 312
+  orig: 512, 512
+  offset: 154, 50
+  index: -1
+Atk/Atk_0002_opSuwakoBa007.png
+  rotate: false
+  xy: 475, 313
+  size: 194, 260
+  orig: 512, 512
+  offset: 147, 47
+  index: -1
+Atk/Atk_0003_opSuwakoBa006.png
+  rotate: true
+  xy: 718, 857
+  size: 263, 307
+  orig: 512, 512
+  offset: 152, 0
+  index: -1
+Atk/Atk_0004_opSuwakoBa005.png
+  rotate: false
+  xy: 2, 860
+  size: 360, 260
+  orig: 512, 512
+  offset: 152, 47
+  index: -1
+Atk/Atk_0005_opSuwakoBa004.png
+  rotate: false
+  xy: 2, 275
+  size: 286, 321
+  orig: 512, 512
+  offset: 158, 47
+  index: -1
+Atk/Atk_0006_opSuwakoBa003.png
+  rotate: true
+  xy: 671, 326
+  size: 194, 257
+  orig: 512, 512
+  offset: 138, 47
+  index: -1
+Atk/Atk_0007_opSuwakoBa002.png
+  rotate: true
+  xy: 1304, 898
+  size: 222, 272
+  orig: 512, 512
+  offset: 124, 32
+  index: -1
+Atk/Atk_0008_opSuwakoBa001.png
+  rotate: true
+  xy: 1027, 898
+  size: 222, 275
+  orig: 512, 512
+  offset: 124, 29
+  index: -1
+Atk/Atk_0009_opSuwakoBa000.png
+  rotate: false
+  xy: 2, 598
+  size: 358, 260
+  orig: 512, 512
+  offset: 148, 47
+  index: -1
+Idle/Kanako_0000_opSuwakoAa007.png
+  rotate: true
+  xy: 1027, 751
+  size: 145, 274
+  orig: 512, 512
+  offset: 184, 5
+  index: -1
+Idle/Kanako_0001_opSuwakoAa006.png
+  rotate: true
+  xy: 676, 522
+  size: 148, 274
+  orig: 512, 512
+  offset: 182, 5
+  index: -1
+Idle/Kanako_0002_opSuwakoAa005.png
+  rotate: false
+  xy: 1013, 8
+  size: 142, 237
+  orig: 512, 512
+  offset: 185, 42
+  index: -1
+Idle/Kanako_0003_opSuwakoAa004.png
+  rotate: false
+  xy: 662, 2
+  size: 148, 243
+  orig: 512, 512
+  offset: 182, 36
+  index: -1
+Idle/Kanako_0004_opSuwakoAa003.png
+  rotate: true
+  xy: 1192, 207
+  size: 176, 251
+  orig: 512, 512
+  offset: 168, 28
+  index: -1
+Idle/Kanako_0005_opSuwakoAa002.png
+  rotate: true
+  xy: 930, 247
+  size: 173, 260
+  orig: 512, 512
+  offset: 170, 19
+  index: -1
+Idle/Kanako_0006_opSuwakoAa001.png
+  rotate: false
+  xy: 2, 2
+  size: 145, 271
+  orig: 512, 512
+  offset: 184, 8
+  index: -1
+Idle/Kanako_0007_opSuwakoAa000.png
+  rotate: true
+  xy: 1157, 60
+  size: 145, 234
+  orig: 512, 512
+  offset: 184, 45
+  index: -1
+OnHit/Hit_0000_hitAir002.png
+  rotate: false
+  xy: 812, 3
+  size: 199, 242
+  orig: 512, 512
+  offset: 149, 49
+  index: -1
+OnHit/Hit_0001_hitAir001.png
+  rotate: false
+  xy: 290, 289
+  size: 183, 284
+  orig: 512, 512
+  offset: 188, 38
+  index: -1
+OnHit/Hit_0002_hitAir000.png
+  rotate: true
+  xy: 676, 672
+  size: 183, 304
+  orig: 512, 512
+  offset: 188, 27
+  index: -1
+OnHit/OnHit_0000_opSuwakoCa013.png
+  rotate: true
+  xy: 1257, 548
+  size: 173, 273
+  orig: 512, 512
+  offset: 170, 28
+  index: -1
+OnHit/OnHit_0001_opSuwakoCa012.png
+  rotate: true
+  xy: 1303, 723
+  size: 173, 273
+  orig: 512, 512
+  offset: 170, 28
+  index: -1
+OnHit/OnHit_0002_opSuwakoCa011.png
+  rotate: true
+  xy: 982, 582
+  size: 167, 273
+  orig: 512, 512
+  offset: 173, 28
+  index: -1
+OnHit/OnHit_0003_opSuwakoCa010.png
+  rotate: false
+  xy: 1578, 847
+  size: 170, 273
+  orig: 512, 512
+  offset: 171, 28
+  index: -1
+OnHit/OnHit_0004_opSuwakoCa009.png
+  rotate: false
+  xy: 318, 2
+  size: 167, 285
+  orig: 512, 512
+  offset: 173, 16
+  index: -1
+OnHit/OnHit_0005_opSuwakoCa008.png
+  rotate: false
+  xy: 149, 6
+  size: 167, 267
+  orig: 512, 512
+  offset: 173, 34
+  index: -1
+OnHit/OnHit_0006_opSuwakoCa007.png
+  rotate: false
+  xy: 1578, 624
+  size: 170, 221
+  orig: 512, 512
+  offset: 171, 80
+  index: -1
+OnHit/OnHit_0007_opSuwakoCa006.png
+  rotate: false
+  xy: 1393, 8
+  size: 155, 197
+  orig: 512, 512
+  offset: 179, 104
+  index: -1
+OnHit/OnHit_0008_opSuwakoCa005.png
+  rotate: false
+  xy: 487, 35
+  size: 173, 276
+  orig: 512, 512
+  offset: 170, 25
+  index: -1
+OnHit/OnHit_0009_opSuwakoCa004.png
+  rotate: true
+  xy: 952, 422
+  size: 158, 264
+  orig: 512, 512
+  offset: 177, 37
+  index: -1
+OnHit/OnHit_0010_opSuwakoCa003.png
+  rotate: true
+  xy: 1218, 385
+  size: 161, 264
+  orig: 512, 512
+  offset: 176, 37
+  index: -1
+OnHit/OnHit_0011_opSuwakoCa002.png
+  rotate: false
+  xy: 1550, 17
+  size: 173, 206
+  orig: 512, 512
+  offset: 170, 95
+  index: -1
+OnHit/OnHit_0012_opSuwakoCa001.png
+  rotate: true
+  xy: 1484, 225
+  size: 161, 218
+  orig: 512, 512
+  offset: 176, 83
+  index: -1
+OnHit/OnHit_0013_opSuwakoCa000.png
+  rotate: true
+  xy: 1484, 388
+  size: 158, 264
+  orig: 512, 512
+  offset: 177, 37
+  index: -1

@@ -109,6 +109,7 @@
   "TH_SANAE-WIND_GOD_LAKE.pages.BATHE.description": "Sacred lake water would work best for purification through bathing — the optimal method.\n\nWith that in mind, you remove your clothes, step into the water, and soak for a while.\n\nThe effect is as good as expected. However, for some reason, you felt an inexplicable sense of being watched, making you uneasy. You didn't stay long, quickly got dressed, and left.",
 
   "TH_SANAE-SUWA_FOUGHTEN_FIELD.title": "Suwa Great War",
+  "TH_SANAE-SUWA_FOUGHTEN_FIELD.loss":"Died in the battle.",
   "TH_SANAE-SUWA_FOUGHTEN_FIELD.pages.INITIAL.description": "You arrive at an open field and see two familiar figures facing off, seemingly about to come to blows.\n\nA closer look reveals they are none other than Lady Suwako and Lady Kanako!\n\nYou step forward, hoping to intervene. Just then, the two notice your presence.\n\n\"You're my descendant, right? Help me defeat this one!\"\n\nSuwako says this, while Kanako crosses her arms and looks at you as well.",
   "TH_SANAE-SUWA_FOUGHTEN_FIELD.pages.INITIAL.options.HELP_KANAKO.title": "Help Kanako",
   "TH_SANAE-SUWA_FOUGHTEN_FIELD.pages.INITIAL.options.HELP_KANAKO.description": "Fight Suwako.",
