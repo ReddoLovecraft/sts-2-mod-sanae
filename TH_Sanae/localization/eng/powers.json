@@ -130,5 +130,8 @@
   "TH_SANAE-AMBITIOUS_MIKO_POWER.smartDescription": "Whenever you gain [gold]Faith[/gold], gain [blue]{Amount}[/blue] [gold]Strength[/gold] and [gold]Dexterity[/gold].",
   "TH_SANAE-MOUNTAIN_FRESH_GOD_POWER.title": "New God in the Mountains",
   "TH_SANAE-MOUNTAIN_FRESH_GOD_POWER.description": "Whenever you play a card, add [gold]Recur {Amount}[/gold] to it.",
-  "TH_SANAE-MOUNTAIN_FRESH_GOD_POWER.smartDescription": "Whenever you play a card, add [gold]Recur [blue]{Amount}[/blue][/gold] to it."
+  "TH_SANAE-MOUNTAIN_FRESH_GOD_POWER.smartDescription": "Whenever you play a card, add [gold]Recur [blue]{Amount}[/blue][/gold] to it.",
+  "TH_SANAE-LOST_STATION_POWER.title": "Lost Station - Suwa",
+"TH_SANAE-LOST_STATION_POWER.description": "You can no longer gain [gold]Faith[/gold]. Whenever you would gain [gold]Faith[/gold], instead gain [blue]1[/blue] [gold]Intangible[/gold].",
+"TH_SANAE-LOST_STATION_POWER.smartDescription": "You can no longer gain [gold]Faith[/gold]. Whenever you would gain [gold]Faith[/gold], instead gain [blue]1[/blue] [gold]Intangible[/gold]."
 }

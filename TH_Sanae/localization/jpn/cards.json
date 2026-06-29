@@ -281,5 +281,7 @@
   "TH_SANAE-STARFALL.title": "星落とし",
   "TH_SANAE-STARFALL.description": "ランダムな敵に{Damage:diff()}ダメージを与える。\nこのターン中、その敵は同じ値の[gold]筋力[/gold]を失う。",
   "TH_SANAE-RISING_WAVE.title": "波浪起こし",
-  "TH_SANAE-RISING_WAVE.description": "{Damage:diff()}ダメージを与える。\n[gold]アタック[/gold]（同名除く）をプレイするたび、このカードを（どこにあっても）手札に戻す。"
+  "TH_SANAE-RISING_WAVE.description": "{Damage:diff()}ダメージを与える。\n[gold]アタック[/gold]（同名除く）をプレイするたび、このカードを（どこにあっても）手札に戻す。",
+   "TH_SANAE-LOST_STATION.title": "ロストステーション-諏訪",
+  "TH_SANAE-LOST_STATION.description": "[gold]虔信{Cards:diff()}[/gold]：[gold]信仰[/gold]を獲得できなくなる。[gold]信仰[/gold]を獲得しようとするたび、代わりに1層の[gold]無実体[/gold]を得る。"
 }

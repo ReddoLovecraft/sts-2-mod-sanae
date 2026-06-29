@@ -15,5 +15,32 @@
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.next": "次へ",
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.char": "私はただの人間じゃないわよ、現人神よ！何でここに来たかって、諏訪子様と神奈子様が修行しろって言ったからよ。",
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.next": "次へ",
-  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "最近この塔に来る者が増えた気がする…誰でも来ていい場所じゃないんだぞ！"
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "最近この塔に来る者が増えた気がする…誰でも来ていい場所じゃないんだぞ！",
+
+  "TH_SANAE-KANAKO.title": "八坂神奈子",
+  "TH_SANAE-KANAKO.epithet": "乾を創造する程度の能力",
+  "TH_SANAE-KANAKO.talk.firstVisitEver.0-0.ancient": "あなたは非常に荘厳な容貌の女性に出会った。彼女は左右に広がるボリュームのある青みがかった紫の肩までの髪を持ち、後ろ頭には注連縄で結われた髷があり、縄にはイチョウやカエデ、グーズベリーが飾られている。\n上半身は赤い半袖をまとい、袖口は金属製のカフスで留められている。その下には白いゆったりとした長袖を着ている。\n背中には大きな注連縄の輪を背負い、多くの紙垂が下がっている。",
+  "TH_SANAE-KANAKO.talk.ANY.0-0r.ancient": "[fade_in]「来たなら、一杯どうだい？」[/fade_in]",
+  "TH_SANAE-KANAKO.talk.ANY.1-0r.ancient": "[fade_in]「今日は機嫌がいい。何か欲しいものはあるか？神として叶えてやろう！」[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.0-0.ancient": "[fade_in]「苗苗、やっと来たね、一緒に一杯やらないか？」[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.1-0r.ancient": "[fade_in]「苗苗、来たか。欲しいものは好きに持っていきな、用意してあるから。」[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-0.char": "[fade_in]「神奈子様！また来ました！」[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-0.next": "次へ",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-1.ancient": "[fade_in]「うむ、その調子だ。この塔で己を磨くのだ。」[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-1.next": "次へ",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-2.ancient": "[fade_in]「……ついでに、よくやった。」[/fade_in]",
+  
+
+  "TH_SANAE-SUWAKO.title": "洩矢諏訪子",
+  "TH_SANAE-SUWAKO.epithet": "坤を創造する程度の能力",
+  "TH_SANAE-SUWAKO.talk.firstVisitEver.0-0.ancient": "あなたは子供のような体格の女性に出会った。彼女は金色の肩までの髪を持ち、二つの目玉が付いた特殊な市女笠をかぶっている。\n青と白を基調とした壺装束をまとい、衣服の各所には鳥獣戯画の蛙が描かれている。",
+  "TH_SANAE-SUWAKO.talk.ANY.0-0r.ancient": "[fade_in]「……」[/fade_in]諏訪子は無言であなたを見つめる。笠の目玉も生きているかのように動いている。",
+  "TH_SANAE-SUWAKO.talk.ANY.1-0r.ancient": "[fade_in]「うん…これを持っていきなさい。神からの祝福だ！」[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.0-0.ancient": "[fade_in]「小早苗、久しぶりだね、私のこと恋しかった？」[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.1-0r.ancient": "[fade_in]「勇気を持って塔を登れ、小早苗！\n[jitter]私はずっと後ろで応援しているからね！[/jitter]」[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-0.char": "[fade_in]「諏訪子様！また来ましたよ！」[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-0.next": "次へ",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-1.ancient": "[fade_in]「うん、いいね、今回は早かったじゃないか、小早苗！」[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-1.next": "次へ",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-2.char": "[fade_in]「えへへ…これからも頑張ります！」[/fade_in]"
 }

@@ -15,5 +15,31 @@
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.next": "Continue",
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.char": "I'm not just human—I'm a living god! As for why I'm here, Lady Suwako and Lady Kanako said they wanted me to come here for training.",
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.next": "Continue",
-  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "I feel like more and more people have been coming to this Spire lately... Don't just let anyone in here!"
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "I feel like more and more people have been coming to this Spire lately... Don't just let anyone in here!",
+
+  "TH_SANAE-KANAKO.title": "Yasaka Kanako",
+  "TH_SANAE-KANAKO.epithet": "Ability to create the Heavens",
+  "TH_SANAE-KANAKO.talk.firstVisitEver.0-0.ancient": "You see a woman with a very dignified appearance. She has shoulder-length blue-purple hair that extends widely to the sides, tied into a bun at the back with a shimenawa rope adorned with ginkgo, maple leaves, and currants.\nShe wears a red short-sleeved top with metallic cuffs, under which is a loose white long-sleeved garment.\nA large shimenawa ring hangs on her back, decorated with many paper streamers.",
+  "TH_SANAE-KANAKO.talk.ANY.0-0r.ancient": "[fade_in]\"Since you're here, how about a drink with me?\"[/fade_in]",
+  "TH_SANAE-KANAKO.talk.ANY.1-0r.ancient": "[fade_in]\"I'm in a good mood today. Is there anything you want? As a god, I can grant it!\"[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.0-0.ancient": "[fade_in]\"Sanae, finally you're here! Want to have a drink together?\"[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.1-0r.ancient": "[fade_in]\"Sanae, you're here. Take whatever you want—I've prepared it all for you.\"[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-0.char": "[fade_in]\"Lady Kanako! I'm back!\"[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-0.next": "Continue",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-1.ancient": "[fade_in]\"Good. Keep going—use this tower to hone yourself.\"[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-1.next": "Continue",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-2.ancient": "[fade_in]\"... By the way, well done.\"[/fade_in]",
+
+  "TH_SANAE-SUWAKO.title": "Moriya Suwako",
+  "TH_SANAE-SUWAKO.epithet": "Ability to create the Earth",
+  "TH_SANAE-SUWAKO.talk.firstVisitEver.0-0.ancient": "You see a woman with a stature resembling that of a child. She has short golden hair that reaches her shoulders, wearing a special ichimegasa hat with two large eye decorations.\nShe wears a jar-shaped costume in blue and white, with frog motifs from the bird-and-animal caricatures painted all over.",
+  "TH_SANAE-SUWAKO.talk.ANY.0-0r.ancient": "[fade_in]\"...\"[/fade_in] Suwako looks at you in silence, and the eyes on her hat seem to move as if alive.",
+  "TH_SANAE-SUWAKO.talk.ANY.1-0r.ancient": "[fade_in]\"Hmm... take these—this is a god's blessing for you!\"[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.0-0.ancient": "[fade_in]\"Sanae, have you missed me after all this time?\"[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.1-0r.ancient": "[fade_in]\"Keep climbing bravely, Sanae!\n[jitter]I'll always be behind you, supporting you![/jitter]\"[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-0.char": "[fade_in]\"Lady Suwako! I'm back again!\"[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-0.next": "Continue",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-1.ancient": "[fade_in]\"Hmm, good. You were fast this time, Sanae!\"[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-1.next": "Continue",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-2.char": "[fade_in]\"Hehe... I'll keep doing my best!\"[/fade_in]"
 }

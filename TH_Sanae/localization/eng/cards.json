@@ -281,5 +281,7 @@
   "TH_SANAE-STARFALL.title": "Starfall",
   "TH_SANAE-STARFALL.description": "Deal {Damage:diff()} damage to a random enemy.\nThat enemy loses that much [gold]Strength[/gold] this turn.",
   "TH_SANAE-RISING_WAVE.title": "Rising Wave",
-  "TH_SANAE-RISING_WAVE.description": "Deal {Damage:diff()} damage.\nWhenever you play an [gold]Attack[/gold] card (except cards with the same name), return this card to your hand (wherever it is)."
+  "TH_SANAE-RISING_WAVE.description": "Deal {Damage:diff()} damage.\nWhenever you play an [gold]Attack[/gold] card (except cards with the same name), return this card to your hand (wherever it is).",
+  "TH_SANAE-LOST_STATION.title": "Lost Station - Suwa",
+"TH_SANAE-LOST_STATION.description": "[gold]Piety {Cards:diff()}[/gold]: You can no longer gain [gold]Faith[/gold]. Whenever you would gain [gold]Faith[/gold], instead gain [blue]1[/blue] [gold]Intangible[/gold]."
 }
