@@ -15,5 +15,32 @@
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-0.next": "继续",
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.char": "我可不只是人类哦，我还是一名现人神！至于为什么来到这里，诹访子大人和神奈子大人说要让我来这里历练一番。",
   "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-1.next": "继续",
-  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "总感觉最近来到这座尖塔的人越来越多了……不要随便什么人都来这里啊！"
+  "THE_ARCHITECT.talk.TH_SANAE-SANAE_CHARACTER.0-2.ancient": "总感觉最近来到这座尖塔的人越来越多了……不要随便什么人都来这里啊！",
+
+  "TH_SANAE-KANAKO.title": "八坂神奈子",
+  "TH_SANAE-KANAKO.epithet": "创造乾程度的能力",
+  "TH_SANAE-KANAKO.talk.firstVisitEver.0-0.ancient": "你见到了一位容貌非常庄严的女性，她有着一头向左右伸展、容量惊人的蓝紫色齐肩短发，脑后用注连绳系着一个发髻，绳上装饰着银杏、枫叶和醋栗。\n上身穿着红色的短袖，袖口有用金属的袖口卡住。短袖之下还穿了一件白色的宽松长袖。\n背后背着巨大的注连绳圈，其上挂着许多纸垂。",
+  "TH_SANAE-KANAKO.talk.ANY.0-0r.ancient": "[fade_in]“既然来了，就陪我喝一杯，如何？”[/fade_in]",
+  "TH_SANAE-KANAKO.talk.ANY.1-0r.ancient": "[fade_in]“今天心情不错，你有没有什么想要的？作为神明我的可以满足你！”[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.0-0.ancient": "[fade_in]“苗苗，可算等到你了，要不要一起喝两杯？”[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.1-0r.ancient": "[fade_in]“苗苗，你来了啊，有什么想要的就自己拿吧，我都为你准备好了。”[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-0.char": "[fade_in]“神奈子大人！我又来了！”[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-0.next": "继续",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-1.ancient": "[fade_in]“嗯，继续加油，用这座塔来磨砺你自身吧。”[/fade_in]",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-1.next": "继续",
+  "TH_SANAE-KANAKO.talk.SANAE_CHARACTER.2-2.ancient": "[fade_in]“……顺便，做的不错。”[/fade_in]",
+  
+
+  "TH_SANAE-SUWAKO.title": "洩矢诹访子",
+  "TH_SANAE-SUWAKO.epithet": "创造坤程度的能力",
+  "TH_SANAE-SUWAKO.talk.firstVisitEver.0-0.ancient": "你见到了一位身材与孩童相近的女性，她有着一头金色的齐肩短发，头上戴着带有两个眼珠的特殊市女笠。\n身穿以青和白为基调的壶装束，衣服的各处都画着鸟兽戏画的青蛙。",
+  "TH_SANAE-SUWAKO.talk.ANY.0-0r.ancient": "[fade_in]“……”[/fade_in]诹访子一言不发地看着你，头上市女笠的眼珠似乎也在转动着，就像活着一样。",
+  "TH_SANAE-SUWAKO.talk.ANY.1-0r.ancient": "[fade_in]“嗯……拿去这些吧，这是神明对你的赐福！”[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.0-0.ancient": "[fade_in]“小早苗，这么久没见，有没有想我啊”[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.1-0r.ancient": "[fade_in]“勇敢的爬塔吧，小早苗！\n[jitter]我会一直在你身后支持你的！[/jitter]”[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-0.char": "[fade_in]“诹访子大人！我又来了哦！”[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-0.next": "继续",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-1.ancient": "[fade_in]“嗯，不错，这次很快嘛，小早苗！”[/fade_in]",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-1.next": "继续",
+  "TH_SANAE-SUWAKO.talk.SANAE_CHARACTER.2-2.char": "[fade_in]“嘿嘿……我会继续加油的！”[/fade_in]"
 }

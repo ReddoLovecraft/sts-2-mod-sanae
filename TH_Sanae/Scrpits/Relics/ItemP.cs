@@ -17,6 +17,7 @@ using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
+using TH_Sanae.Scripts.Multiplayer;
 
 namespace TH_Sanae.Scripts.Main
 {
@@ -39,7 +40,7 @@ namespace TH_Sanae.Scripts.Main
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new IntVar(_percentKey, 0m)];
 
 		[SavedProperty]
-		public int Count
+		public int TookDamageThisCombat
 		{
 			get => _count;
 			set
@@ -50,6 +51,12 @@ namespace TH_Sanae.Scripts.Main
 				InvokeDisplayAmountChanged();
 				RefreshStatus();
 			}
+		}
+
+		public int Count
+		{
+			get => TookDamageThisCombat;
+			set => TookDamageThisCombat = value;
 		}
 
 		public override Task AfterRoomEntered(AbstractRoom room)
@@ -131,18 +138,10 @@ namespace TH_Sanae.Scripts.Main
 
 		public async Task OnRightClick(PlayerChoiceContext context)
 		{
-			if (Count <= 0 || Owner.Creature.CombatState == null || Owner.Creature.CombatState.CurrentSide != Owner.Creature.Side)
-			{
-				return;
-			}
-
-			Flash();
-			await CreatureCmd.Damage(context, Owner.Creature.CombatState.HittableEnemies, 10, ValueProp.Unpowered, Owner.Creature, null);
-			Count -= 1;
-			RefreshStatus(inCombat: true);
+			await YCRightClickSync.DoItemPLocalAndSync(Owner, this, context);
 		}
 
-		private void RefreshStatus(bool inCombat = false)
+		internal void RefreshStatus(bool inCombat = false)
 		{
 			if (Count <= 0)
 			{

@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
 using Patchouib.Scrpits.Main;
+using TH_Sanae.Scripts.Multiplayer;
 
 namespace TH_Sanae.Scripts.Main
 {
@@ -23,31 +24,7 @@ namespace TH_Sanae.Scripts.Main
 
 		public async Task OnRightClick(PlayerChoiceContext context)
 		{
-			Flash();
-
-			var removableDeckCards = PileType.Deck.GetPile(Owner)
-				.Cards
-				.Where(card => card.Type == CardType.Curse || card.Type == CardType.Status)
-				.ToList();
-			if (removableDeckCards.Count > 0)
-			{
-				await CardPileCmd.RemoveFromDeck(removableDeckCards);
-			}
-
-			var cardsToExhaust = Owner.PlayerCombatState?.AllCards
-				.Where(card => card.Pile?.Type != PileType.Exhaust && (card.Type == CardType.Curse || card.Type == CardType.Status))
-				.ToList() ?? [];
-			foreach (CardModel card in cardsToExhaust)
-			{
-				if (card.Pile?.Type == PileType.Exhaust)
-				{
-					continue;
-				}
-
-				await CardCmd.Exhaust(context, card);
-			}
-
-			await RelicCmd.Replace(this, ModelDb.Relic<GoneHinaNingyou>().ToMutable());
+			await YCRightClickSync.DoHinaNingyouLocalAndSync(Owner, this, context);
 		}
 	}
 }

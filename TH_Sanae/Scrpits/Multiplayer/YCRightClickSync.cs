@@ -19,6 +19,9 @@ namespace TH_Sanae.Scripts.Multiplayer;
 public static class YCRightClickSync
 {
 	private const uint YCRightClickChoiceId = 4000000001u;
+	private const uint ChewingWineRightClickChoiceId = 4000000002u;
+	private const uint ItemPRightClickChoiceId = 4000000003u;
+	private const uint HinaNingyouRightClickChoiceId = 4000000004u;
 
 	private static PlayerChoiceSynchronizer? _lastSynchronizer;
 
@@ -65,8 +68,111 @@ public static class YCRightClickSync
 		return ApplyImmediate(player, card, context, hpLoss);
 	}
 
+	public static Task DoChewingWineLocalAndSync(Player player, ChewingWine relic, PlayerChoiceContext context)
+	{
+		if (relic.Charges <= 0 || player.Creature.CombatState == null || player.Creature.CombatState.CurrentSide != player.Creature.Side)
+		{
+			return Task.CompletedTask;
+		}
+
+		if (RunManager.Instance.NetService.Type.IsMultiplayer())
+		{
+			PlayerChoiceMessage message = new()
+			{
+				choiceId = ChewingWineRightClickChoiceId,
+				result = PlayerChoiceResult.FromIndexes([1]).ToNetData()
+			};
+			RunManager.Instance.NetService.SendMessage(message);
+		}
+
+		return ApplyChewingWineImmediate(player, relic, context);
+	}
+
+	public static Task DoItemPLocalAndSync(Player player, ItemP relic, PlayerChoiceContext context)
+	{
+		if (relic.Count <= 0 || player.Creature.CombatState == null || player.Creature.CombatState.CurrentSide != player.Creature.Side)
+		{
+			return Task.CompletedTask;
+		}
+
+		if (RunManager.Instance.NetService.Type.IsMultiplayer())
+		{
+			PlayerChoiceMessage message = new()
+			{
+				choiceId = ItemPRightClickChoiceId,
+				result = PlayerChoiceResult.FromIndexes([1]).ToNetData()
+			};
+			RunManager.Instance.NetService.SendMessage(message);
+		}
+
+		return ApplyItemPImmediate(player, relic, context);
+	}
+
+	public static Task DoHinaNingyouLocalAndSync(Player player, HinaNingyou relic, PlayerChoiceContext context)
+	{
+		if (RunManager.Instance.NetService.Type.IsMultiplayer())
+		{
+			PlayerChoiceMessage message = new()
+			{
+				choiceId = HinaNingyouRightClickChoiceId,
+				result = PlayerChoiceResult.FromIndexes([1]).ToNetData()
+			};
+			RunManager.Instance.NetService.SendMessage(message);
+		}
+
+		return ApplyHinaNingyouImmediate(player, relic, context);
+	}
+
 	private static async void OnPlayerChoiceReceived(Player player, uint choiceId, NetPlayerChoiceResult result)
 	{
+		if (choiceId == ChewingWineRightClickChoiceId)
+		{
+			if (result.type != PlayerChoiceType.Index)
+			{
+				return;
+			}
+
+			if (player.GetRelic<ChewingWine>() is not ChewingWine relic)
+			{
+				return;
+			}
+
+			await ApplyChewingWineImmediate(player, relic, new ThrowingPlayerChoiceContext());
+			return;
+		}
+
+		if (choiceId == ItemPRightClickChoiceId)
+		{
+			if (result.type != PlayerChoiceType.Index)
+			{
+				return;
+			}
+
+			if (player.GetRelic<ItemP>() is not ItemP relic)
+			{
+				return;
+			}
+
+			await ApplyItemPImmediate(player, relic, new ThrowingPlayerChoiceContext());
+			return;
+		}
+
+		if (choiceId == HinaNingyouRightClickChoiceId)
+		{
+			if (result.type != PlayerChoiceType.Index)
+			{
+				return;
+			}
+
+			if (player.GetRelic<HinaNingyou>() is not HinaNingyou relic)
+			{
+				return;
+			}
+
+			await ApplyHinaNingyouImmediate(player, relic, new ThrowingPlayerChoiceContext());
+			return;
+		}
+
 		if (choiceId != YCRightClickChoiceId)
 		{
 			return;
@@ -95,6 +201,60 @@ public static class YCRightClickSync
 		}
 
 		await ApplyImmediate(player, ycCard, new ThrowingPlayerChoiceContext(), hpLoss);
+	}
+
+	private static async Task ApplyChewingWineImmediate(Player player, ChewingWine relic, PlayerChoiceContext context)
+	{
+		if (relic.Charges <= 0 || player.Creature.CombatState == null)
+		{
+			return;
+		}
+
+		relic.Flash();
+		await PlayerCmd.GainEnergy(3, player);
+		relic.Charges -= 1;
+		relic.RefreshStatus(inCombat: true);
+	}
+
+	private static async Task ApplyItemPImmediate(Player player, ItemP relic, PlayerChoiceContext context)
+	{
+		if (relic.Count <= 0 || player.Creature.CombatState == null)
+		{
+			return;
+		}
+
+		relic.Flash();
+		await CreatureCmd.Damage(context, player.Creature.CombatState.HittableEnemies, 10, ValueProp.Unpowered, player.Creature, null);
+		relic.Count -= 1;
+		relic.RefreshStatus(inCombat: true);
+	}
+
+	private static async Task ApplyHinaNingyouImmediate(Player player, HinaNingyou relic, PlayerChoiceContext context)
+	{
+		relic.Flash();
+		var removableDeckCards = PileType.Deck.GetPile(player)
+			.Cards
+			.Where(card => card.Type == CardType.Curse || card.Type == CardType.Status)
+			.ToList();
+		if (removableDeckCards.Count > 0)
+		{
+			await CardPileCmd.RemoveFromDeck(removableDeckCards);
+		}
+
+		var cardsToExhaust = player.PlayerCombatState?.AllCards
+			.Where(card => card.Pile?.Type != PileType.Exhaust && (card.Type == CardType.Curse || card.Type == CardType.Status))
+			.ToList() ?? [];
+		foreach (CardModel card in cardsToExhaust)
+		{
+			if (card.Pile?.Type == PileType.Exhaust)
+			{
+				continue;
+			}
+
+			await CardCmd.Exhaust(context, card);
+		}
+
+		await RelicCmd.Replace(relic, ModelDb.Relic<GoneHinaNingyou>().ToMutable());
 	}
 
 	private static async Task ApplyImmediate(Player player, YCCardModel card, PlayerChoiceContext context, int hpLoss)

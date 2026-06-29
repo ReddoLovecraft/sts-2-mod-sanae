@@ -196,7 +196,8 @@ namespace TH_Sanae.Scripts.Main
 
         public static IReadOnlyList<CardModel> GetAllCombatCards(Player player)
         {
-            return player.Piles.SelectMany(pile => pile.Cards).ToList();
+            return player.Piles.Where(pile => pile.Type == PileType.Hand
+            || pile.Type == PileType.Discard||pile.Type == PileType.Exhaust||pile.Type == PileType.Draw).SelectMany(pile => pile.Cards).ToList();
         }
 
         public static bool IsWindRelatedCard(CardModel card)
@@ -407,6 +408,20 @@ namespace TH_Sanae.Scripts.Main
 
             UpgradeCards(hand.Cards.ToList());
         }
+
+        public static void UpgradeValidCards(List<CardCreationResult> cards,Player owner,RelicModel relic)
+	{
+		foreach (CardCreationResult card3 in cards)
+		{
+			CardModel card = card3.Card;
+			if (card.IsUpgradable)
+			{
+				CardModel card2 = owner.RunState.CloneCard(card);
+				CardCmd.Upgrade(card2);
+				card3.ModifyCard(card2, relic);
+			}
+		}
+	}
 
         private static HashSet<string> GetWindRelatedTipIds()
         {

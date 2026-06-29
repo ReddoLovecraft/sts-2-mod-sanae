@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq8i5e1ra2r5b"]
+
+[ext_resource type="Texture2D" uid="uid://fbw4xegax5gp" path="res://TH_Sanae/ArtWorks/Ancients/swk.jpg" id="1_bbvkv"]
+
+[node name="awakened" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -330.0
+offset_top = -49.0
+offset_right = 2252.0
+offset_bottom = 1172.0
+texture = ExtResource("1_bbvkv")
+expand_mode = 2

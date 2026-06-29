@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf6fmb2u0l0yx"]
+
+[ext_resource type="Texture2D" uid="uid://ngoi5t1054yb" path="res://TH_Sanae/ArtWorks/Ancients/knk.jpg" id="1_wyaow"]
+
+[node name="awakened" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -330.0
+offset_top = -49.0
+offset_right = 2230.0
+offset_bottom = 1391.0
+texture = ExtResource("1_wyaow")
+expand_mode = 2

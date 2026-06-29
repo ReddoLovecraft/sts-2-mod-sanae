@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using Patchouib.Scrpits.Main;
 using TH_Sanae.Scripts.Main;
+using TH_Sanae.Scripts.Multiplayer;
 
 namespace TH_Sanae.Scripts.Main
 {
@@ -73,18 +74,10 @@ namespace TH_Sanae.Scripts.Main
 
 		public async Task OnRightClick(PlayerChoiceContext context)
 		{
-			if (Charges <= 0 || Owner.Creature.CombatState == null || Owner.Creature.CombatState.CurrentSide != Owner.Creature.Side)
-			{
-				return;
-			}
-
-			Flash();
-			await PlayerCmd.GainEnergy(3, Owner);
-			Charges -= 1;
-			RefreshStatus(inCombat: true);
+			await YCRightClickSync.DoChewingWineLocalAndSync(Owner, this, context);
 		}
 
-		private void RefreshStatus(bool inCombat = false)
+		internal void RefreshStatus(bool inCombat = false)
 		{
 			if (Charges <= 0)
 			{

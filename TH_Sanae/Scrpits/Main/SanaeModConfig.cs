@@ -8,4 +8,8 @@ public sealed class SanaeModConfig : SimpleModConfig
 	[ConfigSection("Cards")]
 	[ConfigHoverTip]
 	public static bool NsfwCardArt { get; set; } = false;
+
+	[ConfigSection("Ancients")]
+	[ConfigHoverTip]
+	public static bool TwoGodProtection { get; set; } = false;
 }

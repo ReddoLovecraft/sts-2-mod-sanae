@@ -53,6 +53,8 @@ namespace TH_Sanae.Scripts.Main
 		public override RelicPoolModel RelicPool => ModelDb.RelicPool<SanaeRelicPool>();
 		public override PotionPoolModel PotionPool => ModelDb.PotionPool<SanaePotionPool>();
 
+
+
 		// 初始卡组
 		public override IEnumerable<CardModel> StartingDeck => [
 			ModelDb.Card<Strike>(),
@@ -117,3 +119,45 @@ namespace TH_Sanae.Scripts.Main
 		}
 	}
 }
+/*
+神奈子
+先古之民遗物（2，3幕都可出现）
+
+衔尾蛇纹章
+每当你的抽牌堆洗牌时，为你的所有卡牌添加重放1。
+
+注连绳圈
+
+
+乾神祝福
+
+天行健，君子以自强不息。
+
+神之粥
+在你的回合开始时，将一张丰穰之米洗入你的抽牌堆顶部。
+
+迷你御柱
+将你的牌组中的打击全部替换为乾神招来-御柱，同时将其的耗能减少1点。
+
+山废精酿
+拾起时，用随机药水填满你的药水栏位。
+每当你使用药水时，将你的最大生命提高5点。
+
+神灵金锭
+你不会受到负面效果影响。
+(Goety Revelation)
+
+高达模型
+你的卡牌奖励选项增加2个。
+你的卡牌奖励选项将被升级。
+
+核聚变炉
+在你的回合开始时，消耗一张牌，获得一点能量，然后给予所有敌人6层点燃。
+
+献给神山的供物
+将要杀死敌人时，饶恕该敌人。（可以规避复活等效果，比如把千足虫三段中的一段直接送走）
+被饶恕的敌人会留下随机的奖励。
+“献给大山的，便是属于我的！”
+啊啊，乍一听是多么自私的说法啊。
+
+*/
